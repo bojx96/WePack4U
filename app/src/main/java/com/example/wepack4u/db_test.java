@@ -20,10 +20,10 @@ public class db_test {
         return databaseReference.child(poke_details.getName()).setValue(poke_details);
     }
 
-//    public Task<Void> update(String key, HashMap<String, Object> hashMap){
-//        return databaseReference.child(key).updateChildren(hashMap);
-//    }
     public Task<Void> remove_pokemon(String name){
         return databaseReference.child(name).removeValue();
     }
+    //    public Task<Void> update(String key, HashMap<String, Object> hashMap){
+//        return databaseReference.child(key).updateChildren(hashMap);
+//    }
 }
