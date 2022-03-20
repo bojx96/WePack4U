@@ -1,6 +1,6 @@
 plugins {
     id 'com.android.application'
-    //gservice plugin, changed to id instead of plugin
+    //gservice plugin
     id 'com.google.gms.google-services'
 }
 
