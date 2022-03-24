@@ -9,6 +9,7 @@ import java.util.HashMap;
 public class db_test {
     //for database
     private DatabaseReference databaseReference;
+    private DatabaseReference campuses;
 
     public db_test(){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -23,7 +24,5 @@ public class db_test {
     public Task<Void> remove_pokemon(String name){
         return databaseReference.child(name).removeValue();
     }
-    //    public Task<Void> update(String key, HashMap<String, Object> hashMap){
-//        return databaseReference.child(key).updateChildren(hashMap);
-//    }
+
 }
