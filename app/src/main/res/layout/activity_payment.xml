@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <!-- Checkout section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/checkout_header"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="@string/items"
+        android:textSize="20sp"
+        android:gravity="bottom"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="230dp">
+        <TableRow>
+            <!-- for standardising the table -->
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20sp"/>
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_column_header"
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/unit_column_header"
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/price_column_header"
+                android:textSize="20sp"
+                android:layout_gravity="end"/>
+        </TableRow>
+
+        <!-- draw horizontal line, below is a dummy -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="____________________________________________________________"/>
+
+        <!-- list purchased items here -->
+        <TableRow>
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="1."
+                android:textSize="20sp"/>
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Beef Ramen"
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="$4.70"
+                android:textSize="20sp"
+                android:layout_gravity="right"/>
+        </TableRow>
+
+        <!-- draw horizontal line, below is a dummy -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="____________________________________________________________"
+            android:gravity="bottom"/>
+    </TableLayout>
+
+    <!-- Payment section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/payment_header"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/payment_method">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mastercard_visa"
+            android:id="@+id/mastervisa"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/paylah"
+            android:id="@+id/paylah"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/paynow"
+            android:id="@+id/paynow"/>
+    </RadioGroup>
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="90dp"
+        android:text="@string/checkout_header"
+        android:id="@+id/checkout_button"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/round_button"
+        app:cornerRadius="7dp"/>
+</LinearLayout>
