@@ -3,6 +3,7 @@ package com.example.wepack4u;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Layout;
@@ -26,25 +27,27 @@ import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.rpc.context.AttributeContext;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
-    EditText edit_name;
-    EditText edit_type;
-    EditText remove_name;
-    Button button;
-    Button remove_button;
     FirebaseFirestore db;
-
+    protected boolean auth_key = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!auth_key){
+            login_page();
+        }
         setContentView(R.layout.activity_main);
         EditText edit_name = findViewById(R.id.edit_name);
         EditText edit_type = findViewById(R.id.edit_type);
@@ -52,6 +55,23 @@ public class MainActivity extends AppCompatActivity {
         Button button = findViewById(R.id.btn_submit);
         Button remove_button = findViewById(R.id.remove_button);
         db = FirebaseFirestore.getInstance();
+
+        TextView campus_list = findViewById(R.id.campus_list);
+
+        db.collection("Campus").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(MainActivity.this,"getting campus collection success", Toast.LENGTH_SHORT).show();
+                    for(QueryDocumentSnapshot document : task.getResult()){
+                        Log.d("QueryDoc", "onComplete: " + document.getId() + " data = " + document.getData());
+                    }
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"Failure", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         button.setOnClickListener(v -> { //when button is click, do this
             String name = edit_name.getText().toString();
@@ -106,5 +126,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void login_page(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 }
