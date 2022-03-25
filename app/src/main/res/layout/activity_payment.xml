@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingRight="10dp"
+    tools:context=".PaymentActivity">
 
     <!-- Checkout section -->
     <TextView
@@ -27,13 +29,12 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="230dp">
+        android:layout_height="wrap_content">
         <TableRow>
             <!-- for standardising the table -->
             <TextView
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:textSize="20sp"/>
             <TextView
                 android:layout_width="150dp"
@@ -60,8 +61,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="____________________________________________________________"/>
+    </TableLayout>
 
-        <!-- list purchased items here -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:id="@+id/cart">
+
+        <!-- list purchased items here, below is a dummy -->
+        <!--
         <TableRow>
             <TextView
                 android:layout_width="30dp"
@@ -87,13 +95,35 @@
                 android:textSize="20sp"
                 android:layout_gravity="right"/>
         </TableRow>
+        -->
 
         <!-- draw horizontal line, below is a dummy -->
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:text="____________________________________________________________"
             android:gravity="bottom"/>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TableRow>
+            <TextView
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:gravity="end"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/total"
+                android:textSize="20sp"
+                android:gravity="end"/>
+        </TableRow>
     </TableLayout>
 
     <!-- Payment section -->
