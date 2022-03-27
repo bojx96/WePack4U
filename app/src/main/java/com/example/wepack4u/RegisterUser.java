@@ -95,6 +95,7 @@ public class RegisterUser extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<DocumentReference> task) {
                                                 if(task.isSuccessful()){
                                                     Toast.makeText(RegisterUser.this, "Successfully created user", Toast.LENGTH_LONG).show();
+                                                    finish();
                                                 }
                                                 else{
                                                     Toast.makeText(RegisterUser.this, "Unsuccessful in User Creation",Toast.LENGTH_LONG).show();
