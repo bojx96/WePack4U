@@ -33,6 +33,12 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        //catching UID from MainActivity
+        Intent intent = getIntent();
+        String uid = intent.getStringExtra("uid");
+        Log.d("intent intent intent", "onCreate: " + uid);
+
         EditText edit_name = findViewById(R.id.edit_name);
         EditText edit_type = findViewById(R.id.edit_type);
         EditText remove_name = findViewById(R.id.remove_name);

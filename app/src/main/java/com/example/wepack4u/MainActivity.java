@@ -63,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
                             //redirect
                             String uid = mAuth.getUid();
                             Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                            intent.putExtra("uid" ,uid);
                             startActivity(intent);
+                            finish();
                         }
                         else {
                             Toast.makeText(MainActivity.this, "Failed to login, Please check password", Toast.LENGTH_LONG).show();
