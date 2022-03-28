@@ -81,28 +81,27 @@ public class RegisterUser extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                               User user = new User(first_name,last_name,campus,email);
+                                String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                User user = new User(first_name,last_name,campus,email);
                                 Map<String, Object> user_details = new HashMap<>();
-                                user_details.put("auth_uid",FirebaseAuth.getInstance().getCurrentUser().getUid());
+//                                user_details.put("auth_uid",FirebaseAuth.getInstance().getCurrentUser().getUid());
                                 user_details.put("first_name", first_name);
                                 user_details.put("last_name", last_name);
                                 user_details.put("campus", campus);
                                 user_details.put("email", email);
-                                FirebaseFirestore.getInstance().collection("users")
-                                        .add(user_details)
-                                        .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                if(task.isSuccessful()){
-                                                    Toast.makeText(RegisterUser.this, "Successfully created user", Toast.LENGTH_LONG).show();
-                                                    finish();
-                                                }
-                                                else{
-                                                    Toast.makeText(RegisterUser.this, "Unsuccessful in User Creation",Toast.LENGTH_LONG).show();
-                                                }
-                                            }
-                                        });
-
+                                FirebaseFirestore.getInstance().collection("users").document(auth_uid)
+                                        .set(user_details).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(RegisterUser.this, "Successfully created user", Toast.LENGTH_LONG).show();
+                                            finish();
+                                        }
+                                        else{
+                                            Toast.makeText(RegisterUser.this, "Unsuccessful in User Creation",Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });
                             }
                         }
                     });

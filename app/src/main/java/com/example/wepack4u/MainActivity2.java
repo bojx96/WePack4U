@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,6 +30,11 @@ import java.util.Map;
 
 public class MainActivity2 extends AppCompatActivity {
     FirebaseFirestore db;
+    private FirebaseUser user;
+    private static final String EMAIL = "email";
+    private static final String CAMPUS = "campus";
+    private static final String FIRST_NAME = "first_name";
+    private static final String LAST_NAME = "last_name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +45,40 @@ public class MainActivity2 extends AppCompatActivity {
         Intent intent = getIntent();
         String uid = intent.getStringExtra("uid");
         Log.d("intent intent intent", "onCreate: " + uid);
+        //Alternatively, below method is much more preferred because Auth can access anywhere as long as auth
+        user = FirebaseAuth.getInstance().getCurrentUser();
+//        Log.i("FirebaseAuth in Main2", "onCreate: " + user.getUid());
+        db = FirebaseFirestore.getInstance();
+        db.collection("users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Log.i("TAG",documentSnapshot.toString() );
+                if (documentSnapshot.exists()){
+                    String email = documentSnapshot.getString(EMAIL);
+                    String campus = documentSnapshot.getString(CAMPUS);
+                    String first_name = documentSnapshot.getString(FIRST_NAME);
+                    String last_name = documentSnapshot.getString(LAST_NAME);
+                    Log.i("TAG", "onSuccess: " + email +" "+campus+" "+first_name+" "+last_name);
+                }
+                else {
+                    Toast.makeText(MainActivity2.this, "Document doesn't exist",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivity2.this,"Error occured",Toast.LENGTH_SHORT).show();
+                Log.d("TAG", "onFailure: " + e.toString());
+            }
+        });
+
 
         EditText edit_name = findViewById(R.id.edit_name);
         EditText edit_type = findViewById(R.id.edit_type);
         EditText remove_name = findViewById(R.id.remove_name);
         Button button = findViewById(R.id.btn_submit);
         Button remove_button = findViewById(R.id.remove_button);
-        db = FirebaseFirestore.getInstance();
+//        db = FirebaseFirestore.getInstance();
 
         TextView campus_list = findViewById(R.id.campus_list);
 
