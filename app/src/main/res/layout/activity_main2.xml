@@ -63,5 +63,10 @@
         android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
+    <Button
+        android:id="@+id/about_button"
+        android:text="About yYou"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Button>
 
 </LinearLayout>

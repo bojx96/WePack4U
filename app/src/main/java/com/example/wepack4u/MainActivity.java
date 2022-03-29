@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() { } //override to disable onBackpress
 
     public void register_onClick(View view){
-        Intent intent = new Intent(MainActivity.this, RegisterUser.class);
+        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
         startActivity(intent);
     }
 }
