@@ -13,10 +13,12 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class PaymentActivity extends AppCompatActivity {
+    public static final String TABLE_KEY = "table_key";
+    public static final String TOTAL_KEY = "total_key";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,7 @@ public class PaymentActivity extends AppCompatActivity {
         TableLayout cartDisplay = findViewById(R.id.cart);
         TextView total = findViewById(R.id.total);
         int counter = 1;
-        double subtotal = 0;
+        double subtotal = 0.0f;
 
         TableRow.LayoutParams paramsLeft = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT,
@@ -44,6 +46,8 @@ public class PaymentActivity extends AppCompatActivity {
                 TableRow.LayoutParams.WRAP_CONTENT,
                 1.05f);
         paramsRight.gravity = Gravity.END;
+
+        ArrayList<TableRow> rows = new ArrayList<>();
 
         // for testing
         cart.add(new FoodItem("Beef Ramen", 2, 4.70));
@@ -71,15 +75,19 @@ public class PaymentActivity extends AppCompatActivity {
             cartDisplay.addView(trow);
             counter++;
             subtotal = subtotal + f.getPriceValue();
+            rows.add(trow);
         }
 
-        String total_price = "$" + subtotal;
-        total.setText(total_price);
+        String totalPrice = "$" + subtotal;
+        if (subtotal * 10 % 1 != 0) {
+            totalPrice = totalPrice + "0";
+        }
+        String finalTotalPrice = totalPrice;
+        total.setText(totalPrice);
 
         // Payment section
         RadioGroup payment_method = findViewById(R.id.payment_method);
         Button checkout = findViewById(R.id.checkout_button);
-
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +95,8 @@ public class PaymentActivity extends AppCompatActivity {
                     int selected = payment_method.getCheckedRadioButtonId();
                     RadioButton method = findViewById(selected);
                     Intent intent = new Intent(PaymentActivity.this, ConfirmationActivity.class);
+                    intent.putExtra(TABLE_KEY, rows);
+                    intent.putExtra(TOTAL_KEY, finalTotalPrice);
                     startActivity(intent);
                 }
                 else {

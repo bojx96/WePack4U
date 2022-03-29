@@ -25,4 +25,5 @@
 
     <!-- Confirmation page -->
     <string name="successful_header">Payment Successful</string>
+    <string name="done">Done</string>
 </resources>

@@ -24,14 +24,14 @@
             <TextView
                 android:layout_width="180dp"
                 android:layout_height="match_parent"
-                android:text="Order No. 289"
+                android:id="@+id/order_num"
                 android:textSize="20sp"
                 android:gravity="bottom"/>
 
             <TextView
                 android:layout_width="170dp"
                 android:layout_height="match_parent"
-                android:text="11:46:59 am 24/02/22"
+                android:id="@+id/timestamp"
                 android:textSize="15sp"
                 android:gravity="bottom"
                 android:layout_gravity="end"/>
@@ -96,7 +96,7 @@
             <TextView
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/total"
+                android:id="@+id/total2"
                 android:textSize="20sp"
                 android:gravity="end"/>
         </TableRow>
@@ -109,13 +109,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="A payment of $4.70 has been made."
+        android:id="@+id/payment_text"
         android:textSize="15sp"
         android:textColor="@color/black"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Your order will be done in 15 minutes."
+        android:id="@+id/waiting_time"
         android:textSize="15sp"
         android:textColor="@color/black"/>
 
@@ -126,8 +126,8 @@
     <Button
         android:layout_width="320dp"
         android:layout_height="90dp"
-        android:text="@string/checkout_header"
-        android:id="@+id/checkout_button"
+        android:text="@string/done"
+        android:id="@+id/done_button"
         android:textSize="20sp"
         android:layout_gravity="center"
         android:backgroundTint="@color/round_button"
