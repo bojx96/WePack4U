@@ -1,7 +1,10 @@
 package com.example.wepack4u;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -9,6 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,29 +28,53 @@ public class PaymentActivity extends AppCompatActivity {
         TextView total = findViewById(R.id.total);
         int counter = 1;
         double subtotal = 0;
+
+        TableRow.LayoutParams paramsLeft = new TableRow.LayoutParams(
+                TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT,
+                1.8f);
+        paramsLeft.gravity = Gravity.START;
+        TableRow.LayoutParams paramsMid = new TableRow.LayoutParams(
+                TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT,
+                1.05f);
+        paramsMid.gravity = Gravity.CENTER;
+        TableRow.LayoutParams paramsRight = new TableRow.LayoutParams(
+                TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT,
+                1.05f);
+        paramsRight.gravity = Gravity.END;
+
         // for testing
         cart.add(new FoodItem("Beef Ramen", 2, 4.70));
+        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
 
         for (FoodItem f : cart) {
             TableRow trow = new TableRow(this);
-            TextView index = new TextView(this);
-            index.setText(counter+".");
-            trow.addView(index);
+
             TextView name = new TextView(this);
-            name.setText(f.getName());
+            String text = counter + ".   " + f.getName();
+            name.setText(text);
+            name.setLayoutParams(paramsLeft);
             trow.addView(name);
+
             TextView unit = new TextView(this);
             unit.setText(f.getUnit());
+            unit.setLayoutParams(paramsMid);
             trow.addView(unit);
+
             TextView price = new TextView(this);
             price.setText(f.getPrice());
+            price.setLayoutParams(paramsRight);
             trow.addView(price);
+
             cartDisplay.addView(trow);
             counter++;
             subtotal = subtotal + f.getPriceValue();
         }
 
-        total.setText("$"+subtotal);
+        String total_price = "$" + subtotal;
+        total.setText(total_price);
 
         // Payment section
         RadioGroup payment_method = findViewById(R.id.payment_method);
@@ -58,7 +86,11 @@ public class PaymentActivity extends AppCompatActivity {
                 if (payment_method.getCheckedRadioButtonId() != -1) {
                     int selected = payment_method.getCheckedRadioButtonId();
                     RadioButton method = findViewById(selected);
-                    // go to next page
+                    Intent intent = new Intent(PaymentActivity.this, ConfirmationActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(PaymentActivity.this, R.string.choose_payment, Toast.LENGTH_LONG).show();
                 }
             }
         });
