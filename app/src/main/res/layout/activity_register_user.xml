@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterUser"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/editfirst_name"
+        android:hint="First Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></EditText>
+    <EditText
+        android:id="@+id/editlast_name"
+        android:hint="Last Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></EditText>
+    <EditText
+        android:id="@+id/editemail"
+        android:hint="Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></EditText>
+    <EditText
+        android:id="@+id/editcampus"
+        android:hint="Campus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></EditText>
+    <EditText
+        android:id="@+id/editpassword"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></EditText>
+    <Button
+        android:id="@+id/submit_button"
+        android:text="Submit"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></Button>
+
+</LinearLayout>

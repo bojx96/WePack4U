@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -5,12 +6,21 @@ pluginManagement {
         mavenCentral()
     }
 }
+=======
+>>>>>>> 4c6cc632867ca96e21a18d5740d861ba4d35fdfd
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+<<<<<<< HEAD
     }
 }
 rootProject.name = "StorePage"
+=======
+        jcenter() // Warning: this repository is going to shut down soon
+    }
+}
+rootProject.name = "WePack4U"
+>>>>>>> 4c6cc632867ca96e21a18d5740d861ba4d35fdfd
 include ':app'
