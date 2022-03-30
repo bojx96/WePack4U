@@ -9,4 +9,23 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <string name="about_you">About you</string>
+    <string name="first_name">First Name</string>
+    <string name="hfirst_name">Enter first name</string>
+    <string name="last_name">Last Name</string>
+    <string name="hlast_name">Enter last name</string>
+    <string name="university">Which University are you at?</string>
+    <string name="huniversity">Select a university</string>
+    <string name="location">Where are you located</string>
+    <string name="submit">Submit</string>
+    <string name="text_view">Text View</string>
+
+    <string-array name="university_array">
+        <item>SUTD</item>
+        <item>NTU</item>
+        <item>NUS</item>
+        <item>SMU</item>
+        <item>SUSS</item>
+    </string-array>
 </resources>

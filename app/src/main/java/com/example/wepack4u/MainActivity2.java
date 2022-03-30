@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -41,14 +42,21 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        //catching UID from MainActivity
-        Intent intent = getIntent();
-        String uid = intent.getStringExtra("uid");
-        Log.d("intent intent intent", "onCreate: " + uid);
         //Alternatively, below method is much more preferred because Auth can access anywhere as long as auth
         user = FirebaseAuth.getInstance().getCurrentUser();
 //        Log.i("FirebaseAuth in Main2", "onCreate: " + user.getUid());
         db = FirebaseFirestore.getInstance();
+
+        Button about_button = findViewById(R.id.about_button);
+
+        about_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity2.this,AboutActivity.class);
+                startActivity(intent);
+            }
+        });
+
         db.collection("users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
