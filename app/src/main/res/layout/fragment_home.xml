@@ -1,44 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-=======
-<<<<<<< HEAD
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
->>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-<<<<<<< HEAD
-
-    <FrameLayout
-        android:id="@+id/flFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/bottom_nav_menu"/>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-=======
+    tools:context=".HomeFragment">
     <TextView
         android:id="@+id/sutd_canteen_heading"
         android:layout_width="match_parent"
@@ -88,7 +54,7 @@
                 android:src="@drawable/sutd_canteen_1"
                 android:clickable="true"
                 android:onClick="launchSUTDCanteenFood1"/>
-                <!-- TODO REPLACE THIS WITH SMTH ELSE-->
+            <!-- TODO REPLACE THIS WITH SMTH ELSE-->
 
 
 
@@ -116,7 +82,7 @@
                 android:src="@drawable/sutd_canteen_2"
                 android:clickable="true"
                 android:onClick="launchSUTDCanteenFood2"/>
-                <!-- TODO REPLACE THIS WITH SMTH ELSE-->
+            <!-- TODO REPLACE THIS WITH SMTH ELSE-->
 
 
             <TextView
@@ -143,7 +109,7 @@
                 android:src="@drawable/sutd_canteen_3"
                 android:clickable="true"
                 android:onClick="launchSUTDCanteenFood3"/>
-                <!-- TODO REPLACE THIS WITH SMTH ELSE-->
+            <!-- TODO REPLACE THIS WITH SMTH ELSE-->
 
             <TextView
                 android:id="@+id/sutd_canteen_4"
@@ -169,7 +135,7 @@
                 android:src="@drawable/sutd_canteen_4"
                 android:clickable="true"
                 android:onClick="launchSUTDCanteenFood4"/>
-              <!--  TODO REPLACE THIS WITH SMTH ELSE-->
+            <!--  TODO REPLACE THIS WITH SMTH ELSE-->
 
             <TextView
                 android:id="@+id/sutd_canteen_5"
@@ -195,7 +161,7 @@
                 android:src="@drawable/sutd_canteen_5"
                 android:clickable="true"
                 android:onClick="launchSUTDCanteenFood5"/>
-                <!-- TODO REPLACE THIS WITH SMTH ELSE-->
+            <!-- TODO REPLACE THIS WITH SMTH ELSE-->
 
 
 
@@ -209,53 +175,3 @@
 
 
 </RelativeLayout>
-=======
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
-
-
-    <TextView
-        android:text="Username: "
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></TextView>
-    <EditText
-        android:id="@+id/editemail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></EditText>
-
-    <TextView
-        android:text="Password: "
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
-    <EditText
-        android:id="@+id/editpassword"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></EditText>
-    <Button
-        android:id="@+id/login_button"
-        android:text="Login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/round_button"
-        app:cornerRadius = "7dp"
-        ></Button>
-    <TextView
-        android:id="@+id/register"
-        android:text="Register"
-        android:onClick="register_onClick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></TextView>
-
-</LinearLayout>
->>>>>>> 4c6cc632867ca96e21a18d5740d861ba4d35fdfd
->>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066

@@ -1,4 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+<<<<<<< HEAD
+plugins {
+    id 'com.android.application' version '7.1.2' apply false
+    id 'com.android.library' version '7.1.2' apply false
+=======
+<<<<<<< HEAD
+plugins {
+    id 'com.android.application' version '7.1.2' apply false
+    id 'com.android.library' version '7.1.2' apply false
+=======
 buildscript {
     repositories {
         google()
@@ -12,6 +22,8 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+>>>>>>> 4c6cc632867ca96e21a18d5740d861ba4d35fdfd
+>>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
 }
 
 task clean(type: Delete) {
