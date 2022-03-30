@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.example.anotherbottomtest">
+=======
+<<<<<<< HEAD
+    package="com.example.storepage" >
+=======
+    package="com.example.wepack4u">
+>>>>>>> 4c6cc632867ca96e21a18d5740d861ba4d35fdfd
+>>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
 
     <application
         android:allowBackup="true"
@@ -8,13 +16,38 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/Theme.Anotherbottomtest">
         <activity
             android:name=".SUTDCanteenFood1"
+=======
+<<<<<<< HEAD
+        android:theme="@style/Theme.StorePage" >
+        <activity
+            android:name=".SUTDCanteedFood1"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" >
+=======
+        android:theme="@style/Theme.WePack4U">
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterUser"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+>>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
+<<<<<<< HEAD
+=======
+>>>>>>> 4c6cc632867ca96e21a18d5740d861ba4d35fdfd
+>>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

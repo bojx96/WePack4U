@@ -1,4 +1,5 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">FragmentTest</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -6,6 +7,14 @@
 
     <!-- TODO copy from here onwards -->
     <string name="sutd_canteen_store">SUTD Canteen Store</string>
+=======
+<<<<<<< HEAD
+    <string name="app_name">StorePage</string>
+    <string name="sutd_canteen_store">SUTD Canteen Store</string>
+
+
+    <!-- TODO copy from here onwards -->
+>>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
     <string name="sutd_canteen_1">Indian Stall</string>
     <string name="sutd_canteen_2">Western Stall</string>
     <string name="sutd_canteen_3">Japanese Stall</string>
@@ -16,5 +25,56 @@
     <string name="japanese_stall_image">Japanese Stall</string>
     <string name="healthy_soup_image">Healthy Soup Stall</string>
     <string name="dummy_stall_1_image">Dummy1</string>
+<<<<<<< HEAD
+=======
+=======
+    <string name="app_name">WePack4U</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <!-- Payment page -->
+    <string name="checkout_header">Checkout</string>
+    <string name="items">Items:</string>
+    <string name="name_column_header">Name</string>
+    <string name="unit_column_header">Unit</string>
+    <string name="price_column_header">Price</string>
+    <string name="total">Total:</string>
+    <string name="payment_header">Payment</string>
+    <string name="mastercard_visa">MasterCard/Visa</string>
+    <string name="paylah">DBS PayLah!</string>
+    <string name="paynow">Paynow</string>
+    <string name="choose_payment">Select a payment method.</string>
+
+    <!-- Confirmation page -->
+    <string name="successful_header">Payment Successful</string>
+    <string name="done">Done</string>
+
+    <string name="about_you">About you</string>
+    <string name="first_name">First Name</string>
+    <string name="hfirst_name">Enter first name</string>
+    <string name="last_name">Last Name</string>
+    <string name="hlast_name">Enter last name</string>
+    <string name="university">Which University are you at?</string>
+    <string name="huniversity">Select a university</string>
+    <string name="location">Where are you located</string>
+    <string name="submit">Submit</string>
+    <string name="text_view">Text View</string>
+
+    <string-array name="university_array">
+        <item>SUTD</item>
+        <item>NTU</item>
+        <item>NUS</item>
+        <item>SMU</item>
+        <item>SUSS</item>
+    </string-array>
+>>>>>>> 4c6cc632867ca96e21a18d5740d861ba4d35fdfd
+>>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
 
 </resources>

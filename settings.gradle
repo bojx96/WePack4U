@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -5,12 +9,30 @@ pluginManagement {
         mavenCentral()
     }
 }
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 4c6cc632867ca96e21a18d5740d861ba4d35fdfd
+>>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+<<<<<<< HEAD
     }
 }
 rootProject.name = "anotherbottomtest"
+=======
+<<<<<<< HEAD
+    }
+}
+rootProject.name = "StorePage"
+=======
+        jcenter() // Warning: this repository is going to shut down soon
+    }
+}
+rootProject.name = "WePack4U"
+>>>>>>> 4c6cc632867ca96e21a18d5740d861ba4d35fdfd
+>>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
 include ':app'
