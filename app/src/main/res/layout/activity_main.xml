@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <TextView
+        android:id="@+id/sutd_canteen_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+
+        android:padding="@dimen/regular_padding"
+        android:text="@string/sutd_canteen_store"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textSize="@dimen/heading_font_size"
+        android:textStyle="bold" />
+    <!--start scroll from here-->
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sutd_canteen_heading"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_left">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sutd_canteen_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+
+                android:padding="@dimen/small_padding"
+                android:text="@string/sutd_canteen_1"
+                android:textAlignment="textStart"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textSize="@dimen/stall_name_fontsize" />
+
+            <ImageView
+                android:id="@+id/sutd_canteen_1_image"
+                android:layout_width="@dimen/image_width"
+                android:layout_height="@dimen/image_height"
+                android:layout_marginLeft="@dimen/small_padding"
+                android:layout_marginRight="@dimen/small_padding"
+                android:contentDescription="@string/indian_stall_image"
+                android:scaleType="fitXY"
+                android:src="@drawable/sutd_canteen_1"
+                android:clickable="true"
+                android:onClick="launchSUTDCanteenFood1"/>
+                <!-- TODO REPLACE THIS WITH SMTH ELSE-->
+
+
+
+            <TextView
+                android:id="@+id/sutd_canteen_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+
+                android:padding="@dimen/small_padding"
+                android:text="@string/sutd_canteen_2"
+                android:textAlignment="textStart"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textSize="@dimen/stall_name_fontsize" />
+
+
+            <ImageView
+                android:id="@+id/sutd_canteen_2_image"
+                android:layout_width="@dimen/image_width"
+                android:layout_height="@dimen/image_height"
+                android:layout_marginLeft="@dimen/small_padding"
+                android:layout_marginRight="@dimen/small_padding"
+                android:contentDescription="@string/western_stall_image"
+                android:scaleType="fitXY"
+                android:src="@drawable/sutd_canteen_2"
+                android:clickable="true"
+                android:onClick="launchSUTDCanteenFood2"/>
+                <!-- TODO REPLACE THIS WITH SMTH ELSE-->
+
+
+            <TextView
+                android:id="@+id/sutd_canteen_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+
+                android:padding="@dimen/small_padding"
+                android:text="@string/sutd_canteen_3"
+                android:textAlignment="textStart"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textSize="@dimen/stall_name_fontsize" />
+
+
+            <ImageView
+                android:id="@+id/sutd_canteen_3_image"
+                android:layout_width="@dimen/image_width"
+                android:layout_height="@dimen/image_height"
+                android:layout_marginLeft="@dimen/small_padding"
+                android:layout_marginRight="@dimen/small_padding"
+                android:contentDescription="@string/japanese_stall_image"
+                android:scaleType="fitXY"
+                android:src="@drawable/sutd_canteen_3"
+                android:clickable="true"
+                android:onClick="launchSUTDCanteenFood3"/>
+                <!-- TODO REPLACE THIS WITH SMTH ELSE-->
+
+            <TextView
+                android:id="@+id/sutd_canteen_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+
+                android:padding="@dimen/small_padding"
+                android:text="@string/sutd_canteen_4"
+                android:textAlignment="textStart"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textSize="@dimen/stall_name_fontsize" />
+
+
+            <ImageView
+                android:id="@+id/sutd_canteen_4_image"
+                android:layout_width="@dimen/image_width"
+                android:layout_height="@dimen/image_height"
+                android:layout_marginLeft="@dimen/small_padding"
+                android:layout_marginRight="@dimen/small_padding"
+                android:contentDescription="@string/healthy_soup_image"
+                android:scaleType="fitXY"
+                android:src="@drawable/sutd_canteen_4"
+                android:clickable="true"
+                android:onClick="launchSUTDCanteenFood4"/>
+              <!--  TODO REPLACE THIS WITH SMTH ELSE-->
+
+            <TextView
+                android:id="@+id/sutd_canteen_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+
+                android:padding="@dimen/small_padding"
+                android:text="@string/dummy_stall_1"
+                android:textAlignment="textStart"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textSize="@dimen/stall_name_fontsize" />
+
+
+            <ImageView
+                android:id="@+id/sutd_canteen_5_image"
+                android:layout_width="@dimen/image_width"
+                android:layout_height="@dimen/image_height"
+                android:layout_marginLeft="@dimen/small_padding"
+                android:layout_marginRight="@dimen/small_padding"
+                android:contentDescription="@string/dummy_stall_1_image"
+                android:scaleType="fitXY"
+                android:src="@drawable/sutd_canteen_5"
+                android:clickable="true"
+                android:onClick="launchSUTDCanteenFood5"/>
+                <!-- TODO REPLACE THIS WITH SMTH ELSE-->
+
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

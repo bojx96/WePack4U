@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <!-- TODO copy from here onwards -->
+    <dimen name="regular_padding">16dp</dimen>
+    <dimen name="margin_left">48dp</dimen>
+    <dimen name="heading_font_size">36sp</dimen>
+    <dimen name="stall_name_fontsize">16sp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="image_width">300dp</dimen>
+    <dimen name="image_height">160dp</dimen>
+</resources>

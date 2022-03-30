@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">StorePage</string>
+    <string name="sutd_canteen_store">SUTD Canteen Store</string>
+
+
+    <!-- TODO copy from here onwards -->
+    <string name="sutd_canteen_1">Indian Stall</string>
+    <string name="sutd_canteen_2">Western Stall</string>
+    <string name="sutd_canteen_3">Japanese Stall</string>
+    <string name="sutd_canteen_4">Healthy Soup Stall</string>
+    <string name="dummy_stall_1">Dummy Stall 1</string>
+    <string name="indian_stall_image">Indian Stall</string>
+    <string name="western_stall_image">Western Stall</string>
+    <string name="japanese_stall_image">Japanese Stall</string>
+    <string name="healthy_soup_image">Healthy Soup Stall</string>
+    <string name="dummy_stall_1_image">Dummy1</string>
+
+</resources>
