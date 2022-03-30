@@ -3,32 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/anotherbottomtest/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.12" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/anotherbottomtest/app/src/main/res/drawable/ic_icons8_settings_24.xml" value="0.1" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/anotherbottomtest/app/src/main/res/drawable/ic_settings_black_24dp.xml" value="0.1" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/anotherbottomtest/app/src/main/res/layout/acitvity_sutdcanteen_food1.xml" value="0.15520833333333334" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/anotherbottomtest/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/anotherbottomtest/app/src/main/res/layout/activity_sutdcanteen_food1.xml" value="0.16927083333333334" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/anotherbottomtest/app/src/main/res/layout/fragment_first.xml" value="0.27717391304347827" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/anotherbottomtest/app/src/main/res/layout/fragment_home.xml" value="0.10416666666666667" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/anotherbottomtest/app/src/main/res/layout/fragment_second.xml" value="0.1" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/anotherbottomtest/app/src/main/res/layout/fragment_settings.xml" value="0.10416666666666667" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/anotherbottomtest/app/src/main/res/menu/bottom_nav_menu.xml" value="0.34427083333333336" />
-=======
-<<<<<<< HEAD
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/StorePage/app/src/main/res/drawable/ic_launcher_background.xml" value="0.24" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/StorePage/app/src/main/res/layout/acitvity_second.xml" value="0.1" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/StorePage/app/src/main/res/layout/activity_main.xml" value="0.29347826086956524" />
-        <entry key="..\:/Users/Nicholas/AndroidStudioProjects/StorePage/app/src/main/res/layout/activity_sutdcanteed_food1.xml" value="0.34427083333333336" />
->>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
-      </map>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-<<<<<<< HEAD
-=======
-=======
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26296296296296295" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26296296296296295" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/drawable/round_button.xml" value="0.26296296296296295" />
@@ -45,8 +19,6 @@
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
->>>>>>> 4c6cc632867ca96e21a18d5740d861ba4d35fdfd
->>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

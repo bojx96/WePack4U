@@ -1,29 +1,5 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-=======
-<<<<<<< HEAD
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-
-
->>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
-    <!-- TODO copy from here onwards -->
-    <dimen name="regular_padding">16dp</dimen>
-    <dimen name="margin_left">48dp</dimen>
-    <dimen name="heading_font_size">36sp</dimen>
-    <dimen name="stall_name_fontsize">16sp</dimen>
-    <dimen name="small_padding">8dp</dimen>
-    <dimen name="image_width">300dp</dimen>
-    <dimen name="image_height">160dp</dimen>
-<<<<<<< HEAD
-=======
-=======
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
  <dimen name="activity_horizontal_margin">16dp</dimen>
  <dimen name="activity_vertical_margin">16dp</dimen>
->>>>>>> 4c6cc632867ca96e21a18d5740d861ba4d35fdfd
->>>>>>> f261d49ac295caf5036dc1f936d6a02fe7ca8066
 </resources>
