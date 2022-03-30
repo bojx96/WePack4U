@@ -51,6 +51,9 @@ dependencies {
     //gson
     implementation 'com.google.code.gson:gson:2.8.6'
 
+    //firebase auth
+    implementation platform('com.google.firebase:firebase-bom:29.3.0')
+    implementation 'com.google.firebase:firebase-auth'
     //Google error 9 fix
     implementation 'com.google.android.gms:play-services-location:18.0.0'
 }

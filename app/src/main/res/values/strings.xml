@@ -26,4 +26,24 @@
     <!-- Confirmation page -->
     <string name="successful_header">Payment Successful</string>
     <string name="done">Done</string>
+
+    <string name="about_you">About you</string>
+    <string name="first_name">First Name</string>
+    <string name="hfirst_name">Enter first name</string>
+    <string name="last_name">Last Name</string>
+    <string name="hlast_name">Enter last name</string>
+    <string name="university">Which University are you at?</string>
+    <string name="huniversity">Select a university</string>
+    <string name="location">Where are you located</string>
+    <string name="submit">Submit</string>
+    <string name="text_view">Text View</string>
+
+    <string-array name="university_array">
+        <item>SUTD</item>
+        <item>NTU</item>
+        <item>NUS</item>
+        <item>SMU</item>
+        <item>SUSS</item>
+    </string-array>
+
 </resources>
