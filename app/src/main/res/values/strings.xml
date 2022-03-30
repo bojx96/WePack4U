@@ -10,6 +10,23 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+    <!-- Payment page -->
+    <string name="checkout_header">Checkout</string>
+    <string name="items">Items:</string>
+    <string name="name_column_header">Name</string>
+    <string name="unit_column_header">Unit</string>
+    <string name="price_column_header">Price</string>
+    <string name="total">Total:</string>
+    <string name="payment_header">Payment</string>
+    <string name="mastercard_visa">MasterCard/Visa</string>
+    <string name="paylah">DBS PayLah!</string>
+    <string name="paynow">Paynow</string>
+    <string name="choose_payment">Select a payment method.</string>
+
+    <!-- Confirmation page -->
+    <string name="successful_header">Payment Successful</string>
+    <string name="done">Done</string>
+
     <string name="about_you">About you</string>
     <string name="first_name">First Name</string>
     <string name="hfirst_name">Enter first name</string>
@@ -28,4 +45,5 @@
         <item>SMU</item>
         <item>SUSS</item>
     </string-array>
+
 </resources>
