@@ -17,7 +17,7 @@
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         android:textSize="@dimen/heading_font_size"
         android:textStyle="bold" />
-    <!--start scroll from here-->
+    <!--start recyclerview from here-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
