@@ -1,136 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="30dp"
-    android:paddingRight="30dp"
-    tools:context=".ConfirmationActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/successful_header"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
-
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
-        <TableRow>
-            <TextView
-                android:layout_width="180dp"
-                android:layout_height="match_parent"
-                android:id="@+id/order_num"
-                android:textSize="20sp"
-                android:gravity="bottom"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/_30sdp"
+        android:paddingRight="@dimen/_30sdp"
+        tools:context=".ConfirmationActivity">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/successful_header"
+            android:textSize="@dimen/_30ssp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <TextView
-                android:layout_width="170dp"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/_170sdp"
+                android:layout_height="wrap_content"
+                android:id="@+id/order_num"
+                android:textSize="@dimen/_15ssp"
+                android:gravity="bottom"/>
+            <TextView
+                android:layout_width="@dimen/_85sdp"
+                android:layout_height="wrap_content"
                 android:id="@+id/timestamp"
-                android:textSize="15sp"
+                android:textSize="@dimen/_10ssp"
                 android:gravity="bottom"
                 android:layout_gravity="end"/>
+            <!-- android:text="22:22:22 22/22/22" -->
         </TableRow>
-    </TableLayout>
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TableRow>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/items"
+                    android:textSize="@dimen/_15ssp"
+                    android:gravity="bottom"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="@dimen/_115sdp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name_column_header"
+                    android:textSize="@dimen/_15ssp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/unit_column_header"
+                    android:textSize="@dimen/_15ssp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price_column_header"
+                    android:textSize="@dimen/_15ssp"
+                    android:layout_gravity="end"/>
+            </TableRow>
+
+            <!-- draw horizontal line -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/gray_line"/>
+
+            <TableRow>
+                <TableLayout
+                    android:layout_width="@dimen/_115sdp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cart2a">
+                </TableLayout>
+                <TableLayout
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cart2b">
+                </TableLayout>
+                <TableLayout
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cart2c">
+                </TableLayout>
+            </TableRow>
+        </TableLayout>
+
+        <!-- draw horizontal line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/gray_line"/>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <TextView
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:text="@string/name_column_header"
-                android:textSize="20sp"
-                android:layout_gravity="center"/>
-            <TextView
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:text="@string/unit_column_header"
-                android:textSize="20sp"
-                android:layout_gravity="center"/>
-            <TextView
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:text="@string/price_column_header"
-                android:textSize="20sp"
-                android:layout_gravity="end"/>
-        </TableRow>
-    </TableLayout>
-
-    <!-- draw horizontal line -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/gray_line"/>
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:id="@+id/cart2"
-        android:nestedScrollingEnabled="true">
-    </TableLayout>
-
-    <!-- draw horizontal line -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/gray_line"/>
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TableRow>
-            <TextView
-                android:layout_width="265dp"
+                android:layout_width="@dimen/_185sdp"
                 android:layout_height="wrap_content"
                 android:text="@string/total"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="@dimen/_15ssp"
                 android:gravity="end"/>
             <TextView
-                android:layout_width="85dp"
+                android:layout_width="@dimen/_70sdp"
                 android:layout_height="wrap_content"
                 android:id="@+id/total2"
-                android:textSize="20sp"
+                android:textSize="@dimen/_15ssp"
                 android:gravity="end"/>
         </TableRow>
-    </TableLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="120dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/payment_text"
-        android:textSize="15sp"
-        android:textColor="@color/black"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/waiting_time"
-        android:textSize="15sp"
-        android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/payment_text"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/waiting_time"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="@color/black"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="160dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"/>
 
-    <Button
-        android:layout_width="320dp"
-        android:layout_height="90dp"
-        android:text="@string/done"
-        android:id="@+id/done_button"
-        android:textSize="20sp"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/round_button"
-        app:cornerRadius="7dp"/>
+        <Button
+            android:layout_width="@dimen/_245sdp"
+            android:layout_height="@dimen/_65sdp"
+            android:text="@string/done"
+            android:id="@+id/done_button"
+            android:textSize="@dimen/_15ssp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/round_button"
+            app:cornerRadius="@dimen/_7sdp"/>
 
-</LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"/>
+    </LinearLayout>
+</ScrollView>

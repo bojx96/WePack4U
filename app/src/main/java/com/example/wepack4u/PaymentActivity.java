@@ -16,9 +16,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class PaymentActivity extends AppCompatActivity {
-    public static final String TABLE_KEY = "table_key";
-    public static final String TOTAL_KEY = "total_key";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,63 +23,70 @@ public class PaymentActivity extends AppCompatActivity {
 
         // Checkout section
         ArrayList<FoodItem> cart = new ArrayList<>(); // arraylist should be retrieved from firebase
-        TableLayout cartDisplay = findViewById(R.id.cart);
         TextView total = findViewById(R.id.total);
         int counter = 1;
         double subtotal = 0.0f;
 
+        TableLayout cartA = findViewById(R.id.cart1a);
+        TableLayout cartB = findViewById(R.id.cart1b);
+        TableLayout cartC = findViewById(R.id.cart1c);
+
         TableRow.LayoutParams paramsLeft = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT,
-                1.8f);
-        paramsLeft.gravity = Gravity.START;
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT);
         TableRow.LayoutParams paramsMid = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT,
-                1.05f);
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT);
         paramsMid.gravity = Gravity.CENTER;
         TableRow.LayoutParams paramsRight = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT,
-                1.05f);
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT);
         paramsRight.gravity = Gravity.END;
-
-        ArrayList<TableRow> rows = new ArrayList<>();
 
         // for testing
         cart.add(new FoodItem("Beef Ramen", 2, 4.70));
         cart.add(new FoodItem("Aglio Olio", 1, 4.50));
+        cart.add(new FoodItem("Curry Katsu Don", 3, 4.50));
+        cart.add(new FoodItem("A", 1, 4.50));
+        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
+        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
+        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
+        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
+        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
 
         for (FoodItem f : cart) {
-            TableRow trow = new TableRow(this);
-
+            TableRow trow1 = new TableRow(this);
             TextView name = new TextView(this);
             String text = counter + ".   " + f.getName();
             name.setText(text);
             name.setLayoutParams(paramsLeft);
-            trow.addView(name);
+            trow1.addView(name);
+            cartA.addView(trow1);
 
+            TableRow trow2 = new TableRow(this);
             TextView unit = new TextView(this);
             unit.setText(f.getUnit());
             unit.setLayoutParams(paramsMid);
-            trow.addView(unit);
+            trow2.addView(unit);
+            cartB.addView(trow2);
 
+            TableRow trow3 = new TableRow(this);
             TextView price = new TextView(this);
-            price.setText(f.getPrice());
+            String priceValue = f.getPrice();
+            if (f.getPriceValue() * 10 % 1 == 0) { priceValue = priceValue + "0"; }
+            price.setText(priceValue);
             price.setLayoutParams(paramsRight);
-            trow.addView(price);
+            trow3.addView(price);
+            cartC.addView(trow3);
 
-            cartDisplay.addView(trow);
             counter++;
             subtotal = subtotal + f.getPriceValue();
-            rows.add(trow);
         }
 
         String totalPrice = "$" + subtotal;
-        if (subtotal * 10 % 1 != 0) {
+        if (subtotal * 10 % 1 == 0) {
             totalPrice = totalPrice + "0";
         }
-        String finalTotalPrice = totalPrice;
         total.setText(totalPrice);
 
         // Payment section
@@ -95,8 +99,6 @@ public class PaymentActivity extends AppCompatActivity {
                     int selected = payment_method.getCheckedRadioButtonId();
                     RadioButton method = findViewById(selected);
                     Intent intent = new Intent(PaymentActivity.this, ConfirmationActivity.class);
-                    intent.putExtra(TABLE_KEY, rows);
-                    intent.putExtra(TOTAL_KEY, finalTotalPrice);
                     startActivity(intent);
                 }
                 else {
