@@ -9,16 +9,19 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     EditText email,password;
+    ImageView logo;
     Button login;
 
     @Override
@@ -26,12 +29,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        logo = (ImageView) findViewById(R.id.Logo_image);
         email = (EditText) findViewById(R.id.editemail);
         password = (EditText)  findViewById(R.id.editpassword);
         login = (Button) findViewById(R.id.login_button);
         mAuth = FirebaseAuth.getInstance();
 
-
+        //image example
+        String imageurl = "https://firebasestorage.googleapis.com/v0/b/wepack4u-a3325.appspot.com/o/Pokemons%2Fbulbasaur.png?alt=media&token=87f81b38-d01c-4a3f-8670-9232e236c3c8";
+        Picasso.get().load(imageurl).into(logo); //for logo please put inside resource file
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
