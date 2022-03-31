@@ -13,14 +13,14 @@
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_main2.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_register_user.xml" value="0.23596014492753623" />
+        <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_store_page.xml" value="0.10964912280701754" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/dropdown.xml" value="0.1" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/dropdown2.xml" value="0.1" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/login.xml" value="0.1" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_store_page.xml" value="0.22327898550724637" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -6,14 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-public class StorePage extends AppCompatActivity {
+import com.squareup.picasso.Picasso;
 
+public class StorePage extends AppCompatActivity {
+    ImageView image1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_page);
+
+        image1 = (ImageView) findViewById(R.id.sutd_canteen_1_image);
+        String imageurl = "https://firebasestorage.googleapis.com/v0/b/wepack4u-a3325.appspot.com/o/Pokemons%2Fbulbasaur.png?alt=media&token=87f81b38-d01c-4a3f-8670-9232e236c3c8";
+        Picasso.get().load(imageurl).into(image1);
     }
 
     //TODO SUTDCanteedFood1 redirects to dummy page
