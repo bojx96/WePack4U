@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //image example
-        String imageurl = "https://firebasestorage.googleapis.com/v0/b/wepack4u-a3325.appspot.com/o/Pokemons%2Fbulbasaur.png?alt=media&token=87f81b38-d01c-4a3f-8670-9232e236c3c8";
-        Picasso.get().load(imageurl).into(logo); //for logo please put inside resource file
+//        String imageurl = "https://firebasestorage.googleapis.com/v0/b/wepack4u-a3325.appspot.com/o/Pokemons%2Fbulbasaur.png?alt=media&token=87f81b38-d01c-4a3f-8670-9232e236c3c8";
+//        Picasso.get().load(imageurl).into(logo); //for logo please put inside resource file
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
