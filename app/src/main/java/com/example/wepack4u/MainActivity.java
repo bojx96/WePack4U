@@ -61,12 +61,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            //redirect
-                            String uid = mAuth.getUid();
-                            Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                            intent.putExtra("uid" ,uid);
-                            startActivity(intent);
-                            finish();
+                            Toast.makeText(MainActivity.this, "Login liao", Toast.LENGTH_LONG).show();
+//                            Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+//                            startActivity(intent);
+//                            finish();
                         }
                         else {
                             Toast.makeText(MainActivity.this, "Failed to login, Please check password", Toast.LENGTH_LONG).show();
@@ -82,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() { } //override to disable onBackpress
 
     public void register_onClick(View view){
-        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+        Intent intent = new Intent(MainActivity.this, RegisterUser.class);
         startActivity(intent);
     }
 }

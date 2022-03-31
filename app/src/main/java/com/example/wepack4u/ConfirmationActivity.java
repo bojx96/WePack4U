@@ -57,8 +57,8 @@ public class ConfirmationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //return to home page, LoginActivity is used as a dummy
-                Intent intent = new Intent(ConfirmationActivity.this, LoginActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ConfirmationActivity.this, LoginActivity.class);
+//                startActivity(intent);
             }
         });
     }
