@@ -61,4 +61,13 @@
     <string name="dummy_stall_1_image">Dummy1</string>
 
 
+    <!--dummy array for store page-->
+    <string-array name="programming_languages">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+    </string-array>
 </resources>

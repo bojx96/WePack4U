@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(MainActivity.this, "Login liao", Toast.LENGTH_LONG).show();
-//                            Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-//                            startActivity(intent);
-//                            finish();
+                            Intent intent = new Intent(MainActivity.this, StorePage.class);
+                            startActivity(intent);
+                            finish();
                         }
                         else {
                             Toast.makeText(MainActivity.this, "Failed to login, Please check password", Toast.LENGTH_LONG).show();
