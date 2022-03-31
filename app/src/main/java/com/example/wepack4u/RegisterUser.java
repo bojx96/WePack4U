@@ -31,7 +31,6 @@ public class RegisterUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
 
-
         mAuth = FirebaseAuth.getInstance();
         editfirst_name = (EditText) findViewById(R.id.editfirst_name);
         editlast_name = (EditText) findViewById(R.id.editlast_name);
