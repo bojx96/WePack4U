@@ -10,12 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WePack4U">
         <activity
+            android:name=".StorePage"
+            android:exported="false" />
+        <activity
             android:name=".AboutActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterUser"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
