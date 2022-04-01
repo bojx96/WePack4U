@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/successful_header"
-            android:textSize="@dimen/_30ssp"
+            android:textSize="@dimen/_25ssp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
 
@@ -43,14 +43,6 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TableRow>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/items"
-                    android:textSize="@dimen/_15ssp"
-                    android:gravity="bottom"/>
-            </TableRow>
             <TableRow>
                 <TextView
                     android:layout_width="@dimen/_115sdp"
@@ -129,13 +121,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/payment_text"
-            android:textSize="@dimen/_10ssp"
+            android:textSize="@dimen/_12ssp"
             android:textColor="@color/black"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/waiting_time"
-            android:textSize="@dimen/_10ssp"
+            android:textSize="@dimen/_12ssp"
             android:textColor="@color/black"/>
 
         <View
