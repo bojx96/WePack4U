@@ -15,51 +15,30 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.Document;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterUser extends AppCompatActivity {
     private FirebaseAuth mAuth;
+
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private String campus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
-
-        //pulling store data example
-        String school = "sutd";
-        db.collection("Campus").whereEqualTo("name", school).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        String school_id = document.getId();
-                        Log.d("Mainactivity_DB", document.getId() + " => " + document.getData());
-                        db.collection("Campus").document(school_id).collection("food_stores").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()){
-                                    for (QueryDocumentSnapshot docs : task.getResult()){
-                                        Log.d("Mainactivity_DB", docs.getId() + " => " + docs.getData());
-                                    }
-                                }
-                            }
-                        });
-                    }
-                }
-                else{
-                    Toast.makeText(RegisterUser.this, "in else block", Toast.LENGTH_LONG).show();
-                    Log.d("Mainactvity_DB", "Failed to fetch anything");
-                }
-            }
-        });
-
         mAuth = FirebaseAuth.getInstance();
+
         EditText editfirst_name = findViewById(R.id.editfirst_name);
         EditText editlast_name = findViewById(R.id.editlast_name);
         EditText editcampus = findViewById(R.id.editcampus);
@@ -108,13 +87,12 @@ public class RegisterUser extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                 Map<String, Object> user_details = new HashMap<>();
                                 user_details.put("first_name", first_name);
                                 user_details.put("last_name", last_name);
                                 user_details.put("campus", campus);
                                 user_details.put("email", email);
-                                FirebaseFirestore.getInstance().collection("users").document(auth_uid)
+                                db.collection("users").document(auth_uid)
                                         .set(user_details).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
