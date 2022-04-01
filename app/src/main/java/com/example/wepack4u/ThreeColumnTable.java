@@ -1,10 +1,14 @@
 package com.example.wepack4u;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 
@@ -14,9 +18,7 @@ public class ThreeColumnTable {
     private final TableLayout t3;
     private final ArrayList<FoodItem> cart;
     private final Context context;
-    private TableRow.LayoutParams paramsLeft;
-    private TableRow.LayoutParams paramsMid;
-    private TableRow.LayoutParams paramsRight;
+    private final Typeface typeface;
     private double subtotal;
 
     ThreeColumnTable(TableLayout t1, TableLayout t2, TableLayout t3, ArrayList<FoodItem> cart,
@@ -26,24 +28,10 @@ public class ThreeColumnTable {
         this.t3 = t3;
         this.cart = cart;
         this.context = context;
-    }
-
-    private void setParams() {
-        paramsLeft = new TableRow.LayoutParams(
-                TableRow.LayoutParams.MATCH_PARENT,
-                TableRow.LayoutParams.WRAP_CONTENT);
-        paramsMid = new TableRow.LayoutParams(
-                TableRow.LayoutParams.MATCH_PARENT,
-                TableRow.LayoutParams.WRAP_CONTENT);
-        paramsMid.gravity = Gravity.CENTER;
-        paramsRight = new TableRow.LayoutParams(
-                TableRow.LayoutParams.MATCH_PARENT,
-                TableRow.LayoutParams.WRAP_CONTENT);
-        paramsRight.gravity = Gravity.END;
+        typeface = ResourcesCompat.getFont(context, R.font.montserrat_medium);
     }
 
     public void createTable() {
-        setParams();
         int counter = 1;
         subtotal = 0.0f;
 
@@ -52,32 +40,30 @@ public class ThreeColumnTable {
         cart.add(new FoodItem("Aglio Olio", 1, 4.50));
         cart.add(new FoodItem("Curry Katsu Don", 3, 4.50));
         cart.add(new FoodItem("A", 1, 4.50));
-        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
-        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
-        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
-        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
-        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
 
         for (FoodItem f : cart) {
             String text = counter + ".   " + f.getName();
-            createRow(text, paramsLeft, t1);
+            createRow(text, t1, Gravity.START);
 
-            createRow(f.getUnit(), paramsMid, t2);
+            createRow(f.getUnit(), t2, Gravity.CENTER_HORIZONTAL);
 
             String priceValue = f.getPrice();
             if (f.getPriceValue() * 10 % 1 == 0) { priceValue = priceValue + "0"; }
-            createRow(priceValue, paramsRight, t3);
+            createRow(priceValue, t3, Gravity.END);
 
             counter++;
             subtotal = subtotal + f.getPriceValue();
         }
     }
 
-    private void createRow(String text, TableRow.LayoutParams params, TableLayout table) {
+    private void createRow(String text, TableLayout table, int alignment) {
         TableRow trow = new TableRow(context);
         TextView textView = new TextView(context);
+
         textView.setText(text);
-        textView.setLayoutParams(params);
+        textView.setTypeface(typeface);
+        textView.setGravity(alignment);
+
         trow.addView(textView);
         table.addView(trow);
     }

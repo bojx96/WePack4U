@@ -17,9 +17,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/successful_header"
-            android:textSize="@dimen/_25ssp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textSize="@dimen/_24ssp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat_bold"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_10sdp"/>
 
         <TableRow
             android:layout_width="match_parent"
@@ -29,65 +33,68 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/order_num"
                 android:textSize="@dimen/_15ssp"
-                android:gravity="bottom"/>
+                android:fontFamily="@font/montserrat_medium"/>
             <TextView
                 android:layout_width="@dimen/_85sdp"
                 android:layout_height="wrap_content"
                 android:id="@+id/timestamp"
                 android:textSize="@dimen/_10ssp"
-                android:gravity="bottom"
-                android:layout_gravity="end"/>
+                android:layout_gravity="bottom"
+                android:fontFamily="@font/montserrat_medium"/>
             <!-- android:text="22:22:22 22/22/22" -->
         </TableRow>
 
-        <TableLayout
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TableRow>
-                <TextView
-                    android:layout_width="@dimen/_115sdp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/name_column_header"
-                    android:textSize="@dimen/_15ssp"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/unit_column_header"
-                    android:textSize="@dimen/_15ssp"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/price_column_header"
-                    android:textSize="@dimen/_15ssp"
-                    android:layout_gravity="end"/>
-            </TableRow>
+            <TextView
+                android:layout_width="@dimen/_155sdp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/name_column_header"
+                android:textSize="@dimen/_15ssp" />
+            <TextView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                android:text="@string/unit_column_header"
+                android:textSize="@dimen/_15ssp"
+                android:gravity="center"
+                android:fontFamily="@font/montserrat_medium"/>
+            <TextView
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="wrap_content"
+                android:text="@string/price_column_header"
+                android:textSize="@dimen/_15ssp"
+                android:gravity="end"
+                android:fontFamily="@font/montserrat_medium"/>
+        </TableRow>
 
-            <!-- draw horizontal line -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/gray_line"/>
+        <!-- draw horizontal line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/gray_line"/>
 
-            <TableRow>
-                <TableLayout
-                    android:layout_width="@dimen/_115sdp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cart2a">
-                </TableLayout>
-                <TableLayout
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cart2b">
-                </TableLayout>
-                <TableLayout
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cart2c">
-                </TableLayout>
-            </TableRow>
-        </TableLayout>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TableLayout
+                android:layout_width="@dimen/_170sdp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cart2a">
+            </TableLayout>
+            <TableLayout
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cart2b">
+            </TableLayout>
+            <TableLayout
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cart2c">
+            </TableLayout>
+        </TableRow>
 
         <!-- draw horizontal line -->
         <View
@@ -102,15 +109,16 @@
                 android:layout_width="@dimen/_185sdp"
                 android:layout_height="wrap_content"
                 android:text="@string/total"
-                android:textStyle="bold"
                 android:textSize="@dimen/_15ssp"
-                android:gravity="end"/>
+                android:gravity="end"
+                android:fontFamily="@font/montserrat_bold"/>
             <TextView
                 android:layout_width="@dimen/_70sdp"
                 android:layout_height="wrap_content"
                 android:id="@+id/total2"
                 android:textSize="@dimen/_15ssp"
-                android:gravity="end"/>
+                android:gravity="end"
+                android:fontFamily="@font/montserrat_medium"/>
         </TableRow>
 
         <View
@@ -122,13 +130,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/payment_text"
             android:textSize="@dimen/_12ssp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat_medium"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/waiting_time"
             android:textSize="@dimen/_12ssp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat_medium"/>
 
         <View
             android:layout_width="match_parent"
@@ -140,6 +150,7 @@
             android:text="@string/done"
             android:id="@+id/done_button"
             android:textSize="@dimen/_15ssp"
+            android:fontFamily="@font/montserrat_bold"
             android:layout_gravity="center"
             android:backgroundTint="@color/round_button"
             app:cornerRadius="@dimen/_7sdp"/>
