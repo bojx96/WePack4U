@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,11 +28,40 @@ public class RegisterUser extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText editfirst_name,editlast_name,editcampus, editemail, editpassword;
     private Button submit_button;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
+
+        //pulling store data example
+        String school = "sutd";
+        db.collection("Campus").whereEqualTo("name", school).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String school_id = document.getId();
+                        Log.d("Mainactivity_DB", document.getId() + " => " + document.getData());
+                        db.collection("Campus").document(school_id).collection("food_stores").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()){
+                                    for (QueryDocumentSnapshot docs : task.getResult()){
+                                        Log.d("Mainactivity_DB", docs.getId() + " => " + docs.getData());
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+                else{
+                    Toast.makeText(RegisterUser.this, "in else block", Toast.LENGTH_LONG).show();
+                    Log.d("Mainactvity_DB", "Failed to fetch anything");
+                }
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         editfirst_name = (EditText) findViewById(R.id.editfirst_name);
