@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(MainActivity.this, StorePage.class);
+                            Intent intent = new Intent(MainActivity.this, FoodDisplay.class);
                             startActivity(intent);
                             finish();
                         }
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() { } //override to disable onBackpress
 
     public void register_onClick(View view){
-        Intent intent = new Intent(MainActivity.this, StorePage.class);
+        Intent intent = new Intent(MainActivity.this, RegisterUser.class);
         startActivity(intent);
     }
 }
