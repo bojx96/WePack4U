@@ -14,6 +14,13 @@ public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.
     String data1[], data2[];
     int images[];
     Context context;
+    //Brandon's Edit
+//    List<FoodStore> foodStores;
+    //Brandon's Edit
+//    public FoodDisplayAdaptor(Context ct, List<FoodStore>){
+//        context = ct;
+//        foodStores = List<FoodStore>;
+//    }
     public FoodDisplayAdaptor(Context ct, String s1[], String s2[], int img[]){
         context = ct;
         data1 = s1;
@@ -28,12 +35,14 @@ public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.
         View view = inflater.inflate(R.layout.activity_food_display_adaptor,parent,false);
         return new FoodDisplayViewHolder(view);
     }
-
+//    foodStores {store1, store2}
     @Override
     public void onBindViewHolder(@NonNull FoodDisplayViewHolder holder, int position) {
         holder.FoodName.setText(data1[position]);
         holder.FoodPrice.setText(data2[position]);
         holder.FoodImage.setImageResource(images[position]);
+// Brandon's Edit
+//        holder.FoodName.setText(foodStore.get(position).store_name);
 
     }
 
