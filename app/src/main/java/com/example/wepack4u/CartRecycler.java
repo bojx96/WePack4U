@@ -63,7 +63,7 @@ public class CartRecycler extends RecyclerView.Adapter<CartRecycler.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            store = itemView.findViewById(R.id.store_name);
+            store = itemView.findViewById(R.id.stall_name);
             order = itemView.findViewById(R.id.order_num);
             cartA = itemView.findViewById(R.id.cart_a);
             cartB = itemView.findViewById(R.id.cart_b);
