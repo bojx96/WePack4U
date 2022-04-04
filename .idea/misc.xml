@@ -8,8 +8,13 @@
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/drawable/round_button.xml" value="0.26296296296296295" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="app/src/main/res/layout/activity_confirmation.xml" value="0.39648682559598497" />
-        <entry key="app/src/main/res/layout/activity_payment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_about.xml" value="0.30910645575032064" />
+        <entry key="app/src/main/res/layout/activity_confirmation.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_payment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_register_user.xml" value="0.30910645575032064" />
+        <entry key="app/src/main/res/layout/activity_store_page.xml" value="0.30910645575032064" />
+        <entry key="app/src/main/res/layout/cart_display.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/dropdown.xml" value="0.30910645575032064" />
       </map>
     </option>
   </component>
