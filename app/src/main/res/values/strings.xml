@@ -60,5 +60,21 @@
     <string name="healthy_soup_image">Healthy Soup Stall</string>
     <string name="dummy_stall_1_image">Dummy1</string>
 
+    <!-- Food Display Page -->
+    <string-array name="food_names">
+        <item>foodname1</item>
+        <item>foodname2</item>
+        <item>foodname3</item>
+        <item>foodname4</item>
+
+
+    </string-array>
+    <string-array name="food_prices">
+        <item>foodprice1.</item>
+        <item>foodprice2.</item>
+        <item>foodprice3.</item>
+        <item>foodprice4.</item>
+
+    </string-array>
 
 </resources>
