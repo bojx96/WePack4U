@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() { } //override to disable onBackpress
 
     public void register_onClick(View view){
-        Intent intent = new Intent(MainActivity.this, RegisterUser.class);
+        Intent intent = new Intent(MainActivity.this, StorePage.class);
         startActivity(intent);
     }
 }

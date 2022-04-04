@@ -20,6 +20,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.List;
+
 
 public class dbTest {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -61,14 +63,9 @@ public class dbTest {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()){
-                                    int count = 0;
-                                    for (QueryDocumentSnapshot docs : task.getResult()){
-                                        Log.d("storeList", docs.getId() + " => " + docs.getData());
-                                        Log.d("TAG", "store_name = " + docs.get("store_name"));
-//                                        storeName[count] = (String) docs.get("store_name");
-//                                        count ++;
-//                                        Log.d("TAG", "storeName " + storeName[count]);
-                                    }
+                                    QuerySnapshot querySnapshot = task.getResult();
+                                    List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
+//                                    System.out.println(campus.get(0).store_name);
                                 }
                             }
                         });
