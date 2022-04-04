@@ -23,18 +23,18 @@ public class PaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment);
 
         // Checkout section
-        ArrayList<FoodItem> cart = new ArrayList<>(); // arraylist should be retrieved from firebase
-        /*TableLayout cartA = findViewById(R.id.cart1a);
-        TableLayout cartB = findViewById(R.id.cart1b);
-        TableLayout cartC = findViewById(R.id.cart1c);
-        ThreeColumnTable table = new ThreeColumnTable(cartA, cartB, cartC, cart, PaymentActivity.this);
-        table.createTable();*/
+        // dummies; should be retrieved from firebase
+        ArrayList<FoodItem> cart = new ArrayList<>();
+        cart.add(new FoodItem("Beef Ramen", 2, 4.70));
+        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
+        ArrayList<FoodItem> cart2 = new ArrayList<>();
+        cart2.add(new FoodItem("Curry Katsu Don", 3, 4.50));
+        cart2.add(new FoodItem("A", 1, 4.50));
 
-        // dummies
         String[] stores = {"Japanese", "Western"};
         ArrayList<ArrayList<FoodItem>> carts = new ArrayList<>();
         carts.add(cart);
-        carts.add(new ArrayList<FoodItem>());
+        carts.add(cart2);
 
         RecyclerView recycler = findViewById(R.id.cart_recycler_a);
         CartRecycler adapter = new CartRecycler(PaymentActivity.this, stores, new int[0], carts, true);
@@ -42,7 +42,7 @@ public class PaymentActivity extends AppCompatActivity {
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
         TextView total = findViewById(R.id.total);
-        total.setText(ThreeColumnTable.getTotalPrice());
+        total.setText(new TotalPrice(carts).getTotal());
 
         // Payment section
         RadioGroup payment_method = findViewById(R.id.payment_method);

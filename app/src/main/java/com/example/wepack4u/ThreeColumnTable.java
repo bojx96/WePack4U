@@ -19,7 +19,6 @@ public class ThreeColumnTable {
     private final ArrayList<FoodItem> cart;
     private final Context context;
     private final Typeface typeface;
-    private static double TOTAL;
 
     ThreeColumnTable(TableLayout t1, TableLayout t2, TableLayout t3, ArrayList<FoodItem> cart,
                      Context context) {
@@ -33,13 +32,6 @@ public class ThreeColumnTable {
 
     public void createTable() {
         int counter = 1;
-        double subtotal = 0.0f;
-
-        // for testing
-        cart.add(new FoodItem("Beef Ramen", 2, 4.70));
-        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
-        cart.add(new FoodItem("Curry Katsu Don", 3, 4.50));
-        cart.add(new FoodItem("A", 1, 4.50));
 
         for (FoodItem f : cart) {
             String text = counter + ".   " + f.getName();
@@ -52,9 +44,7 @@ public class ThreeColumnTable {
             createRow(priceValue, t3, Gravity.END);
 
             counter++;
-            subtotal = subtotal + f.getPriceValue();
         }
-        TOTAL = TOTAL + subtotal;
     }
 
     private void createRow(String text, TableLayout table, int alignment) {
@@ -67,11 +57,5 @@ public class ThreeColumnTable {
 
         trow.addView(textView);
         table.addView(trow);
-    }
-
-    public static String getTotalPrice() {
-        String totalPrice = "$" + TOTAL;
-        if (TOTAL * 10 % 1 == 0) { totalPrice = totalPrice + "0"; }
-        return totalPrice;
     }
 }

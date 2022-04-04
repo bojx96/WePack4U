@@ -21,29 +21,23 @@ public class ConfirmationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
 
-        // Order number
-        /*int order = 69; // nice dummy var
-        TextView orderNo = findViewById(R.id.order_num);
-        String orderNum = "Order No. " + order;
-        orderNo.setText(orderNum);*/
-
         // Timestamp
         TextView timestamp = findViewById(R.id.timestamp);
         timestamp.setText(new Timestamp().setTimestamp());
 
         // Receipt
-        ArrayList<FoodItem> cart = new ArrayList<>(); // arraylist should be retrieved from firebase
-        /*TableLayout cartA = findViewById(R.id.cart2a);
-        TableLayout cartB = findViewById(R.id.cart2b);
-        TableLayout cartC = findViewById(R.id.cart2c);
-        ThreeColumnTable table = new ThreeColumnTable(cartA, cartB, cartC, cart, ConfirmationActivity.this);
-        table.createTable();*/
+        // dummies; should be retrieved from firebase
+        ArrayList<FoodItem> cart = new ArrayList<>();
+        cart.add(new FoodItem("Beef Ramen", 2, 4.70));
+        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
+        ArrayList<FoodItem> cart2 = new ArrayList<>();
+        cart2.add(new FoodItem("Curry Katsu Don", 3, 4.50));
+        cart2.add(new FoodItem("A", 1, 4.50));
 
-        // dummies
         String[] stores = {"Japanese", "Western"};
         ArrayList<ArrayList<FoodItem>> carts = new ArrayList<>();
         carts.add(cart);
-        carts.add(new ArrayList<FoodItem>());
+        carts.add(cart2);
         int[] orders = {69, 420};
 
         RecyclerView recycler = findViewById(R.id.cart_recycler_b);
@@ -52,11 +46,12 @@ public class ConfirmationActivity extends AppCompatActivity {
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
         TextView total = findViewById(R.id.total2);
-        total.setText(ThreeColumnTable.getTotalPrice());
+        String totalPrice = new TotalPrice(carts).getTotal();
+        total.setText(totalPrice);
 
         // Text
         TextView paymentText = findViewById(R.id.payment_text);
-        String text1 = "A payment of " + ThreeColumnTable.getTotalPrice() + " has been made.";
+        String text1 = "A payment of " + totalPrice + " has been made.";
         paymentText.setText(text1);
 
         int time = 15; // dummy var
@@ -69,7 +64,7 @@ public class ConfirmationActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConfirmationActivity.this, StorePage.class);
+                Intent intent = new Intent(ConfirmationActivity.this, PaymentActivity.class);
                 startActivity(intent);
             }
         });
