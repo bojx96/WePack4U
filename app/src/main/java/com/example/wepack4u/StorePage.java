@@ -21,6 +21,9 @@ public class StorePage extends AppCompatActivity {
         image1 = (ImageView) findViewById(R.id.sutd_canteen_1_image);
         String imageurl = "https://firebasestorage.googleapis.com/v0/b/wepack4u-a3325.appspot.com/o/Pokemons%2Fbulbasaur.png?alt=media&token=87f81b38-d01c-4a3f-8670-9232e236c3c8";
         Picasso.get().load(imageurl).into(image1);
+
+        dbTest testing1 = new dbTest();
+        testing1.getStoreList();
     }
 
     //TODO SUTDCanteedFood1 redirects to dummy page
