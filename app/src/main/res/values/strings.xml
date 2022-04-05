@@ -17,6 +17,14 @@
     <string name="register">Register</string>
     <string name="forgotPassword">Forgot Password</string>
 
+    <!-- RegisterUser page -->
+    <string name="firstNameInput">First Name</string>
+    <string name="lastNameInput">Last Name</string>
+    <string name="emailInput">Email</string>
+    <string name="campusInput">Campus</string>
+    <string name="passwordInput">Password</string>
+    <string name="submitButton">Submit</string>
+
     <!-- Payment page -->
     <string name="checkout_header">Checkout</string>
     <string name="items">Items:</string>

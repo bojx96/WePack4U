@@ -89,8 +89,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(MainActivity.this, RegisterUser.class);
         startActivity(intent);
     }
-//    public void register_onClick(View view){
-//        Intent intent = new Intent(MainActivity.this, RegisterUser.class);
-//        startActivity(intent);
-//    }
 }
