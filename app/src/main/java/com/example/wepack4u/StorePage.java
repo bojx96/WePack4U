@@ -1,6 +1,8 @@
 package com.example.wepack4u;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +11,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+public class StorePage extends AppCompatActivity {
+    //below this is where the data is inputted in
+    RecyclerView recyclerView;
+    String s1[];
+    //TODO for now the image is hardcoded, replace from db
+    int images[] = {R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background};
 
 public class StorePage extends AppCompatActivity {
     ImageView image1;
@@ -18,16 +25,25 @@ public class StorePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_page);
 
-        image1 = (ImageView) findViewById(R.id.sutd_canteen_1_image);
-        String imageurl = "https://firebasestorage.googleapis.com/v0/b/wepack4u-a3325.appspot.com/o/Pokemons%2Fbulbasaur.png?alt=media&token=87f81b38-d01c-4a3f-8670-9232e236c3c8";
-        Picasso.get().load(imageurl).into(image1);
+        recyclerView = findViewById(R.id.recyclerview);
+        //TODO for now the array is hardcoded, should replace th R.array with smth else
+        s1 = getResources().getStringArray(R.array.programming_languages);
+        //my adapter java is where the data being allocated
+        StoreAdapter myAdapter = new StoreAdapter(this, s1, images);
+        //recyclerview is the layout
+        recyclerView.setAdapter(myAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        dbTest testing1 = new dbTest();
-        testing1.getStoreList();
+
     }
+    //TODO make the clickable in a list?
+    public void goestostore(View view){
 
+        Toast.makeText(this,"selected",Toast.LENGTH_SHORT).show();
+
+    }
     //TODO SUTDCanteedFood1 redirects to dummy page
-    public void launchSUTDCanteenFood1(View view){
+   /* public void launchSUTDCanteenFood1(View view){
         Toast.makeText(this,"food1 selected",Toast.LENGTH_SHORT).show();
 //        Intent intent = new Intent(this,SUTDCanteedFood1.class);
 //        startActivity(intent);
@@ -54,6 +70,6 @@ public class StorePage extends AppCompatActivity {
     public void launchSUTDCanteenFood5(View view){
         Toast.makeText(this,"food5 selected",Toast.LENGTH_SHORT).show();
 //        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);
-    }
+//        startActivity(intent);*/
+
 }
