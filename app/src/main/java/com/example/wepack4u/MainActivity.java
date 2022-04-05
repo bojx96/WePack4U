@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(MainActivity.this, FoodDisplay.class);
+                            Intent intent = new Intent(MainActivity.this, StorePage.class);
                             startActivity(intent);
                             finish();
                         }

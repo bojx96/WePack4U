@@ -9,16 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
 public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.MyViewHolder>{
-
-    String data1[];
-    int images[];
     Context context;
+    List<FoodStore> foodStores;
 
-    public StoreAdapter(Context ct, String s1[], int img[]){
+    public StoreAdapter(Context ct, List<FoodStore> foodStoresInput){
         context = ct;
-        data1 = s1;
-        images = img;
+        foodStores = foodStoresInput;
     }
 
     @NonNull
@@ -31,15 +32,13 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        //set which text corresponds to which data list
-        holder.myText1.setText(data1[position]);
-        holder.myImage.setImageResource(images[position]);
+        holder.myText1.setText(foodStores.get(position).store_name);
+        Picasso.get().load(foodStores.get(position).store_img_url).into(holder.myImage);
     }
 
     @Override
     public int getItemCount() {
-        //no need change
-        return images.length;
+        return foodStores.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{

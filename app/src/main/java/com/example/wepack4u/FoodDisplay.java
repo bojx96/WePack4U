@@ -34,7 +34,7 @@ public class FoodDisplay extends AppCompatActivity {
         setContentView(R.layout.activity_food_display);
         recyclerView = findViewById(R.id.recyclerView);
 
-        getStoreList();
+        getFoodList();
 
 
     }
@@ -42,7 +42,7 @@ public class FoodDisplay extends AppCompatActivity {
         startActivity(new Intent (FoodDisplay.this,FoodDetail.class));
     }
 
-    public void getStoreList(){
+    public void getFoodList(){
         DocumentReference userRef = db.collection("users").document(auth_uid);
         userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

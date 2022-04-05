@@ -1,5 +1,6 @@
 package com.example.wepack4u;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,65 +12,91 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class StorePage extends AppCompatActivity {
-    //below this is where the data is inputted in
-    RecyclerView recyclerView;
-    String s1[];
-    //TODO for now the image is hardcoded, replace from db
-    int images[] = {R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background};
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
+
 
 public class StorePage extends AppCompatActivity {
-    ImageView image1;
+    //below this is where the data is inputted in
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private String campus;
+    RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_page);
-
         recyclerView = findViewById(R.id.recyclerview);
-        //TODO for now the array is hardcoded, should replace th R.array with smth else
-        s1 = getResources().getStringArray(R.array.programming_languages);
-        //my adapter java is where the data being allocated
-        StoreAdapter myAdapter = new StoreAdapter(this, s1, images);
-        //recyclerview is the layout
-        recyclerView.setAdapter(myAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        getStoreList();
 
     }
     //TODO make the clickable in a list?
     public void goestostore(View view){
-
         Toast.makeText(this,"selected",Toast.LENGTH_SHORT).show();
-
-    }
-    //TODO SUTDCanteedFood1 redirects to dummy page
-   /* public void launchSUTDCanteenFood1(View view){
-        Toast.makeText(this,"food1 selected",Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);
-   }
-
-    public void launchSUTDCanteenFood2(View view){
-        Toast.makeText(this,"food2 selected",Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);
     }
 
-    public void launchSUTDCanteenFood3(View view){
-        Toast.makeText(this,"food3 selected",Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);
+    public void getStoreList(){
+        DocumentReference userRef = db.collection("users").document(auth_uid);
+        userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot userDoc = task.getResult();
+                    if (userDoc.exists()){
+                        campus = (userDoc.getString("campus"));
+                        storeList(campus);
+                    }
+                    else{
+                        Log.d("get_campus", "does not exist");
+                    }
+                }
+            }
+        });
     }
 
-    public void launchSUTDCanteenFood4(View view){
-        Toast.makeText(this,"food4 selected",Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);
+    public void storeList(String campus_name) {
+        db.collection("Campus").whereEqualTo("name", campus_name).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String school_id = document.getId();
+                        db.collection("Campus").document(school_id).collection("food_stores").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()){
+                                    QuerySnapshot querySnapshot = task.getResult();
+                                    List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
+                                    StoreAdapter storeAdapter = new StoreAdapter(StorePage.this, foodStores);
+                                    recyclerView.setAdapter(storeAdapter);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(StorePage.this));
+                                    System.out.println(foodStores.get(0).store_name);
+                                }
+                            }
+                        });
+                    }
+                }
+                else{
+                    Log.d("storeList", "Failed to fetch anything");
+                }
+            }
+        });
     }
 
-    public void launchSUTDCanteenFood5(View view){
-        Toast.makeText(this,"food5 selected",Toast.LENGTH_SHORT).show();
+//    public void launchSUTDCanteenFood5(View view){
+//        Toast.makeText(this,"food5 selected",Toast.LENGTH_SHORT).show();
 //        Intent intent = new Intent(this,SUTDCanteedFood1.class);
 //        startActivity(intent);*/
+    //}
 
 }
