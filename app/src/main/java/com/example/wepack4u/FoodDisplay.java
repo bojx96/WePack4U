@@ -74,8 +74,8 @@ public class FoodDisplay extends AppCompatActivity {
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()){
                                     QuerySnapshot querySnapshot = task.getResult();
-                                    List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
-                                    FoodDisplayAdaptor foodDisplayAdaptor = new FoodDisplayAdaptor(FoodDisplay.this, foodStores );
+                                    List<FoodMenu> foodMenu = querySnapshot.toObjects(FoodMenu.class);
+                                    FoodDisplayAdaptor foodDisplayAdaptor = new FoodDisplayAdaptor(FoodDisplay.this, foodMenu );
                                     recyclerView.setAdapter(foodDisplayAdaptor);
                                     recyclerView.setLayoutManager(new LinearLayoutManager(FoodDisplay.this));
 //                                    System.out.println(foodStores.get(0).name);
@@ -112,8 +112,8 @@ public class FoodDisplay extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if (task.isSuccessful()){
                                                     QuerySnapshot querySnapshot = task.getResult();
-                                                    List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
-                                                    FoodDisplayAdaptor foodDisplayAdaptor = new FoodDisplayAdaptor(FoodDisplay.this, foodStores );
+                                                    List<FoodMenu> foodMenu = querySnapshot.toObjects(FoodMenu.class);
+                                                    FoodDisplayAdaptor foodDisplayAdaptor = new FoodDisplayAdaptor(FoodDisplay.this, foodMenu );
                                                     recyclerView.setAdapter(foodDisplayAdaptor);
                                                     recyclerView.setLayoutManager(new LinearLayoutManager(FoodDisplay.this));
                                                 }

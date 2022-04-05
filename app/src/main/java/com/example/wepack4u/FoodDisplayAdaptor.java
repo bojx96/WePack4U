@@ -23,11 +23,11 @@ import java.util.List;
 
 public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.FoodDisplayViewHolder>{
     Context context;
-    List<FoodStore> foodStores;
+    List<FoodMenu> foodMenu;
     //Brandon's Edit
-    public FoodDisplayAdaptor(Context ct, List<FoodStore> foodStores_input){
+    public FoodDisplayAdaptor(Context ct, List<FoodMenu> foodMenuInput){
         context = ct;
-        foodStores = foodStores_input;
+        foodMenu = foodMenuInput;
     }
     @NonNull
     @Override
@@ -40,19 +40,19 @@ public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.
     @Override
     public void onBindViewHolder(@NonNull FoodDisplayViewHolder holder, int position) {
 // Brandon's Edit
-        holder.FoodName.setText(foodStores.get(position).name);
-        holder.FoodPrice.setText(foodStores.get(position).price);
-        Picasso.get().load(foodStores.get(position).img).into(holder.FoodImage);
+        holder.FoodName.setText(foodMenu.get(position).name);
+        holder.FoodPrice.setText(foodMenu.get(position).price);
+        Picasso.get().load(foodMenu.get(position).img).into(holder.FoodImage);
     }
 
     @Override
     public int getItemCount() {
-        return foodStores.size();
+        return foodMenu.size();
     }
 
     //to get ID
     public String getId_name(int position){
-        return foodStores.get(position).name;
+        return foodMenu.get(position).name;
     }
 
     public class FoodDisplayViewHolder extends RecyclerView.ViewHolder{
