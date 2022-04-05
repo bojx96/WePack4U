@@ -27,9 +27,6 @@ public class FoodDisplay extends AppCompatActivity {
     private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private String campus;
     RecyclerView recyclerView;
-//    String s1[],s2[];
-//    int images[] = {R.drawable.food_image_placeholder,R.drawable.food_image_placeholder,R.drawable.food_image_placeholder,R.drawable.food_image_placeholder};
-    List<FoodStore> foodStores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +34,8 @@ public class FoodDisplay extends AppCompatActivity {
         setContentView(R.layout.activity_food_display);
         recyclerView = findViewById(R.id.recyclerView);
 
-//        s1 = getResources().getStringArray(R.array.food_names);
-//        s2 = getResources().getStringArray(R.array.food_prices);
-
-        // Brandon's Edit
         getStoreList();
+
 
     }
     public void toFoodDetail(View v){
@@ -57,7 +51,7 @@ public class FoodDisplay extends AppCompatActivity {
                     DocumentSnapshot userDoc = task.getResult();
                     if (userDoc.exists()){
                         campus = (userDoc.getString("campus"));
-                        storeList(campus);
+                        foodList(campus);
                     }
                     else{
                         Log.d("get_campus", "does not exist");
@@ -74,6 +68,7 @@ public class FoodDisplay extends AppCompatActivity {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String school_id = document.getId();
+
                         db.collection("Campus").document(school_id).collection("food_stores").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -83,7 +78,7 @@ public class FoodDisplay extends AppCompatActivity {
                                     FoodDisplayAdaptor foodDisplayAdaptor = new FoodDisplayAdaptor(FoodDisplay.this, foodStores );
                                     recyclerView.setAdapter(foodDisplayAdaptor);
                                     recyclerView.setLayoutManager(new LinearLayoutManager(FoodDisplay.this));
-//                                    System.out.println(campus.get(0).store_name);
+//                                    System.out.println(foodStores.get(0).name);
                                 }
                             }
                         });
@@ -95,4 +90,47 @@ public class FoodDisplay extends AppCompatActivity {
             }
         });
     }
+
+    public void foodList(String campus_name) {
+        db.collection("Campus").whereEqualTo("name", campus_name).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String school_id = document.getId();
+                        db.collection("Campus").document(school_id).collection("food_stores").whereEqualTo("store_name","Healthy Soup").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()){
+                                    QuerySnapshot querySnapshot = task.getResult();
+                                    List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        String store_id = document.getId();
+                                        db.collection("Campus").document(school_id).collection("food_stores")
+                                                .document(store_id).collection("menu").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()){
+                                                    QuerySnapshot querySnapshot = task.getResult();
+                                                    List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
+                                                    FoodDisplayAdaptor foodDisplayAdaptor = new FoodDisplayAdaptor(FoodDisplay.this, foodStores );
+                                                    recyclerView.setAdapter(foodDisplayAdaptor);
+                                                    recyclerView.setLayoutManager(new LinearLayoutManager(FoodDisplay.this));
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+                else{
+                    Log.d("storeList", "Failed to fetch anything");
+                }
+            }
+        });
+    }
+
+
 }

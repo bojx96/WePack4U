@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -39,13 +40,19 @@ public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.
     @Override
     public void onBindViewHolder(@NonNull FoodDisplayViewHolder holder, int position) {
 // Brandon's Edit
-        holder.FoodName.setText(foodStores.get(position).store_name);
-
+        holder.FoodName.setText(foodStores.get(position).name);
+        holder.FoodPrice.setText(foodStores.get(position).price);
+        Picasso.get().load(foodStores.get(position).img).into(holder.FoodImage);
     }
 
     @Override
     public int getItemCount() {
         return foodStores.size();
+    }
+
+    //to get ID
+    public String getId_name(int position){
+        return foodStores.get(position).name;
     }
 
     public class FoodDisplayViewHolder extends RecyclerView.ViewHolder{
