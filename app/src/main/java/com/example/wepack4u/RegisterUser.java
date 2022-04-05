@@ -9,67 +9,36 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterUser extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private EditText editfirst_name,editlast_name,editcampus, editemail, editpassword;
-    private Button submit_button;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
-
-        //pulling store data example
-        String school = "sutd";
-        db.collection("Campus").whereEqualTo("name", school).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        String school_id = document.getId();
-                        Log.d("Mainactivity_DB", document.getId() + " => " + document.getData());
-                        db.collection("Campus").document(school_id).collection("food_stores").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()){
-                                    for (QueryDocumentSnapshot docs : task.getResult()){
-                                        Log.d("Mainactivity_DB", docs.getId() + " => " + docs.getData());
-                                    }
-                                }
-                            }
-                        });
-                    }
-                }
-                else{
-                    Toast.makeText(RegisterUser.this, "in else block", Toast.LENGTH_LONG).show();
-                    Log.d("Mainactvity_DB", "Failed to fetch anything");
-                }
-            }
-        });
-
         mAuth = FirebaseAuth.getInstance();
-        editfirst_name = (EditText) findViewById(R.id.editfirst_name);
-        editlast_name = (EditText) findViewById(R.id.editlast_name);
-        editcampus = (EditText) findViewById(R.id.editcampus);
-        editemail = (EditText) findViewById(R.id.editemail);
-        editpassword = (EditText) findViewById(R.id.editpassword);
-        submit_button = (Button) findViewById(R.id.submit_button);
+
+
+        EditText editfirst_name = findViewById(R.id.editfirst_name);
+        EditText editlast_name = findViewById(R.id.editlast_name);
+        EditText editcampus = findViewById(R.id.editcampus);
+        EditText editemail = findViewById(R.id.editemail);
+        EditText editpassword = findViewById(R.id.editpassword);
+        Button submit_button = findViewById(R.id.submit_button);
 
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,15 +81,12 @@ public class RegisterUser extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                User user = new User(first_name,last_name,campus,email);
                                 Map<String, Object> user_details = new HashMap<>();
-//                                user_details.put("auth_uid",FirebaseAuth.getInstance().getCurrentUser().getUid());
                                 user_details.put("first_name", first_name);
                                 user_details.put("last_name", last_name);
                                 user_details.put("campus", campus);
                                 user_details.put("email", email);
-                                FirebaseFirestore.getInstance().collection("users").document(auth_uid)
+                                db.collection("users").document(auth_uid)
                                         .set(user_details).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -139,6 +105,5 @@ public class RegisterUser extends AppCompatActivity {
                 }
             }
         });
-
     }
 }
