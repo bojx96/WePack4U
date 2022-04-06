@@ -1,6 +1,8 @@
 package com.example.wepack4u;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,8 +19,13 @@ public class FoodDetail extends AppCompatActivity {
         foodDetailRecyclerView = findViewById(R.id.foodDetailRecyclerView);
 
         options = getResources().getStringArray(R.array.food_options);
+
         FoodDetailAdaptor foodDetailAdaptor = new FoodDetailAdaptor(this, options);
         foodDetailRecyclerView.setAdapter(foodDetailAdaptor);
         foodDetailRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void toFoodDisplay(View view) {
+        startActivity(new Intent(FoodDetail.this, FoodDisplay.class));
     }
 }

@@ -68,7 +68,9 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="-50dp"
         android:layout_marginEnd="50dp"
-        android:text="Add to cart" />
+        android:text="Add to cart"
+        android:onClick="toFoodDisplay"/>
+
 
 
 </RelativeLayout>
