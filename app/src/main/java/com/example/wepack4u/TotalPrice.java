@@ -1,22 +1,16 @@
 package com.example.wepack4u;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TotalPrice {
-    private final ArrayList<ArrayList<FoodItem>> carts;
+    private final List<FoodItem> cart;
 
-    public TotalPrice(ArrayList<ArrayList<FoodItem>> carts) {
-        this.carts = carts;
-    }
+    public TotalPrice(List<FoodItem> cart) { this.cart = cart; }
 
     public String getTotal() {
         double subtotal = 0f;
 
-        for (ArrayList<FoodItem> c : carts) {
-            for (FoodItem f : c) {
-                subtotal = subtotal + f.getPriceValue();
-            }
-        }
+        for (FoodItem f : cart) { subtotal = subtotal + f.getPriceValue(); }
 
         String totalPrice = "$" + subtotal;
         if (subtotal * 10 % 1 == 0) { totalPrice = totalPrice + "0"; }
