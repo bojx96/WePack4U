@@ -1,48 +1,36 @@
 package com.example.wepack4u;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
 
-public class StorePage extends AppCompatActivity {
-    //below this is where the data is inputted in
+public class dbTest {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private String campus;
-    RecyclerView recyclerView;
+    public String[] storeName, storePicURL;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_page);
-        recyclerView = findViewById(R.id.recyclerview);
-
-        getStoreList();
-
-    }
-    //TODO make the clickable in a list?
-    public void goestostore(View view){
-        Toast.makeText(this,"selected",Toast.LENGTH_SHORT).show();
+    public void setCampus(String campus) {
+        this.campus = campus;
     }
 
     public void getStoreList(){
@@ -77,10 +65,7 @@ public class StorePage extends AppCompatActivity {
                                 if (task.isSuccessful()){
                                     QuerySnapshot querySnapshot = task.getResult();
                                     List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
-                                    StoreAdapter storeAdapter = new StoreAdapter(StorePage.this, foodStores);
-                                    recyclerView.setAdapter(storeAdapter);
-                                    recyclerView.setLayoutManager(new LinearLayoutManager(StorePage.this));
-                                    System.out.println(foodStores.get(0).store_name);
+//                                    System.out.println(campus.get(0).store_name);
                                 }
                             }
                         });
@@ -92,11 +77,5 @@ public class StorePage extends AppCompatActivity {
             }
         });
     }
-
-//    public void launchSUTDCanteenFood5(View view){
-//        Toast.makeText(this,"food5 selected",Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);*/
-    //}
 
 }

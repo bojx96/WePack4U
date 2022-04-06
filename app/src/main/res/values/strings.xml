@@ -10,6 +10,21 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+    <!-- Login page -->
+    <string name="password_input">Password: </string>
+    <string name="username_input">Username: </string>
+    <string name="loginButton">Login</string>
+    <string name="register">Register</string>
+    <string name="forgotPassword">Forgot Password</string>
+
+    <!-- RegisterUser page -->
+    <string name="firstNameInput">First Name</string>
+    <string name="lastNameInput">Last Name</string>
+    <string name="emailInput">Email</string>
+    <string name="campusInput">Campus</string>
+    <string name="passwordInput">Password</string>
+    <string name="submitButton">Submit</string>
+
     <!-- Payment page -->
     <string name="checkout_header">Checkout</string>
     <string name="items">Items:</string>
@@ -60,5 +75,30 @@
     <string name="healthy_soup_image">Healthy Soup Stall</string>
     <string name="dummy_stall_1_image">Dummy1</string>
 
+    <!-- Food Display Page -->
+    <string-array name="food_names">
+        <item>foodname1</item>
+        <item>foodname2</item>
+        <item>foodname3</item>
+        <item>foodname4</item>
 
+
+    </string-array>
+    <string-array name="food_prices">
+        <item>foodprice1.</item>
+        <item>foodprice2.</item>
+        <item>foodprice3.</item>
+        <item>foodprice4.</item>
+
+    </string-array>
+
+    <!--dummy array for store page-->
+    <string-array name="programming_languages">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+    </string-array>
 </resources>

@@ -9,8 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,9 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
-
-public class StorePage extends AppCompatActivity {
-    //below this is where the data is inputted in
+public class FoodDisplay extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private String campus;
@@ -34,18 +31,16 @@ public class StorePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_page);
-        recyclerView = findViewById(R.id.recyclerview);
-
-        getStoreList();
+        setContentView(R.layout.activity_food_display);
+        recyclerView = findViewById(R.id.recyclerView);
+        getFoodList();
 
     }
-    //TODO make the clickable in a list?
-    public void goestostore(View view){
-        Toast.makeText(this,"selected",Toast.LENGTH_SHORT).show();
+    public void toFoodDetail(View v){
+        startActivity(new Intent (FoodDisplay.this,FoodDetail.class));
     }
 
-    public void getStoreList(){
+    public void getFoodList(){
         DocumentReference userRef = db.collection("users").document(auth_uid);
         userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -54,7 +49,7 @@ public class StorePage extends AppCompatActivity {
                     DocumentSnapshot userDoc = task.getResult();
                     if (userDoc.exists()){
                         campus = (userDoc.getString("campus"));
-                        storeList(campus);
+                        foodList(campus);
                     }
                     else{
                         Log.d("get_campus", "does not exist");
@@ -64,23 +59,35 @@ public class StorePage extends AppCompatActivity {
         });
     }
 
-    public void storeList(String campus_name) {
+    public void foodList(String campus_name) {
         db.collection("Campus").whereEqualTo("name", campus_name).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String school_id = document.getId();
-                        db.collection("Campus").document(school_id).collection("food_stores").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        db.collection("Campus").document(school_id).collection("food_stores").whereEqualTo("store_name","Healthy Soup").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()){
                                     QuerySnapshot querySnapshot = task.getResult();
                                     List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
-                                    StoreAdapter storeAdapter = new StoreAdapter(StorePage.this, foodStores);
-                                    recyclerView.setAdapter(storeAdapter);
-                                    recyclerView.setLayoutManager(new LinearLayoutManager(StorePage.this));
-                                    System.out.println(foodStores.get(0).store_name);
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        String store_id = document.getId();
+                                        db.collection("Campus").document(school_id).collection("food_stores")
+                                                .document(store_id).collection("menu").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()){
+                                                    QuerySnapshot querySnapshot = task.getResult();
+                                                    List<FoodMenu> foodMenu = querySnapshot.toObjects(FoodMenu.class);
+                                                    FoodDisplayAdaptor foodDisplayAdaptor = new FoodDisplayAdaptor(FoodDisplay.this, foodMenu );
+                                                    recyclerView.setAdapter(foodDisplayAdaptor);
+                                                    recyclerView.setLayoutManager(new LinearLayoutManager(FoodDisplay.this));
+                                                }
+                                            }
+                                        });
+                                    }
                                 }
                             }
                         });
@@ -93,10 +100,5 @@ public class StorePage extends AppCompatActivity {
         });
     }
 
-//    public void launchSUTDCanteenFood5(View view){
-//        Toast.makeText(this,"food5 selected",Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);*/
-    //}
 
 }
