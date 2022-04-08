@@ -1,48 +1,41 @@
 package com.example.wepack4u;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.ArrayList;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
 
 public class PaymentActivity extends AppCompatActivity {
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
         // Checkout section
-        // dummies; should be retrieved from firebase
-        ArrayList<FoodItem> cart = new ArrayList<>();
-        cart.add(new FoodItem("Beef Ramen", 2, 4.70));
-        cart.add(new FoodItem("Aglio Olio", 1, 4.50));
-        ArrayList<FoodItem> cart2 = new ArrayList<>();
-        cart2.add(new FoodItem("Curry Katsu Don", 3, 4.50));
-        cart2.add(new FoodItem("A", 1, 4.50));
-
-        String[] stores = {"Japanese", "Western"};
-        ArrayList<ArrayList<FoodItem>> carts = new ArrayList<>();
-        carts.add(cart);
-        carts.add(cart2);
-
-        RecyclerView recycler = findViewById(R.id.cart_recycler_a);
-        CartRecycler adapter = new CartRecycler(PaymentActivity.this, stores, new int[0], carts, true);
-        recycler.setAdapter(adapter);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
-
-        TextView total = findViewById(R.id.total);
-        total.setText(new TotalPrice(carts).getTotal());
+        recyclerView = findViewById(R.id.cart_recycler_a);
+        foodList();
 
         // Payment section
         RadioGroup payment_method = findViewById(R.id.payment_method);
@@ -58,6 +51,30 @@ public class PaymentActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(PaymentActivity.this, R.string.choose_payment, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    public void foodList() {
+        db.collection("users").document(auth_uid).collection("cart").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    QuerySnapshot querySnapshot = task.getResult();
+                    List<FoodItem> foodItems = querySnapshot.toObjects(FoodItem.class);
+                    String[] stalls = {"Japanese Korean", "Healthy Soup"}; // dummy
+
+                    CartRecycler cartRecycler = new CartRecycler(PaymentActivity.this,
+                            foodItems, stalls, null);
+                    recyclerView.setAdapter(cartRecycler);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(PaymentActivity.this));
+
+                    TextView total = findViewById(R.id.total);
+                    total.setText(new TotalPrice(foodItems).getTotal());
+                } else {
+                    Log.d("cart_list", "Failed to fetch anything");
                 }
             }
         });
