@@ -34,12 +34,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button login = findViewById(R.id.login_button);
         login.setOnClickListener(this);
 
-
     }
     @Override
     public void onClick (View v){
         switch (v.getId()){
-            case R.id.submit_button:
+            case R.id.login_button:
                 validateLogin();
                 break;
             case R.id.register:
