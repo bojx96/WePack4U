@@ -11,20 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CartRecycler extends RecyclerView.Adapter<CartRecycler.ViewHolder> {
     private final Context context;
-    private final String[] stores;
+    private final List<FoodItem> cart;
+    private final String[] stalls;
     private final int[] orders;
-    private final ArrayList<ArrayList<FoodItem>> carts;
-    private final boolean isPaymentPage;
 
-    public CartRecycler(Context context, String[] stores, int[] orders, ArrayList<ArrayList<FoodItem>> carts, boolean isPaymentPage) {
+    public CartRecycler(Context context, List<FoodItem> cart, String[] stalls, int[] orders) {
         this.context = context;
-        this.stores = stores;
+        this.cart = cart;
+        this.stalls = stalls;
         this.orders = orders;
-        this.carts = carts;
-        this.isPaymentPage = isPaymentPage;
     }
 
     @NonNull
@@ -37,24 +36,24 @@ public class CartRecycler extends RecyclerView.Adapter<CartRecycler.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.store.setText(stores[position]);
-        if (!isPaymentPage) {
+        holder.stall.setText(stalls[position]);
+        if (orders != null) {
             String orderNum = "Order No. " + orders[position];
             holder.order.setText(orderNum);
         }
 
         ThreeColumnTable table = new ThreeColumnTable(holder.cartA, holder.cartB, holder.cartC,
-                carts.get(position), context);
+                cart, stalls[position], context);
         table.createTable();
     }
 
     @Override
     public int getItemCount() {
-        return stores.length;
+        return stalls.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView store;
+        TextView stall;
         TextView order;
         TableLayout cartA;
         TableLayout cartB;
@@ -63,7 +62,7 @@ public class CartRecycler extends RecyclerView.Adapter<CartRecycler.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            store = itemView.findViewById(R.id.stall_name);
+            stall = itemView.findViewById(R.id.stall_name);
             order = itemView.findViewById(R.id.order_num);
             cartA = itemView.findViewById(R.id.cart_a);
             cartB = itemView.findViewById(R.id.cart_b);
