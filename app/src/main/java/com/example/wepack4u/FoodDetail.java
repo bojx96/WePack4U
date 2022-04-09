@@ -2,10 +2,9 @@ package com.example.wepack4u;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,15 +24,19 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FoodDetail extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private String campus;
     private String data;
+    private Map<String, Object> foodDetails = new HashMap<>();
     private TextView FoodDetailName,FoodDetailPrice;
     private ImageView FoodImageHolder;
+    private Button addtoCart;
     RecyclerView foodDetailRecyclerView;
     String options[];
 
@@ -48,6 +51,15 @@ public class FoodDetail extends AppCompatActivity {
         FoodDetailAdaptor foodDetailAdaptor = new FoodDetailAdaptor(this, options);
         foodDetailRecyclerView.setAdapter(foodDetailAdaptor);
         foodDetailRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        addtoCart = findViewById(R.id.addtoCart);
+        addtoCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.collection("users").document(auth_uid).collection("cart").document().set(foodDetails);
+                finish();
+            }
+        });
 
     }
 
@@ -90,6 +102,7 @@ public class FoodDetail extends AppCompatActivity {
                                 List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     String store_id = document.getId();
+                                    String STORENAME = document.get("store_name").toString();
                                     colRef.document(school_id).collection("food_stores")
                                             .document(store_id).collection("menu").whereEqualTo("name",data).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
@@ -101,8 +114,14 @@ public class FoodDetail extends AppCompatActivity {
                                                     FoodDetailName = findViewById(R.id.FoodDetailName);
                                                     FoodDetailPrice = findViewById(R.id.FoodDetailPrice);
                                                     Picasso.get().load(document.get("img").toString()).into(FoodImageHolder);
-                                                    FoodDetailName.setText(document.get("name").toString());
-                                                    FoodDetailPrice.setText(document.get("price").toString());
+                                                    String FOODNAME = document.get("name").toString();
+                                                    String FOODPRICE = document.get("price").toString();
+                                                    FoodDetailName.setText(FOODNAME);
+                                                    FoodDetailPrice.setText(FOODPRICE);
+                                                    foodDetails.put("name",FOODNAME);
+                                                    foodDetails.put("price",FOODPRICE);
+                                                    foodDetails.put("stall",STORENAME);
+                                                    foodDetails.put("unit",1);
                                                 }
                                             }
                                         }
