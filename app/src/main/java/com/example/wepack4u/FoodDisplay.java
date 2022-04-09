@@ -22,10 +22,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
-public class FoodDisplay extends AppCompatActivity {
+public class FoodDisplay extends AppCompatActivity implements FoodDisplayAdaptor.OnFoodListener {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private String campus;
+    private List<FoodMenu> foodMenu;
     RecyclerView recyclerView;
 
     @Override
@@ -81,7 +82,7 @@ public class FoodDisplay extends AppCompatActivity {
                                                 if (task.isSuccessful()){
                                                     QuerySnapshot querySnapshot = task.getResult();
                                                     List<FoodMenu> foodMenu = querySnapshot.toObjects(FoodMenu.class);
-                                                    FoodDisplayAdaptor foodDisplayAdaptor = new FoodDisplayAdaptor(FoodDisplay.this, foodMenu );
+                                                    FoodDisplayAdaptor foodDisplayAdaptor = new FoodDisplayAdaptor(FoodDisplay.this, foodMenu,FoodDisplay.this);
                                                     recyclerView.setAdapter(foodDisplayAdaptor);
                                                     recyclerView.setLayoutManager(new LinearLayoutManager(FoodDisplay.this));
                                                 }
@@ -101,4 +102,10 @@ public class FoodDisplay extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onFoodClick(int position) {
+        foodMenu.get(position);
+        Intent intent = new Intent(this, FoodDetail.class);
+        startActivity(intent);
+    }
 }
