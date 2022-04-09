@@ -18,10 +18,12 @@ public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.
     Context context;
     List<FoodMenu> foodMenu;
 
+
     //Brandon's Edit
     public FoodDisplayAdaptor(Context ct, List<FoodMenu> foodMenuInput){
         context = ct;
         foodMenu = foodMenuInput;
+
     }
     @NonNull
     @Override
@@ -37,6 +39,7 @@ public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.
         holder.FoodName.setText(foodMenu.get(position).name);
         holder.FoodPrice.setText(foodMenu.get(position).price);
         Picasso.get().load(foodMenu.get(position).img).into(holder.FoodImage);
+
     }
 
     @Override
@@ -44,12 +47,8 @@ public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.
         return foodMenu.size();
     }
 
-    //to get ID
-    public String getId_name(int position){
-        return foodMenu.get(position).name;
-    }
 
-    public class FoodDisplayViewHolder extends RecyclerView.ViewHolder{
+    public class FoodDisplayViewHolder extends RecyclerView.ViewHolder {
         TextView FoodName, FoodPrice;
         ImageView FoodImage;
 
@@ -59,5 +58,7 @@ public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.
             FoodPrice = itemView.findViewById(R.id.FoodPrice);
             FoodImage = itemView.findViewById(R.id.FoodImage);
         }
+
     }
+
 }
