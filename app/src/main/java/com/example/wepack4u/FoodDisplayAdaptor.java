@@ -1,7 +1,6 @@
 package com.example.wepack4u;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,23 +10,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.FoodDisplayViewHolder>{
     Context context;
-    List<FoodStore> foodStores;
+    List<FoodMenu> foodMenu;
+
     //Brandon's Edit
-    public FoodDisplayAdaptor(Context ct, List<FoodStore> foodStores_input){
+    public FoodDisplayAdaptor(Context ct, List<FoodMenu> foodMenuInput){
         context = ct;
-        foodStores = foodStores_input;
+        foodMenu = foodMenuInput;
     }
     @NonNull
     @Override
@@ -40,19 +34,19 @@ public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.
     @Override
     public void onBindViewHolder(@NonNull FoodDisplayViewHolder holder, int position) {
 // Brandon's Edit
-        holder.FoodName.setText(foodStores.get(position).name);
-        holder.FoodPrice.setText(foodStores.get(position).price);
-        Picasso.get().load(foodStores.get(position).img).into(holder.FoodImage);
+        holder.FoodName.setText(foodMenu.get(position).name);
+        holder.FoodPrice.setText(foodMenu.get(position).price);
+        Picasso.get().load(foodMenu.get(position).img).into(holder.FoodImage);
     }
 
     @Override
     public int getItemCount() {
-        return foodStores.size();
+        return foodMenu.size();
     }
 
     //to get ID
     public String getId_name(int position){
-        return foodStores.get(position).name;
+        return foodMenu.get(position).name;
     }
 
     public class FoodDisplayViewHolder extends RecyclerView.ViewHolder{

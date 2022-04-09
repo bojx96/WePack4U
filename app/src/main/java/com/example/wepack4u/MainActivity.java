@@ -18,50 +18,61 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
+    private EditText email,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ImageView logo = findViewById(R.id.Logo_image);
-        EditText email = findViewById(R.id.editemail);
-        EditText password = findViewById(R.id.editpassword);
-        Button login = findViewById(R.id.login_button);
         mAuth = FirebaseAuth.getInstance();
 
+        this.email = findViewById(R.id.editemail);
+        this.password = findViewById(R.id.editpassword);
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email_input = email.getText().toString();
-                String password_input = password.getText().toString();
-                password.setText("");
-                if (email_input.isEmpty()){
-                    email.setError("Email cannot be empty!");
-                    email.requestFocus();
-                    return;
-                }
-                if (!Patterns.EMAIL_ADDRESS.matcher(email_input).matches()){
-                    email.setError("Email is Invalid");
-                    email.requestFocus();
-                    return;
-                }
+        Button login = findViewById(R.id.login_button);
+        login.setOnClickListener(this);
 
-                if(password_input.isEmpty()){
-                    password.setError("Password cannot be empty!");
-                    password.requestFocus();
-                    return;
-                }
+    }
+    @Override
+    public void onClick (View v){
+        switch (v.getId()){
+            case R.id.login_button:
+                validateLogin();
+                break;
+            case R.id.register:
+                registerText();
+                break;
+        }
+    }
 
-                mAuth.signInWithEmailAndPassword(email_input,password_input)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    public void validateLogin(){
+        String email_input = email.getText().toString();
+        String password_input = password.getText().toString();
+        password.setText("");
+        if (email_input.isEmpty()){
+            email.setError("Email cannot be empty!");
+            email.requestFocus();
+            return;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email_input).matches()){
+            email.setError("Email is Invalid");
+            email.requestFocus();
+            return;
+        }
+
+        if(password_input.isEmpty()){
+            password.setError("Password cannot be empty!");
+            password.requestFocus();
+            return;
+        }
+        mAuth.signInWithEmailAndPassword(email_input,password_input)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(MainActivity.this, FoodDisplay.class);
+                            Intent intent = new Intent(MainActivity.this, StorePage.class);
                             startActivity(intent);
                             finish();
                         }
@@ -70,16 +81,11 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-            }
-        });
-
 
     }
-    @Override
-    public void onBackPressed() { } //override to disable onBackpress
 
-    public void register_onClick(View view){
-        Intent intent = new Intent(MainActivity.this, RegisterUser.class);
+    public void registerText(){
+        Intent intent = new Intent(MainActivity.this, AboutActivity.class);
         startActivity(intent);
     }
 }

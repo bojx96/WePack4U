@@ -10,35 +10,40 @@
 
     <EditText
         android:id="@+id/editfirst_name"
-        android:hint="First Name"
+        android:hint="@string/firstNameInput"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></EditText>
+        android:layout_height="wrap_content" />
+
     <EditText
         android:id="@+id/editlast_name"
-        android:hint="Last Name"
+        android:hint="@string/lastNameInput"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></EditText>
+        android:layout_height="wrap_content" />
+
     <EditText
         android:id="@+id/editemail"
-        android:hint="Email"
+        android:hint="@string/emailInput"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></EditText>
+        android:layout_height="wrap_content" />
+
     <EditText
         android:id="@+id/editcampus"
-        android:hint="Campus"
+        android:hint="@string/campusInput"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></EditText>
+        android:layout_height="wrap_content" />
+
     <EditText
         android:id="@+id/editpassword"
-        android:hint="Password"
+        android:hint="@string/password_input"
         android:inputType="textPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></EditText>
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/submit_button"
-        android:text="Submit"
+        android:text="@string/submitButton"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></Button>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

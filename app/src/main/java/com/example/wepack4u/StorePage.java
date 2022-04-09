@@ -1,6 +1,9 @@
 package com.example.wepack4u;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,51 +12,91 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
+
 
 public class StorePage extends AppCompatActivity {
-    ImageView image1;
+    //below this is where the data is inputted in
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private String campus;
+    RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_page);
+        recyclerView = findViewById(R.id.recyclerview);
 
-        image1 = (ImageView) findViewById(R.id.sutd_canteen_1_image);
-        String imageurl = "https://firebasestorage.googleapis.com/v0/b/wepack4u-a3325.appspot.com/o/Pokemons%2Fbulbasaur.png?alt=media&token=87f81b38-d01c-4a3f-8670-9232e236c3c8";
-        Picasso.get().load(imageurl).into(image1);
+        getStoreList();
 
-        dbTest testing1 = new dbTest();
-        testing1.getStoreList();
+    }
+    //TODO make the clickable in a list?
+    public void goestostore(View view){
+        Toast.makeText(this,"selected",Toast.LENGTH_SHORT).show();
     }
 
-    //TODO SUTDCanteedFood1 redirects to dummy page
-    public void launchSUTDCanteenFood1(View view){
-        Toast.makeText(this,"food1 selected",Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);
-   }
-
-    public void launchSUTDCanteenFood2(View view){
-        Toast.makeText(this,"food2 selected",Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);
+    public void getStoreList(){
+        DocumentReference userRef = db.collection("users").document(auth_uid);
+        userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot userDoc = task.getResult();
+                    if (userDoc.exists()){
+                        campus = (userDoc.getString("campus"));
+                        storeList(campus);
+                    }
+                    else{
+                        Log.d("get_campus", "does not exist");
+                    }
+                }
+            }
+        });
     }
 
-    public void launchSUTDCanteenFood3(View view){
-        Toast.makeText(this,"food3 selected",Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);
+    public void storeList(String campus_name) {
+        db.collection("Campus").whereEqualTo("name", campus_name).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String school_id = document.getId();
+                        db.collection("Campus").document(school_id).collection("food_stores").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()){
+                                    QuerySnapshot querySnapshot = task.getResult();
+                                    List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
+                                    StoreAdapter storeAdapter = new StoreAdapter(StorePage.this, foodStores);
+                                    recyclerView.setAdapter(storeAdapter);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(StorePage.this));
+                                    System.out.println(foodStores.get(0).store_name);
+                                }
+                            }
+                        });
+                    }
+                }
+                else{
+                    Log.d("storeList", "Failed to fetch anything");
+                }
+            }
+        });
     }
 
-    public void launchSUTDCanteenFood4(View view){
-        Toast.makeText(this,"food4 selected",Toast.LENGTH_SHORT).show();
+//    public void launchSUTDCanteenFood5(View view){
+//        Toast.makeText(this,"food5 selected",Toast.LENGTH_SHORT).show();
 //        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);
-    }
+//        startActivity(intent);*/
+    //}
 
-    public void launchSUTDCanteenFood5(View view){
-        Toast.makeText(this,"food5 selected",Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);
-    }
 }

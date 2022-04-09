@@ -6,21 +6,27 @@
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26296296296296295" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26296296296296295" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/drawable/round_button.xml" value="0.26296296296296295" />
-        <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/font/monserrat_fly.xml" value="0.16041666666666668" />
-        <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_about.xml" value="0.176" />
-        <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_confirmation.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_about.xml" value="0.21403508771929824" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_main2.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_register_user.xml" value="0.23596014492753623" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/activity_store_page.xml" value="0.10964912280701754" />
-        <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/dropdown.xml" value="0.1" />
+        <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/cart_display.xml" value="0.13508771929824562" />
+        <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/dropdown.xml" value="0.4" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/dropdown2.xml" value="0.1" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_food_detail.xml" value="0.3203732503888025" />
-        <entry key="app/src/main/res/layout/activity_food_detail_adaptor.xml" value="0.21739130434782608" />
+        <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/store_row.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_about.xml" value="0.30910645575032064" />
+        <entry key="app/src/main/res/layout/activity_confirmation.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_food_detail.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/activity_food_display.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/activity_food_display_adaptor.xml" value="0.22327898550724637" />
+        <entry key="app/src/main/res/layout/activity_payment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_register_user.xml" value="0.30910645575032064" />
+        <entry key="app/src/main/res/layout/activity_store_page.xml" value="0.30910645575032064" />
+        <entry key="app/src/main/res/layout/cart_display.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/dropdown.xml" value="0.30910645575032064" />
       </map>
     </option>
   </component>
