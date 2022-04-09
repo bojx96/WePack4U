@@ -17,7 +17,8 @@
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/dropdown.xml" value="0.1" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/dropdown2.xml" value="0.1" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_food_detail.xml" value="0.22327898550724637" />
+        <entry key="app/src/main/res/layout/activity_food_detail.xml" value="0.3203732503888025" />
+        <entry key="app/src/main/res/layout/activity_food_detail_adaptor.xml" value="0.21739130434782608" />
         <entry key="app/src/main/res/layout/activity_food_display.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/activity_food_display_adaptor.xml" value="0.22327898550724637" />
       </map>
