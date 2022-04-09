@@ -11,7 +11,8 @@
         android:theme="@style/Theme.WePack4U" >
         <activity
             android:name=".FoodDetail"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".FoodDisplay"/>
         <activity
             android:name=".FoodDisplay"
             android:exported="false" />
