@@ -11,11 +11,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class FoodDetailAdaptor extends RecyclerView.Adapter<FoodDetailAdaptor.FoodDetailViewHolder>{
     String options[];
     Context context;
 
-    public FoodDetailAdaptor(Context ct, String opt[]){
+    public FoodDetailAdaptor(Context ct,String opt[]){
         context = ct;
         options = opt;
     }

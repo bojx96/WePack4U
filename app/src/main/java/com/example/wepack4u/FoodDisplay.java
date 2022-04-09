@@ -22,7 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
-public class FoodDisplay extends AppCompatActivity implements FoodDisplayAdaptor.OnFoodListener {
+public class FoodDisplay extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private String campus;
@@ -34,6 +34,18 @@ public class FoodDisplay extends AppCompatActivity implements FoodDisplayAdaptor
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_display);
         recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(FoodDisplay.this, FoodDetail.class);
+                        intent.putExtra("foodName", foodMenu.get(position).name);
+                        startActivity(intent);
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) { }
+                })
+        );
         getFoodList();
 
     }
@@ -81,8 +93,8 @@ public class FoodDisplay extends AppCompatActivity implements FoodDisplayAdaptor
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if (task.isSuccessful()){
                                                     QuerySnapshot querySnapshot = task.getResult();
-                                                    List<FoodMenu> foodMenu = querySnapshot.toObjects(FoodMenu.class);
-                                                    FoodDisplayAdaptor foodDisplayAdaptor = new FoodDisplayAdaptor(FoodDisplay.this, foodMenu,FoodDisplay.this);
+                                                    foodMenu = querySnapshot.toObjects(FoodMenu.class);
+                                                    FoodDisplayAdaptor foodDisplayAdaptor = new FoodDisplayAdaptor(FoodDisplay.this, foodMenu);
                                                     recyclerView.setAdapter(foodDisplayAdaptor);
                                                     recyclerView.setLayoutManager(new LinearLayoutManager(FoodDisplay.this));
                                                 }
@@ -99,13 +111,5 @@ public class FoodDisplay extends AppCompatActivity implements FoodDisplayAdaptor
                 }
             }
         });
-    }
-
-
-    @Override
-    public void onFoodClick(int position) {
-        foodMenu.get(position);
-        Intent intent = new Intent(this, FoodDetail.class);
-        startActivity(intent);
     }
 }

@@ -17,13 +17,12 @@ import java.util.List;
 public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.FoodDisplayViewHolder>{
     Context context;
     List<FoodMenu> foodMenu;
-    private OnFoodListener mOnFoodListener;
+
 
     //Brandon's Edit
-    public FoodDisplayAdaptor(Context ct, List<FoodMenu> foodMenuInput, OnFoodListener onFoodListener){
+    public FoodDisplayAdaptor(Context ct, List<FoodMenu> foodMenuInput){
         context = ct;
         foodMenu = foodMenuInput;
-        this.mOnFoodListener =onFoodListener;
 
     }
     @NonNull
@@ -31,7 +30,7 @@ public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.
     public FoodDisplayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.activity_food_display_adaptor,parent,false);
-        return new FoodDisplayViewHolder(view,mOnFoodListener);
+        return new FoodDisplayViewHolder(view);
     }
 
     @Override
@@ -48,32 +47,18 @@ public class FoodDisplayAdaptor extends RecyclerView.Adapter<FoodDisplayAdaptor.
         return foodMenu.size();
     }
 
-    //to get ID
-    public String getId_name(int position){
-        return foodMenu.get(position).name;
-    }
 
-    public class FoodDisplayViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class FoodDisplayViewHolder extends RecyclerView.ViewHolder {
         TextView FoodName, FoodPrice;
         ImageView FoodImage;
-        OnFoodListener onFoodListener;
 
-        public FoodDisplayViewHolder(@NonNull View itemView, OnFoodListener onFoodListener) {
+        public FoodDisplayViewHolder(@NonNull View itemView) {
             super(itemView);
             FoodName = itemView.findViewById(R.id.FoodName);
             FoodPrice = itemView.findViewById(R.id.FoodPrice);
             FoodImage = itemView.findViewById(R.id.FoodImage);
-            this.onFoodListener = onFoodListener;
-
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            onFoodListener.onFoodClick(getAdapterPosition());
-        }
     }
-    public interface OnFoodListener{
-        void onFoodClick(int position);
-    }
+
 }
