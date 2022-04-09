@@ -29,6 +29,7 @@ public class StorePage extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private String campus;
+    private List<FoodStore> foodStores;
     RecyclerView recyclerView;
 
     @Override
@@ -36,6 +37,19 @@ public class StorePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_page);
         recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(StorePage.this, FoodDisplay.class);
+                        intent.putExtra("storeName", foodStores.get(position).store_name);
+                        startActivity(intent);
+                    }
+
+
+                    @Override public void onLongItemClick(View view, int position) { }
+                })
+        );
 
         getStoreList();
 
@@ -76,7 +90,7 @@ public class StorePage extends AppCompatActivity {
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()){
                                     QuerySnapshot querySnapshot = task.getResult();
-                                    List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
+                                    foodStores = querySnapshot.toObjects(FoodStore.class);
                                     StoreAdapter storeAdapter = new StoreAdapter(StorePage.this, foodStores);
                                     recyclerView.setAdapter(storeAdapter);
                                     recyclerView.setLayoutManager(new LinearLayoutManager(StorePage.this));
@@ -92,11 +106,5 @@ public class StorePage extends AppCompatActivity {
             }
         });
     }
-
-//    public void launchSUTDCanteenFood5(View view){
-//        Toast.makeText(this,"food5 selected",Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this,SUTDCanteedFood1.class);
-//        startActivity(intent);*/
-    //}
 
 }

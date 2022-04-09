@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,8 +32,7 @@ import java.util.Map;
 public class FoodDetail extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    private String campus;
-    private String data;
+    private String campus,foodName,storeName;
     private Map<String, Object> foodDetails = new HashMap<>();
     private TextView FoodDetailName,FoodDetailPrice;
     private ImageView FoodImageHolder;
@@ -45,8 +45,10 @@ public class FoodDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_detail);
         foodDetailRecyclerView = findViewById(R.id.foodDetailRecyclerView);
-        data = getIntent().getStringExtra("foodName");
+        foodName = getIntent().getStringExtra("foodName");
+        storeName = getIntent().getStringExtra("storeName");
         getFoodDetails();
+
         options = getResources().getStringArray(R.array.food_options);
         FoodDetailAdaptor foodDetailAdaptor = new FoodDetailAdaptor(this, options);
         foodDetailRecyclerView.setAdapter(foodDetailAdaptor);
@@ -58,6 +60,7 @@ public class FoodDetail extends AppCompatActivity {
             public void onClick(View view) {
                 db.collection("users").document(auth_uid).collection("cart").document().set(foodDetails);
                 finish();
+                Toast.makeText(FoodDetail.this, "Item Added to Cart!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -93,7 +96,7 @@ public class FoodDetail extends AppCompatActivity {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     String school_id = document.getId();
                     colRef.document(school_id).collection("food_stores")
-                            .whereEqualTo("store_name","Healthy Soup")
+                            .whereEqualTo("store_name",storeName)
                             .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -104,7 +107,7 @@ public class FoodDetail extends AppCompatActivity {
                                     String store_id = document.getId();
                                     String STORENAME = document.get("store_name").toString();
                                     colRef.document(school_id).collection("food_stores")
-                                            .document(store_id).collection("menu").whereEqualTo("name",data).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            .document(store_id).collection("menu").whereEqualTo("name",foodName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                             if (task.isSuccessful()){

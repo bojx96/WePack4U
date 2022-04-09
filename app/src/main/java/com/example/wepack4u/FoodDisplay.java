@@ -27,6 +27,7 @@ public class FoodDisplay extends AppCompatActivity {
     private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private String campus;
     private List<FoodMenu> foodMenu;
+    private String storeName;
     RecyclerView recyclerView;
 
     @Override
@@ -34,12 +35,16 @@ public class FoodDisplay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_display);
         recyclerView = findViewById(R.id.recyclerView);
+        storeName = getIntent().getStringExtra("storeName");
+        System.out.println(storeName);
+
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(FoodDisplay.this, FoodDetail.class);
                         intent.putExtra("foodName", foodMenu.get(position).name);
+                        intent.putExtra("storeName",storeName);
                         startActivity(intent);
                     }
 
@@ -79,7 +84,7 @@ public class FoodDisplay extends AppCompatActivity {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String school_id = document.getId();
-                        db.collection("Campus").document(school_id).collection("food_stores").whereEqualTo("store_name","Healthy Soup").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        db.collection("Campus").document(school_id).collection("food_stores").whereEqualTo("store_name",storeName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()){
