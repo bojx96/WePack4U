@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/_30sdp"
+        android:paddingRight="@dimen/_30sdp"
+        tools:context=".PaymentActivity">
+
+        <!-- Checkout section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/checkout_header"
+            android:textSize="@dimen/_30ssp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat_bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cart_recycler_a"/>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="@dimen/_185sdp"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                android:textSize="@dimen/_15ssp"
+                android:gravity="end"
+                android:fontFamily="@font/montserrat_bold"/>
+            <TextView
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="wrap_content"
+                android:id="@+id/total"
+                android:textSize="@dimen/_15ssp"
+                android:gravity="end"
+                android:fontFamily="@font/montserrat_medium"/>
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"/>
+
+        <!-- Payment section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_header"
+            android:textSize="@dimen/_30ssp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat_bold"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_10sdp"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="wrap_content"
+                android:id="@+id/payment_method">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_40sdp"
+                    android:id="@+id/mastervisa"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_40sdp"
+                    android:id="@+id/paylah"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_40sdp"
+                    android:id="@+id/paynow"/>
+            </RadioGroup>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+                    <ImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/stripe"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"/>
+                    <View
+                        android:layout_width="@dimen/_5sdp"
+                        android:layout_height="@dimen/_40sdp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_40sdp"
+                        android:text="@string/mastercard_visa"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:gravity="center_vertical"/>
+                </TableRow>
+
+                <TableRow>
+                    <ImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/paylah"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"/>
+                    <View
+                        android:layout_width="@dimen/_5sdp"
+                        android:layout_height="@dimen/_40sdp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_40sdp"
+                        android:text="@string/paylah"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:gravity="center_vertical"/>
+                </TableRow>
+
+                <TableRow>
+                    <ImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/paynow"/>
+                    <View
+                        android:layout_width="@dimen/_5sdp"
+                        android:layout_height="@dimen/_40sdp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_40sdp"
+                        android:text="@string/paynow"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:gravity="center_vertical"/>
+                </TableRow>
+            </TableLayout>
+        </TableRow>
+
+        <Button
+            android:layout_width="@dimen/_245sdp"
+            android:layout_height="@dimen/_65sdp"
+            android:text="@string/checkout_header"
+            android:id="@+id/checkout_button"
+            android:textSize="@dimen/_15ssp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/round_button"
+            app:cornerRadius="@dimen/_7sdp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"/>
+    </LinearLayout>
+</ScrollView>

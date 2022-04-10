@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FoodDisplay">
+
+
+    <ImageView
+        android:id="@+id/FoodDetailImage"
+        android:layout_width="match_parent"
+        android:layout_height="162dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/food_image_placeholder" />
+
+    <TextView
+        android:id="@+id/FoodDetailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/FoodDetailImage"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:text="FoodName"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/FoodDetailPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/FoodDetailImage"
+        android:layout_alignEnd="@id/FoodDetailName"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="-250dp"
+        android:text="FoodPrice"
+        android:textAlignment="center" />
+
+    <View
+        android:id="@+id/Separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/FoodDetailName"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/OptionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Separator"
+        android:text="Options"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/foodDetailRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/OptionTitle"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="50dp" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <Button
+        android:id="@+id/addtoCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/foodDetailRecyclerView"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="-100dp"
+        android:layout_marginEnd="50dp"
+        android:text="Add to cart" />
+
+
+</RelativeLayout>

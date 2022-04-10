@@ -1,0 +1,122 @@
+package com.example.wepack4u;
+
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
+
+
+public class CartFragment extends Fragment {
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    RecyclerView recyclerView;
+
+
+
+    public CartFragment() {
+        // Required empty public constructor
+    }
+
+    public static CartFragment newInstance(String param1, String param2) {
+        CartFragment fragment = new CartFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_cart, container, false);
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        // Checkout section
+        recyclerView = view.findViewById(R.id.cart_recycler_a);
+        foodList();
+
+        // Payment section
+        RadioGroup payment_method = view.findViewById(R.id.payment_method);
+        Button checkout = view.findViewById(R.id.checkout_button);
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (payment_method.getCheckedRadioButtonId() != -1) {
+                    int selected = payment_method.getCheckedRadioButtonId();
+                    RadioButton method = view.findViewById(selected);
+                    Intent intent = new Intent(getContext(), ConfirmationActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+    public void foodList() {
+        db.collection("users").document(auth_uid).collection("cart").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            List<FoodItem> foodItems = querySnapshot.toObjects(FoodItem.class);
+                            String[] stalls = {"Japanese Korean", "Healthy Soup"}; // dummy
+
+                            CartRecycler cartRecycler = new CartRecycler(getContext(),
+                                    foodItems, stalls, null);
+                            recyclerView.setAdapter(cartRecycler);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                            TextView total = getView().findViewById(R.id.total);
+                            total.setText(new TotalPrice(foodItems).getTotal());
+                        } else {
+                            Log.d("cart_list", "Failed to fetch anything");
+                        }
+                    }
+                });
+    }
+}
