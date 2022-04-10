@@ -42,13 +42,15 @@
     <string name="successful_header">Payment Successful</string>
     <string name="done">Done</string>
 
+    <!-- About you page -->
     <string name="about_you">About you</string>
     <string name="first_name">First Name</string>
     <string name="hfirst_name">Enter first name</string>
     <string name="last_name">Last Name</string>
     <string name="hlast_name">Enter last name</string>
+    <string name="email">Enter email</string>
     <string name="university">Which University are you at?</string>
-    <string name="huniversity">Select a university</string>
+    <string name="huniversity">University</string>
     <string name="location">Where are you located</string>
     <string name="submit">Submit</string>
     <string name="text_view">Text View</string>
@@ -74,6 +76,8 @@
     <string name="japanese_stall_image">Japanese Stall</string>
     <string name="healthy_soup_image">Healthy Soup Stall</string>
     <string name="dummy_stall_1_image">Dummy1</string>
+    <string name="password">Enter password</string>
+    <string name="login">Login</string>
 
     <!-- Food Display Page -->
     <string-array name="food_names">

@@ -1,7 +1,7 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/editTextUniversityName"
     android:layout_width="345dp"
-    android:layout_height="35dp"
+    android:layout_height="30dp"
     android:ems="13"
     android:text="@string/text_view"
     android:fontFamily="@font/montserrat_medium"
