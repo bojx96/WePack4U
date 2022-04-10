@@ -34,7 +34,6 @@ public class AboutYouFragment extends Fragment {
     private static final String FIRST_NAME = "first_name";
     private static final String LAST_NAME = "last_name";
     EditText editFirstName,editLastName;
-    AutoCompleteTextView editCampus;
     Button submitButton;
 
 
@@ -59,55 +58,36 @@ public class AboutYouFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        return inflater.inflate(R.layout.fragment_about_you, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        editFirstName= view.findViewById(R.id.editTextFirstName);
+        editLastName= view.findViewById(R.id.editTextLastName);
+        submitButton = view.findViewById(R.id.submitButton);
+        //catch UID
         user = FirebaseAuth.getInstance().getCurrentUser();
-        db = FirebaseFirestore.getInstance();
-        DocumentReference userDoc = db.collection("users").document(user.getUid());
-
-
-        this.editFirstName= view.findViewById(R.id.editTextFirstName);
-        this.editLastName= view.findViewById(R.id.editTextLastName);
-        this.editCampus = view.findViewById(R.id.autoCompleteTextViewUniversityName);
-        this.submitButton = view.findViewById(R.id.submitButton);
-
-        loadProfile(userDoc);
 
         String[] universities = getResources().getStringArray(R.array.university_array);
+
         AutoCompleteTextView editText = view.findViewById(R.id.autoCompleteTextViewUniversityName);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown, R.id.editTextUniversityName, universities);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.dropdown, R.id.editTextUniversityName, universities);
         editText.setAdapter(adapter);
 
-
-        submitButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String firstName = editFirstName.getText().toString();
-                        String lastName = editLastName.getText().toString();
-                        String campus = editCampus.getText().toString();
-                        userDoc.update(FIRST_NAME,firstName);
-                        userDoc.update(LAST_NAME,lastName);
-                        userDoc.update(CAMPUS,campus);
-//                        openNextPage();
-                    }
-                });
-
-    }
-    public void loadProfile(DocumentReference userDoc){
-        userDoc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        Log.i("AboutActivity", "onCreate: " + user.getUid());
+        db = FirebaseFirestore.getInstance();
+        db.collection("users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Log.i("TAG",documentSnapshot.toString() );
                 if (documentSnapshot.exists()){
+//                  String email = documentSnapshot.getString(EMAIL);
+//                  String campus = documentSnapshot.getString(CAMPUS);
                     String first_name = documentSnapshot.getString(FIRST_NAME);
                     String last_name = documentSnapshot.getString(LAST_NAME);
-                    String campus = documentSnapshot.getString(CAMPUS);
                     editFirstName.setText(first_name);
                     editLastName.setText(last_name);
-                    editCampus.setText(campus);
                 }
                 else {
                     Toast.makeText(getContext(), "Document doesn't exist",Toast.LENGTH_SHORT).show();
@@ -121,5 +101,15 @@ public class AboutYouFragment extends Fragment {
             }
         });
 
+
+        submitButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                      openNextPage();
+                        String firstName = editFirstName.getText().toString();
+                        String lastName = editLastName.getText().toString();
+                    }
+                });
     }
 }
