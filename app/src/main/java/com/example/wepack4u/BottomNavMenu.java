@@ -48,7 +48,7 @@ public class BottomNavMenu extends AppCompatActivity {
                             break;
                     }
 
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
 
                     return true;
                 }
