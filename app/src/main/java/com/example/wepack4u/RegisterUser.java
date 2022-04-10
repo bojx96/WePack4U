@@ -3,10 +3,14 @@ package com.example.wepack4u;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -26,7 +30,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    private EditText editFirstName, editLastName, editCampus, editEmail, editPassword;
+    private EditText editFirstName, editLastName, editEmail, editPassword;
+    private AutoCompleteTextView editCampus;
+    private String campus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +42,27 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
         this.editFirstName = findViewById(R.id.editfirst_name);
         this.editLastName = findViewById(R.id.editlast_name);
-        this.editCampus = findViewById(R.id.editcampus);
         this.editEmail = findViewById(R.id.editemail);
         this.editPassword = findViewById(R.id.editpassword);
 
         Button submit_button = findViewById(R.id.submit_button);
         submit_button.setOnClickListener(this);
 
+        String[] universities = getResources().getStringArray(R.array.university_array);
+
+        this.editCampus= findViewById(R.id.editcampus);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdown, R.id.editTextUniversityName, universities);
+        editCampus.setAdapter(adapter);
+
+        editCampus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                System.out.println("here");
+                campus =adapterView.getItemAtPosition(position).toString();
+                System.out.println("campus"+campus);
+
+            }
+        });
     }
 
     @Override
@@ -57,9 +77,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     public void validateInput(){
         String first_name = editFirstName.getText().toString();
         String last_name = editLastName.getText().toString();
-        String campus = editCampus.getText().toString();
         String email = editEmail.getText().toString();
         String password = editPassword.getText().toString();
+        System.out.println("campus"+campus);
         if(first_name.isEmpty()){
             editFirstName.setError("First name is required");
             editFirstName.requestFocus();
@@ -70,7 +90,8 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             editLastName.requestFocus();
             return;
         }
-        if(campus.isEmpty()){
+        if(campus==null){
+            System.out.println("worked");
             editCampus.setError("Campus is required");
             editCampus.requestFocus();
             return;
@@ -96,9 +117,11 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
+
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 if (task.isSuccessful()){
                     Map<String, Object> user_details = new HashMap<>();
                     user_details.put("first_name", first_name);
@@ -119,7 +142,13 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                         }
                     });
                 }
+                backToMain();
             }
         });
+    }
+
+    public void backToMain(){
+        Intent intent = new Intent(RegisterUser.this, MainActivity.class);
+        startActivity(intent);
     }
 }
