@@ -123,7 +123,6 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()){
-                    backToMain();
                     Map<String, Object> user_details = new HashMap<>();
                     user_details.put("first_name", first_name);
                     user_details.put("last_name", last_name);
