@@ -55,17 +55,10 @@
     <string name="submit">Submit</string>
     <string name="text_view">Text View</string>
 
-    <string-array name="university_array">
-        <item>SUTD</item>
-        <item>NTU</item>
-        <item>NUS</item>
-        <item>SMU</item>
-        <item>SUSS</item>
-    </string-array>
+    <string name="sutd_canteen_store">SUTD Canteen Store</string>
 
 
     <!-- Store Page -->
-    <string name="sutd_canteen_store">SUTD Canteen Store</string>
     <string name="sutd_canteen_1">Indian Stall</string>
     <string name="sutd_canteen_2">Western Stall</string>
     <string name="sutd_canteen_3">Japanese Stall</string>
@@ -76,10 +69,18 @@
     <string name="japanese_stall_image">Japanese Stall</string>
     <string name="healthy_soup_image">Healthy Soup Stall</string>
     <string name="dummy_stall_1_image">Dummy1</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="password">Enter password</string>
     <string name="login">Login</string>
 
     <!-- Food Display Page -->
+    <string-array name="university_array">
+        <item>SUTD</item>
+        <item>NTU</item>
+        <item>NUS</item>
+        <item>SMU</item>
+        <item>SUSS</item>
+    </string-array>
     <string-array name="food_names">
         <item>foodname1</item>
         <item>foodname2</item>
@@ -88,6 +89,7 @@
 
 
     </string-array>
+    <!-- Food Detail Page -->
     <string-array name="food_prices">
         <item>foodprice1</item>
         <item>foodprice2</item>
@@ -95,7 +97,7 @@
         <item>foodprice4</item>
 
     </string-array>
-    <!-- Food Detail Page -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string-array name="food_options">
         <item>More Chilly</item>
         <item>Less Chilly</item>

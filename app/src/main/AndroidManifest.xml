@@ -40,7 +40,9 @@
             android:exported="false" />
         <activity
             android:name=".ConfirmationActivity"
-            android:exported="false" />
+            android:exported="false"/>
+        <activity android:name=".BottomNavMenu"
+            android:exported="false"/>
     </application>
 
 </manifest>
