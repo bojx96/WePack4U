@@ -80,7 +80,7 @@ public class ConfirmationFragment extends Fragment {
                 /*Intent intent = new Intent(getContext(), StorePage.class);
                 startActivity(intent);*/
                 Fragment nextFragment = new StorePageFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,nextFragment).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,nextFragment).addToBackStack("ConfirmationStack").commit();
 
             }
         });
