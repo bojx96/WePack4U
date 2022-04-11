@@ -82,12 +82,13 @@ public class AboutYouFragment extends Fragment {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Log.i("TAG",documentSnapshot.toString() );
                 if (documentSnapshot.exists()){
-//                  String email = documentSnapshot.getString(EMAIL);
-//                  String campus = documentSnapshot.getString(CAMPUS);
                     String first_name = documentSnapshot.getString(FIRST_NAME);
                     String last_name = documentSnapshot.getString(LAST_NAME);
+                    String campus = documentSnapshot.getString(CAMPUS);
                     editFirstName.setText(first_name);
                     editLastName.setText(last_name);
+                    editText.setText(campus);
+
                 }
                 else {
                     Toast.makeText(getContext(), "Document doesn't exist",Toast.LENGTH_SHORT).show();
