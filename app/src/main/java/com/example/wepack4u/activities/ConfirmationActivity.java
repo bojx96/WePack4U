@@ -71,12 +71,8 @@ public class ConfirmationActivity extends AppCompatActivity {
                             stalls.add(each.getStall());
                         }
                     }
-                    // dummies
-//                    String[] stalls = {"Japanese Korean", "Healthy Soup"};
-                    int[] orders = {69, 420};
 
-                    CartRecycler cartRecycler = new CartRecycler(ConfirmationActivity.this,
-                            foodItems, stalls, orders);
+                    CartRecycler cartRecycler = new CartRecycler(ConfirmationActivity.this, foodItems, stalls, true);
                     recyclerView.setAdapter(cartRecycler);
                     recyclerView.setLayoutManager(new LinearLayoutManager(ConfirmationActivity.this));
 

@@ -153,12 +153,12 @@ public class FoodDetailFragment extends Fragment {
                                                     Picasso.get().load(document.get("img").toString()).into(FoodImageHolder);
                                                     String FOODNAME = document.get("name").toString();
                                                     String FOODPRICE = document.get("price").toString();
-                                                    double FOODPRICEFLOAT = Double.parseDouble(FOODPRICE);
+//                                                    double FOODPRICEFLOAT = Double.parseDouble(FOODPRICE);
 
                                                     FoodDetailName.setText(FOODNAME);
                                                     FoodDetailPrice.setText(FOODPRICE);
                                                     foodDetails.put("name",FOODNAME);
-                                                    foodDetails.put("price",FOODPRICEFLOAT);
+                                                    foodDetails.put("price",FOODPRICE);
                                                     foodDetails.put("stall",STORENAME);
                                                     foodDetails.put("unit",1);
                                                 }

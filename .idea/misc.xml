@@ -36,6 +36,7 @@
         <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_payment.xml" value="0.16927083333333334" />
         <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_store_page.xml" value="0.16927083333333334" />
         <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/cart_display.xml" value="0.16927083333333334" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_about_you.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_cart.xml" value="0.15217391304347827" />
         <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_food_detail.xml" value="0.21739130434782608" />
         <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_food_display.xml" value="0.16927083333333334" />
@@ -66,13 +67,19 @@
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.30910645575032064" />
         <entry key="app/src/main/res/layout/activity_confirmation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_food_detail.xml" value="0.22327898550724637" />
+        <entry key="app/src/main/res/layout/activity_food_detail_adaptor.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/activity_food_display.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/activity_food_display_adaptor.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/activity_payment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_register_user.xml" value="0.30910645575032064" />
         <entry key="app/src/main/res/layout/activity_store_page.xml" value="0.30910645575032064" />
         <entry key="app/src/main/res/layout/cart_display.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/cart_display_row.xml" value="0.5421407926109034" />
         <entry key="app/src/main/res/layout/dropdown.xml" value="0.30910645575032064" />
+        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/fragment_food_detail.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/receipt_row.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/store_row.xml" value="0.16983695652173914" />
       </map>
     </option>
   </component>

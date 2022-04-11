@@ -1,15 +1,17 @@
 package com.example.wepack4u.utilities;
 
+import java.math.BigDecimal;
+
 public class FoodItem {
     private String name;
     private int unit;
-    private double price;
+    private String price;
     private String stall;
 
     // No-arg constructor needed for Firebase to work
     FoodItem() {}
 
-    FoodItem(String name, int unit, double price, String stall) {
+    FoodItem(String name, int unit, String price, String stall) {
         this.name = name;
         this.unit = unit;
         this.price = price;
@@ -21,11 +23,11 @@ public class FoodItem {
     public String getUnit() { return ""+this.unit; }
 
     public String getPrice() {
-        double subtotal = price * unit;
-        return "$"+subtotal;
+        BigDecimal subtotal = new BigDecimal(price).multiply(new BigDecimal(unit));
+        return "$" + subtotal.setScale(2, BigDecimal.ROUND_UP).toString();
     }
 
-    public double getPriceValue() { return this.price * this.unit; }
+    public BigDecimal getPriceValue() { return new BigDecimal(price).multiply(new BigDecimal(unit)); }
 
     public String getStall() { return this.stall; }
 }

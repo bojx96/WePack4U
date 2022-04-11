@@ -35,22 +35,15 @@ public class ThreeColumnTable {
     }
 
     public void createTable() {
-        int counter = 1;
 
         for (FoodItem f : cart) {
             if (f.getStall().equals(this.stall)) {
-                String text = counter + ".   " + f.getName();
-                createRow(text, t1, Gravity.START);
+                createRow(f.getName(), t1, Gravity.START);
 
                 createRow(f.getUnit(), t2, Gravity.CENTER_HORIZONTAL);
 
                 String priceValue = f.getPrice();
-                if (f.getPriceValue() * 10 % 1 == 0) {
-                    priceValue = priceValue + "0";
-                }
                 createRow(priceValue, t3, Gravity.END);
-
-                counter++;
             }
         }
     }

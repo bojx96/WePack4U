@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import com.example.wepack4u.R;
 import com.example.wepack4u.activities.MainActivity;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import androidx.annotation.NonNull;
 
@@ -30,15 +32,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 
-public class AboutYouFragment extends Fragment {
+public class AboutYouFragment extends Fragment implements View.OnClickListener {
     FirebaseFirestore db;
     private FirebaseUser user;
+    private String campus;
     private static final String CAMPUS = "campus";
     private static final String FIRST_NAME = "first_name";
     private static final String LAST_NAME = "last_name";
     EditText editFirstName,editLastName;
     Button submitButton,logoutButton;
-
+    AutoCompleteTextView editText;
 
 
     public AboutYouFragment() {
@@ -70,18 +73,24 @@ public class AboutYouFragment extends Fragment {
         editLastName= view.findViewById(R.id.editTextLastName);
         submitButton = view.findViewById(R.id.submitButton);
         logoutButton = view.findViewById(R.id.logoutButton);
-        //catch UID
+
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         String[] universities = getResources().getStringArray(R.array.university_array);
-
         AutoCompleteTextView editText = view.findViewById(R.id.autoCompleteTextViewUniversityName);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.dropdown, R.id.editTextUniversityName, universities);
         editText.setAdapter(adapter);
 
-        Log.i("AboutActivity", "onCreate: " + user.getUid());
+        editText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                campus =adapterView.getItemAtPosition(position).toString();
+            }
+        });
+
         db = FirebaseFirestore.getInstance();
-        db.collection("users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        DocumentReference userDoc = db.collection("users").document(user.getUid());
+        userDoc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Log.i("TAG",documentSnapshot.toString() );
@@ -105,25 +114,47 @@ public class AboutYouFragment extends Fragment {
         });
 
 
-        submitButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-//                      openNextPage();
-                        String firstName = editFirstName.getText().toString();
-                        String lastName = editLastName.getText().toString();
-                    }
-                });
-        logoutButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        FirebaseAuth.getInstance().signOut();
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(intent);
-                        getActivity().finish();
-                    }
+        submitButton.setOnClickListener(this);
+        logoutButton.setOnClickListener(this);
+    }
+    public boolean validateInput(String firstName, String lastName){
+        if (campus == null){
+            Toast.makeText(getContext(),"Please choose campus!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(firstName.isEmpty()){
+            editFirstName.setError("First Name is required");
+            editFirstName.requestFocus();
+            return false;
+        }
+        if(lastName.isEmpty()){
+            editLastName.setError("Last Name is required");
+            editLastName.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.submitButton:
+                DocumentReference userDoc = db.collection("users").document(user.getUid());
+                String firstName = editFirstName.getText().toString();
+                String lastName = editLastName.getText().toString();
+                if ( validateInput(firstName, lastName) ){
+                    userDoc.update("first_name",firstName);
+                    userDoc.update("last_name",lastName);
+                    userDoc.update("campus", campus);
+                    Toast.makeText(getContext(),"Account Successfully updated!",Toast.LENGTH_SHORT).show();
                 }
-        );
+                break;
+            case R.id.logoutButton:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+                break;
+        }
     }
 }

@@ -17,6 +17,7 @@
         android:id="@+id/bottomNav"
         android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
+
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/menu"/>
 

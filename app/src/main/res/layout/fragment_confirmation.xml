@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="20dp">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,11 +14,10 @@
         tools:context=".activities.ConfirmationActivity">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/successful_header"
-            android:textSize="@dimen/_24sdp"
-            android:gravity="center"
+            android:textSize="@dimen/_24ssp"
             android:textColor="@color/black"
             android:fontFamily="@font/montserrat_bold"/>
 
@@ -27,13 +25,24 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp"/>
 
-        <TextView
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/timestamp"
-            android:textSize="@dimen/_8ssp"
-            android:gravity="end"
-            android:fontFamily="@font/montserrat_bold"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="@dimen/_115sdp"
+                android:layout_height="wrap_content"
+                android:id="@+id/order_num"
+                android:textSize="@dimen/_15ssp"
+                android:fontFamily="@font/montserrat_medium"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/timestamp"
+                android:textSize="@dimen/_10ssp"
+                android:gravity="end"
+                android:fontFamily="@font/montserrat_medium"/>
+        </TableRow>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -41,28 +50,27 @@
             android:id="@+id/cart_recycler_b"/>
 
         <TableRow
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="@dimen/_185sdp"
                 android:layout_height="wrap_content"
                 android:text="@string/total"
-                android:textSize="@dimen/_12ssp"
-                android:textColor="#D5000000"
+                android:textSize="@dimen/_15ssp"
                 android:gravity="end"
                 android:fontFamily="@font/montserrat_bold"/>
             <TextView
                 android:layout_width="@dimen/_70sdp"
                 android:layout_height="wrap_content"
                 android:id="@+id/total2"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_15ssp"
                 android:gravity="end"
                 android:fontFamily="@font/montserrat_medium"/>
         </TableRow>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"/>
+            android:layout_height="@dimen/_30sdp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -70,7 +78,6 @@
             android:id="@+id/payment_text"
             android:textSize="@dimen/_12ssp"
             android:textColor="@color/black"
-            android:gravity="center"
             android:fontFamily="@font/montserrat_medium"/>
         <TextView
             android:layout_width="match_parent"
@@ -78,23 +85,22 @@
             android:id="@+id/waiting_time"
             android:textSize="@dimen/_12ssp"
             android:textColor="@color/black"
-            android:gravity="center"
             android:fontFamily="@font/montserrat_medium"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"/>
+            android:layout_height="@dimen/_30sdp"/>
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_38sdp"
-            android:text="@string/checkout_header"
+            android:layout_width="@dimen/_245sdp"
+            android:layout_height="@dimen/_65sdp"
+            android:text="@string/done"
             android:id="@+id/done_button"
+            android:textSize="@dimen/_15ssp"
             android:fontFamily="@font/montserrat_bold"
             android:layout_gravity="center"
-            android:backgroundTint="#000000"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="10dp"/>
+            android:backgroundTint="@color/round_button"
+            app:cornerRadius="@dimen/_7sdp"/>
 
         <View
             android:layout_width="match_parent"

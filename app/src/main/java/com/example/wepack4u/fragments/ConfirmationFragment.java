@@ -50,7 +50,6 @@ public class ConfirmationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -63,6 +62,11 @@ public class ConfirmationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view,savedInstanceState);
+
+        // Order number
+        TextView orderNum = view.findViewById(R.id.order_num);
+        String order = "Order No. " + "420"; //dummy
+        orderNum.setText(order);
 
         // Timestamp
         TextView timestamp = view.findViewById(R.id.timestamp);
@@ -77,11 +81,8 @@ public class ConfirmationFragment extends Fragment {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(getContext(), StorePage.class);
-                startActivity(intent);*/
                 Fragment nextFragment = new StorePageFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,nextFragment).commit();
-
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,nextFragment).addToBackStack("ConfirmationStack").commit();
             }
         });
     }
@@ -100,14 +101,14 @@ public class ConfirmationFragment extends Fragment {
                                     stalls.add(each.getStall());
                                 }
                             }
-                            // dummies
-//                    String[] stalls = {"Japanese Korean", "Healthy Soup"};
-                            int[] orders = {69, 420};
 
-                            CartRecycler cartRecycler = new CartRecycler(getContext(),
-                                    foodItems, stalls, orders);
+                            CartRecycler cartRecycler = new CartRecycler(getContext(), foodItems,
+                                    stalls, false);
                             recyclerView.setAdapter(cartRecycler);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+                                @Override
+                                public boolean canScrollVertically() { return false; }
+                            });
 
                             TextView total = getView().findViewById(R.id.total2);
                             String totalPrice = new TotalPrice(foodItems).getTotal();
