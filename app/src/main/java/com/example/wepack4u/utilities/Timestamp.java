@@ -1,11 +1,11 @@
-package com.example.wepack4u;
+package com.example.wepack4u.utilities;
 
 import java.util.Calendar;
 
 public class Timestamp {
     private final Calendar c;
 
-    Timestamp() { c = Calendar.getInstance(); }
+    public Timestamp() { c = Calendar.getInstance(); }
 
     public String setTimestamp() {
         String secondText = formatText(c.get(Calendar.SECOND));

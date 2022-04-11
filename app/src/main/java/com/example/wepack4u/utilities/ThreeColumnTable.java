@@ -1,16 +1,17 @@
-package com.example.wepack4u;
+package com.example.wepack4u.utilities;
 
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
 
-import java.util.ArrayList;
+import com.example.wepack4u.R;
+import com.example.wepack4u.utilities.FoodItem;
+
 import java.util.List;
 
 public class ThreeColumnTable {
@@ -22,8 +23,8 @@ public class ThreeColumnTable {
     private final Context context;
     private final Typeface typeface;
 
-    ThreeColumnTable(TableLayout t1, TableLayout t2, TableLayout t3, List<FoodItem> cart,
-                     String stall, Context context) {
+    public ThreeColumnTable(TableLayout t1, TableLayout t2, TableLayout t3, List<FoodItem> cart,
+                            String stall, Context context) {
         this.t1 = t1;
         this.t2 = t2;
         this.t3 = t3;

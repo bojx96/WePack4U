@@ -1,4 +1,6 @@
-package com.example.wepack4u;
+package com.example.wepack4u.utilities;
+
+import com.example.wepack4u.utilities.FoodItem;
 
 import java.text.DecimalFormat;
 import java.util.List;

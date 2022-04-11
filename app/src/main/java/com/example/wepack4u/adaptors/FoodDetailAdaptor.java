@@ -1,17 +1,16 @@
-package com.example.wepack4u;
+package com.example.wepack4u.adaptors;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import com.example.wepack4u.R;
 
 public class FoodDetailAdaptor extends RecyclerView.Adapter<FoodDetailAdaptor.FoodDetailViewHolder>{
     String options[];

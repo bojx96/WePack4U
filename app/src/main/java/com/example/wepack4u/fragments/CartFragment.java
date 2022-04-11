@@ -1,4 +1,4 @@
-package com.example.wepack4u;
+package com.example.wepack4u.fragments;
 
 import android.os.Bundle;
 
@@ -15,33 +15,24 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.wepack4u.adaptors.CartRecycler;
+import com.example.wepack4u.utilities.FoodItem;
+import com.example.wepack4u.R;
+import com.example.wepack4u.utilities.TotalPrice;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.content.Intent;
-import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.List;
 
 
 public class CartFragment extends Fragment {

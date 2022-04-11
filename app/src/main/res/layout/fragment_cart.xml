@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:paddingLeft="@dimen/_30sdp"
         android:paddingRight="@dimen/_30sdp"
-        tools:context=".PaymentActivity">
+        tools:context=".activities.PaymentActivity">
 
         <!-- Checkout section -->
         <TextView

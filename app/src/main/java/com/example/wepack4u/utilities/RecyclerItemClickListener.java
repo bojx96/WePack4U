@@ -1,4 +1,4 @@
-package com.example.wepack4u;
+package com.example.wepack4u.utilities;
 
 import android.content.Context;
 import android.view.GestureDetector;

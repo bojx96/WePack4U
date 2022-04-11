@@ -1,4 +1,4 @@
-package com.example.wepack4u;
+package com.example.wepack4u.utilities;
 
 public class User {
     public String first_name, last_name, email, campus;

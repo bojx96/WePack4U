@@ -1,18 +1,24 @@
-package com.example.wepack4u;
-
-import android.content.Intent;
-import android.os.Bundle;
+package com.example.wepack4u.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.wepack4u.R;
+import com.example.wepack4u.utilities.TotalPrice;
+import com.example.wepack4u.adaptors.CartRecycler;
+import com.example.wepack4u.utilities.FoodItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,9 +28,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import kotlin.random.AbstractPlatformRandom;
-
-public class ConfirmationActivity extends AppCompatActivity {
+public class PaymentActivity extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     RecyclerView recyclerView;
@@ -32,23 +36,27 @@ public class ConfirmationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirmation);
+        setContentView(R.layout.activity_payment);
 
-        // Timestamp
-        TextView timestamp = findViewById(R.id.timestamp);
-        timestamp.setText(new Timestamp().setTimestamp());
-
-        // Firebase-dependent data
-        recyclerView = findViewById(R.id.cart_recycler_b);
+        // Checkout section
+        recyclerView = findViewById(R.id.cart_recycler_a);
         foodList();
 
-        // Button
-        Button done = findViewById(R.id.done_button);
-        done.setOnClickListener(new View.OnClickListener() {
+        // Payment section
+        RadioGroup payment_method = findViewById(R.id.payment_method);
+        Button checkout = findViewById(R.id.checkout_button);
+        checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConfirmationActivity.this, StorePage.class);
-                startActivity(intent);
+                if (payment_method.getCheckedRadioButtonId() != -1) {
+                    int selected = payment_method.getCheckedRadioButtonId();
+                    RadioButton method = findViewById(selected);
+                    Intent intent = new Intent(PaymentActivity.this, ConfirmationActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(PaymentActivity.this, R.string.choose_payment, Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -58,38 +66,24 @@ public class ConfirmationActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                ArrayList<String> stalls = new ArrayList<>();
                 if (task.isSuccessful()) {
-                    // Receipt
                     QuerySnapshot querySnapshot = task.getResult();
                     List<FoodItem> foodItems = querySnapshot.toObjects(FoodItem.class);
-                    ArrayList<String> stalls =  new ArrayList<>();
                     for (FoodItem each: foodItems){
                         if (!stalls.contains(each.getStall())){
                             stalls.add(each.getStall());
                         }
                     }
-                    // dummies
-//                    String[] stalls = {"Japanese Korean", "Healthy Soup"};
-                    int[] orders = {69, 420};
+//                    String[] stalls = {"Japanese Korean", "Healthy Soup"}; // dummy
 
-                    CartRecycler cartRecycler = new CartRecycler(ConfirmationActivity.this,
-                            foodItems, stalls, orders);
+                    CartRecycler cartRecycler = new CartRecycler(PaymentActivity.this,
+                            foodItems, stalls, null);
                     recyclerView.setAdapter(cartRecycler);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(ConfirmationActivity.this));
+                    recyclerView.setLayoutManager(new LinearLayoutManager(PaymentActivity.this));
 
-                    TextView total = findViewById(R.id.total2);
-                    String totalPrice = new TotalPrice(foodItems).getTotal();
-                    total.setText(totalPrice);
-
-                    // Text
-                    TextView paymentText = findViewById(R.id.payment_text);
-                    String text1 = "A payment of " + totalPrice + " has been made.";
-                    paymentText.setText(text1);
-
-                    int time = 15; // dummy var
-                    TextView waitingTime = findViewById(R.id.waiting_time);
-                    String text2 = "Your order will be done in " + time + " minutes.";
-                    waitingTime.setText(text2);
+                    TextView total = findViewById(R.id.total);
+                    total.setText(new TotalPrice(foodItems).getTotal());
                 } else {
                     Log.d("cart_list", "Failed to fetch anything");
                 }

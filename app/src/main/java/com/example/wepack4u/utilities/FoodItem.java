@@ -1,4 +1,4 @@
-package com.example.wepack4u;
+package com.example.wepack4u.utilities;
 
 public class FoodItem {
     private String name;

@@ -1,4 +1,4 @@
-package com.example.wepack4u;
+package com.example.wepack4u.adaptors;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
+import com.example.wepack4u.utilities.FoodItem;
+import com.example.wepack4u.R;
+import com.example.wepack4u.utilities.ThreeColumnTable;
+
 import java.util.ArrayList;
 import java.util.List;
 
