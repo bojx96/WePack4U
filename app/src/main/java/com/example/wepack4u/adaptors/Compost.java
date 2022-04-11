@@ -29,7 +29,9 @@ public class Compost extends RecyclerView.Adapter<Compost.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.cart_display_row, parent, false);
+        View view;
+        if (isPayment) { view = inflater.inflate(R.layout.cart_display_row, parent, false); }
+        else { view = inflater.inflate(R.layout.receipt_row, parent, false); }
         return new Compost.ViewHolder(view);
     }
 

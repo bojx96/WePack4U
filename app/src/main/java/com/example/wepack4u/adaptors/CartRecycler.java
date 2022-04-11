@@ -71,7 +71,13 @@ public class CartRecycler extends RecyclerView.Adapter<CartRecycler.ViewHolder> 
             super(itemView);
 
             stall = itemView.findViewById(R.id.stall_name);
-            child = itemView.findViewById(R.id.row_a);
+
+            if (isPayment) {
+                child = itemView.findViewById(R.id.row_a);
+            }
+            else {
+                child = itemView.findViewById(R.id.row_b);
+            }
         }
     }
 }
