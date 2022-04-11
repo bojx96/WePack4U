@@ -29,7 +29,6 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private EditText editFirstName, editLastName, editEmail, editPassword;
     private AutoCompleteTextView editCampus;
     private String campus;
@@ -128,7 +127,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                     user_details.put("last_name", last_name);
                     user_details.put("campus", campus);
                     user_details.put("email", email);
-                    db.collection("users").document(auth_uid)
+                    db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .set(user_details).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
