@@ -10,16 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CartRecycler extends RecyclerView.Adapter<CartRecycler.ViewHolder> {
     private final Context context;
     private final List<FoodItem> cart;
-    private final String[] stalls;
+    private final ArrayList<String> stalls;
     private final int[] orders;
 
-    public CartRecycler(Context context, List<FoodItem> cart, String[] stalls, int[] orders) {
+    public CartRecycler(Context context, List<FoodItem> cart, ArrayList<String> stalls, int[] orders) {
         this.context = context;
         this.cart = cart;
         this.stalls = stalls;
@@ -36,20 +37,20 @@ public class CartRecycler extends RecyclerView.Adapter<CartRecycler.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.stall.setText(stalls[position]);
+        holder.stall.setText(stalls.get(position));
         if (orders != null) {
             String orderNum = "Order No. " + orders[position];
             holder.order.setText(orderNum);
         }
 
         ThreeColumnTable table = new ThreeColumnTable(holder.cartA, holder.cartB, holder.cartC,
-                cart, stalls[position], context);
+                cart, stalls.get(position), context);
         table.createTable();
     }
 
     @Override
     public int getItemCount() {
-        return stalls.length;
+        return stalls.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
