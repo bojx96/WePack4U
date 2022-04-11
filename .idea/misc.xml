@@ -3,24 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1635" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_about.xml" value="0.21739130434782608" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_bottom_nav_menu.xml" value="0.15217391304347827" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_confirmation.xml" value="0.16927083333333334" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_food_detail.xml" value="0.21739130434782608" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_food_detail_adaptor.xml" value="0.16927083333333334" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_food_display.xml" value="0.16927083333333334" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_food_display_adaptor.xml" value="0.16927083333333334" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_payment.xml" value="0.16927083333333334" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_store_page.xml" value="0.16927083333333334" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/cart_display.xml" value="0.16927083333333334" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_cart.xml" value="0.15217391304347827" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_food_detail.xml" value="0.21739130434782608" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_food_display.xml" value="0.16927083333333334" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_settings.xml" value="0.15217391304347827" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_store_page.xml" value="0.15217391304347827" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/store_row.xml" value="0.10416666666666667" />
-        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/menu/menu.xml" value="0.10416666666666667" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26296296296296295" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26296296296296295" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/drawable/round_button.xml" value="0.26296296296296295" />
@@ -40,6 +22,27 @@
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/dropdown2.xml" value="0.1" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/login.xml" value="0.1" />
         <entry key="..\:/Users/Brandon Ong/Desktop/Term 4/Info Sys/WePack4U/app/src/main/res/layout/store_row.xml" value="0.264" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1635" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_about.xml" value="0.21739130434782608" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_bottom_nav_menu.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_confirmation.xml" value="0.16927083333333334" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_food_detail.xml" value="0.21739130434782608" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_food_detail_adaptor.xml" value="0.16927083333333334" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_food_display.xml" value="0.16927083333333334" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_food_display_adaptor.xml" value="0.16927083333333334" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_payment.xml" value="0.16927083333333334" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/activity_store_page.xml" value="0.16927083333333334" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/cart_display.xml" value="0.16927083333333334" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_cart.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_food_detail.xml" value="0.21739130434782608" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_food_display.xml" value="0.16927083333333334" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_settings.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/fragment_store_page.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/layout/store_row.xml" value="0.10416666666666667" />
+        <entry key="..\:/Users/Nicholas/Desktop/WePack4U/app/src/main/res/menu/menu.xml" value="0.10416666666666667" />
+        <entry key="..\:/Users/Nicholas/Desktop/new/app/src/main/res/layout/activity_confirmation.xml" value="0.22327898550724637" />
+        <entry key="..\:/Users/Nicholas/Desktop/new/app/src/main/res/layout/fragment_confirmation.xml" value="0.22327898550724637" />
+        <entry key="..\:/Users/Nicholas/Desktop/new/app/src/main/res/layout/fragment_food_detail.xml" value="0.22327898550724637" />
         <entry key="..\:/Users/annma/AndroidStudioProjects/WePack4U_ann/app/src/main/res/layout/activity_about.xml" value="0.26570415400202635" />
         <entry key="..\:/Users/annma/AndroidStudioProjects/WePack4U_ann/app/src/main/res/layout/activity_main.xml" value="0.26570415400202635" />
         <entry key="..\:/Users/annma/AndroidStudioProjects/WePack4U_ann/app/src/main/res/layout/activity_register_user.xml" value="0.26570415400202635" />
