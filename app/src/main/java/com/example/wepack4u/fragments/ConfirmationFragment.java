@@ -82,7 +82,7 @@ public class ConfirmationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Fragment nextFragment = new StorePageFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,nextFragment).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,nextFragment).addToBackStack("ConfirmationStack").commit();
             }
         });
     }
