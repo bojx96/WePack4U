@@ -8,12 +8,14 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wepack4u.utilities.FoodItem;
 import com.example.wepack4u.R;
 import com.example.wepack4u.utilities.ThreeColumnTable;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +23,13 @@ public class CartRecycler extends RecyclerView.Adapter<CartRecycler.ViewHolder> 
     private final Context context;
     private final List<FoodItem> cart;
     private final ArrayList<String> stalls;
-    private final int[] orders;
+    private final boolean isPayment;
 
-    public CartRecycler(Context context, List<FoodItem> cart, ArrayList<String> stalls, int[] orders) {
+    public CartRecycler(Context context, List<FoodItem> cart, ArrayList<String> stalls, boolean isPayment) {
         this.context = context;
         this.cart = cart;
         this.stalls = stalls;
-        this.orders = orders;
+        this.isPayment = isPayment;
     }
 
     @NonNull
@@ -40,15 +42,20 @@ public class CartRecycler extends RecyclerView.Adapter<CartRecycler.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.stall.setText(stalls.get(position));
-        if (orders != null) {
-            String orderNum = "Order No. " + orders[position];
-            holder.order.setText(orderNum);
+        String stall = stalls.get(position);
+        holder.stall.setText(stall);
+
+        ArrayList<FoodItem> stallCart = new ArrayList<>();
+        for (FoodItem f : cart) {
+            if (f.getStall().equals(stall)) { stallCart.add(f); }
         }
 
-        ThreeColumnTable table = new ThreeColumnTable(holder.cartA, holder.cartB, holder.cartC,
-                cart, stalls.get(position), context);
-        table.createTable();
+        Compost compost = new Compost(holder.child.getContext(), stallCart, isPayment);
+        holder.child.setAdapter(compost);
+        holder.child.setLayoutManager(new LinearLayoutManager(context) {
+            @Override
+            public boolean canScrollVertically() { return false; }
+        });
     }
 
     @Override
@@ -58,19 +65,19 @@ public class CartRecycler extends RecyclerView.Adapter<CartRecycler.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView stall;
-        TextView order;
-        TableLayout cartA;
-        TableLayout cartB;
-        TableLayout cartC;
+        RecyclerView child;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             stall = itemView.findViewById(R.id.stall_name);
-            order = itemView.findViewById(R.id.order_num);
-            cartA = itemView.findViewById(R.id.cart_a);
-            cartB = itemView.findViewById(R.id.cart_b);
-            cartC = itemView.findViewById(R.id.cart_c);
+
+            if (isPayment) {
+                child = itemView.findViewById(R.id.row_a);
+            }
+            else {
+                child = itemView.findViewById(R.id.row_b);
+            }
         }
     }
 }

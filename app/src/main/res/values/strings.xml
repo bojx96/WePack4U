@@ -31,6 +31,7 @@
     <string name="name_column_header">Name</string>
     <string name="unit_column_header">Unit</string>
     <string name="price_column_header">Price</string>
+    <string name="remove">Remove</string>
     <string name="total">Total:</string>
     <string name="payment_header">Payment</string>
     <string name="mastercard_visa">MasterCard/Visa</string>

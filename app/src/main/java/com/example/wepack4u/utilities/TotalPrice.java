@@ -2,6 +2,7 @@ package com.example.wepack4u.utilities;
 
 import com.example.wepack4u.utilities.FoodItem;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -12,12 +13,14 @@ public class TotalPrice {
     public TotalPrice(List<FoodItem> cart) { this.cart = cart; }
 
     public String getTotal() {
-        double subtotal = 0f;
+        BigDecimal subtotal = new BigDecimal(0);
 
-        for (FoodItem f : cart) { subtotal = subtotal + f.getPriceValue(); }
+        for (FoodItem f : cart) { subtotal = subtotal.add(f.getPriceValue()); }
 
-        String totalPrice = "$" + df.format(subtotal);
-        if (subtotal * 10 % 1 == 0) { totalPrice = totalPrice; }
-        return totalPrice;
+        return "$" + subtotal.setScale(2, BigDecimal.ROUND_UP).toString();
+
+        //String totalPrice = "$" + df.format(subtotal);
+        //if (subtotal * 10 % 1 == 0) { totalPrice = totalPrice; }
+        //return totalPrice;
     }
 }
