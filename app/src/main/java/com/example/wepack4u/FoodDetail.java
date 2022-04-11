@@ -119,10 +119,11 @@ public class FoodDetail extends AppCompatActivity {
                                                     Picasso.get().load(document.get("img").toString()).into(FoodImageHolder);
                                                     String FOODNAME = document.get("name").toString();
                                                     String FOODPRICE = document.get("price").toString();
+                                                    float FOODPRICEFLOAT=Float.parseFloat(FOODPRICE);
                                                     FoodDetailName.setText(FOODNAME);
                                                     FoodDetailPrice.setText(FOODPRICE);
                                                     foodDetails.put("name",FOODNAME);
-                                                    foodDetails.put("price",FOODPRICE);
+                                                    foodDetails.put("price",FOODPRICEFLOAT);
                                                     foodDetails.put("stall",STORENAME);
                                                     foodDetails.put("unit",1);
                                                 }
