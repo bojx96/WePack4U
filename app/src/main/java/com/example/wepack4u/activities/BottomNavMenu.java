@@ -59,6 +59,11 @@ public class BottomNavMenu extends AppCompatActivity {
             };
     @Override
     public void onBackPressed(){
+        //clear existing fragments in the stacks
+        int fragmentcount = getSupportFragmentManager().getBackStackEntryCount();
+        for (int i = 0; i < fragmentcount; i++){
+            getSupportFragmentManager().popBackStack();
+        }
         getSupportFragmentManager().beginTransaction().replace(R.id.container,new StorePageFragment()).commit();
     }
 }
