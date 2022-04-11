@@ -22,7 +22,6 @@
         android:id="@+id/recyclerviewstorefragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/sutd_canteen_heading"
-        android:layout_marginBottom="50dp"/>
+        android:layout_below="@id/sutd_canteen_heading"/>
 
 </RelativeLayout>
