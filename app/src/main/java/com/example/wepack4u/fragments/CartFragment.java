@@ -38,9 +38,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class CartFragment extends Fragment {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    RecyclerView recyclerView;
-
-
+    private RecyclerView recyclerView;
 
     public CartFragment() {
         // Required empty public constructor
@@ -79,8 +77,6 @@ public class CartFragment extends Fragment {
                 if (payment_method.getCheckedRadioButtonId() != -1) {
                     int selected = payment_method.getCheckedRadioButtonId();
                     RadioButton method = view.findViewById(selected);
-                    /*Intent intent = new Intent(getContext(), ConfirmationActivity.class);
-                    startActivity(intent);*/
                     Fragment nextFragment = new ConfirmationFragment();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,nextFragment).addToBackStack("CartStack").commit();
                 }
@@ -93,30 +89,31 @@ public class CartFragment extends Fragment {
     public void foodList() {
         db.collection("users").document(auth_uid).collection("cart").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            QuerySnapshot querySnapshot = task.getResult();
-                            List<FoodItem> foodItems = querySnapshot.toObjects(FoodItem.class);
-                            ArrayList<String> stalls =  new ArrayList<>();
-                            for (FoodItem each: foodItems){
-                                if (!stalls.contains(each.getStall())){
-                                    stalls.add(each.getStall());
-                                }
-                            }
-//                            String[] stalls = {"Japanese Korean", "Healthy Soup"}; // dummy
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    QuerySnapshot querySnapshot = task.getResult();
+                    List<FoodItem> foodItems = querySnapshot.toObjects(FoodItem.class);
 
-                            CartRecycler cartRecycler = new CartRecycler(getContext(),
-                                    foodItems, stalls, null);
-                            recyclerView.setAdapter(cartRecycler);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-                            TextView total = getView().findViewById(R.id.total);
-                            total.setText(new TotalPrice(foodItems).getTotal());
-                        } else {
-                            Log.d("cart_list", "Failed to fetch anything");
-                        }
+                    ArrayList<String> stalls = new ArrayList<>();
+                    for (FoodItem each: foodItems){
+                        if (!stalls.contains(each.getStall())) { stalls.add(each.getStall()); }
                     }
-                });
+
+                    CartRecycler cartRecycler = new CartRecycler(getContext(), foodItems, stalls,
+                            true);
+                    recyclerView.setAdapter(cartRecycler);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+                        @Override
+                        public boolean canScrollVertically() { return false; }
+                    });
+
+                    TextView total = getView().findViewById(R.id.total);
+                    total.setText(new TotalPrice(foodItems).getTotal());
+                } else {
+                    Log.d("cart_list", "Failed to fetch anything");
+                }
+            }
+        });
     }
 }

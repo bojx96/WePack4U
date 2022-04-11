@@ -75,10 +75,8 @@ public class PaymentActivity extends AppCompatActivity {
                             stalls.add(each.getStall());
                         }
                     }
-//                    String[] stalls = {"Japanese Korean", "Healthy Soup"}; // dummy
 
-                    CartRecycler cartRecycler = new CartRecycler(PaymentActivity.this,
-                            foodItems, stalls, null);
+                    CartRecycler cartRecycler = new CartRecycler(PaymentActivity.this, foodItems, stalls, false);
                     recyclerView.setAdapter(cartRecycler);
                     recyclerView.setLayoutManager(new LinearLayoutManager(PaymentActivity.this));
 
