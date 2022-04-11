@@ -1,4 +1,4 @@
-package com.example.wepack4u;
+package com.example.wepack4u.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wepack4u.R;
 import com.example.wepack4u.adaptors.FoodDetailAdaptor;
 import com.example.wepack4u.utilities.FoodStore;
 import com.google.android.gms.tasks.OnCompleteListener;

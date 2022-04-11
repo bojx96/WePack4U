@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.wepack4u.FoodDetail;
+import com.example.wepack4u.activities.FoodDetail;
 import com.example.wepack4u.utilities.FoodMenu;
 import com.example.wepack4u.utilities.FoodStore;
 import com.example.wepack4u.R;

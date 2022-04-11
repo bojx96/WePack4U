@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.wepack4u.R;
-import com.example.wepack4u.StorePage;
 import com.example.wepack4u.adaptors.CartRecycler;
 import com.example.wepack4u.utilities.FoodItem;
 import com.example.wepack4u.utilities.Timestamp;

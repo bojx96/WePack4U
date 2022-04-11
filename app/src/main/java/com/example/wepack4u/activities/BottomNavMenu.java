@@ -1,4 +1,4 @@
-package com.example.wepack4u;
+package com.example.wepack4u.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.wepack4u.R;
 import com.example.wepack4u.fragments.AboutYouFragment;
 import com.example.wepack4u.fragments.CartFragment;
 import com.example.wepack4u.fragments.StorePageFragment;

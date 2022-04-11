@@ -1,4 +1,4 @@
-package com.example.wepack4u;
+package com.example.wepack4u.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +9,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.wepack4u.adaptors.StoreAdapter;
+import com.example.wepack4u.R;
+import com.example.wepack4u.adaptors.FoodDisplayAdaptor;
+import com.example.wepack4u.utilities.FoodMenu;
 import com.example.wepack4u.utilities.FoodStore;
 import com.example.wepack4u.utilities.RecyclerItemClickListener;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,43 +26,43 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
-
-public class StorePage extends AppCompatActivity {
-    //below this is where the data is inputted in
+public class FoodDisplay extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private String campus;
-    private List<FoodStore> foodStores;
+    private List<FoodMenu> foodMenu;
+    private String storeName;
     RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_page);
-        recyclerView = findViewById(R.id.recyclerview);
+        setContentView(R.layout.activity_food_display);
+        recyclerView = findViewById(R.id.recyclerView);
+        storeName = getIntent().getStringExtra("storeName");
+        System.out.println(storeName);
+
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(StorePage.this, FoodDisplay.class);
-                        intent.putExtra("storeName", foodStores.get(position).store_name);
+                        Intent intent = new Intent(FoodDisplay.this, FoodDetail.class);
+                        intent.putExtra("foodName", foodMenu.get(position).name);
+                        intent.putExtra("storeName",storeName);
                         startActivity(intent);
                     }
-
 
                     @Override public void onLongItemClick(View view, int position) { }
                 })
         );
-
-        getStoreList();
+        getFoodList();
 
     }
-    //TODO make the clickable in a list?
-    public void goestostore(View view){
-        Toast.makeText(this,"selected",Toast.LENGTH_SHORT).show();
+    public void toFoodDetail(View v){
+        startActivity(new Intent (FoodDisplay.this,FoodDetail.class));
     }
 
-    public void getStoreList(){
+    public void getFoodList(){
         DocumentReference userRef = db.collection("users").document(auth_uid);
         userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -70,7 +71,7 @@ public class StorePage extends AppCompatActivity {
                     DocumentSnapshot userDoc = task.getResult();
                     if (userDoc.exists()){
                         campus = (userDoc.getString("campus"));
-                        storeList(campus);
+                        foodList(campus);
                     }
                     else{
                         Log.d("get_campus", "does not exist");
@@ -80,23 +81,35 @@ public class StorePage extends AppCompatActivity {
         });
     }
 
-    public void storeList(String campus_name) {
+    public void foodList(String campus_name) {
         db.collection("Campus").whereEqualTo("name", campus_name).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String school_id = document.getId();
-                        db.collection("Campus").document(school_id).collection("food_stores").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        db.collection("Campus").document(school_id).collection("food_stores").whereEqualTo("store_name",storeName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()){
                                     QuerySnapshot querySnapshot = task.getResult();
-                                    foodStores = querySnapshot.toObjects(FoodStore.class);
-                                    StoreAdapter storeAdapter = new StoreAdapter(StorePage.this, foodStores);
-                                    recyclerView.setAdapter(storeAdapter);
-                                    recyclerView.setLayoutManager(new LinearLayoutManager(StorePage.this));
-                                    System.out.println(foodStores.get(0).store_name);
+                                    List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        String store_id = document.getId();
+                                        db.collection("Campus").document(school_id).collection("food_stores")
+                                                .document(store_id).collection("menu").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()){
+                                                    QuerySnapshot querySnapshot = task.getResult();
+                                                    foodMenu = querySnapshot.toObjects(FoodMenu.class);
+                                                    FoodDisplayAdaptor foodDisplayAdaptor = new FoodDisplayAdaptor(FoodDisplay.this, foodMenu);
+                                                    recyclerView.setAdapter(foodDisplayAdaptor);
+                                                    recyclerView.setLayoutManager(new LinearLayoutManager(FoodDisplay.this));
+                                                }
+                                            }
+                                        });
+                                    }
                                 }
                             }
                         });
@@ -108,5 +121,4 @@ public class StorePage extends AppCompatActivity {
             }
         });
     }
-
 }

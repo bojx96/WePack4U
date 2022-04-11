@@ -19,7 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wepack4u.FoodDisplay;
+import com.example.wepack4u.activities.FoodDisplay;
 import com.example.wepack4u.R;
 import com.example.wepack4u.adaptors.FoodDetailAdaptor;
 import com.example.wepack4u.utilities.FoodStore;

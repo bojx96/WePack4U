@@ -10,14 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WePack4U">
         <activity
-            android:name=".FoodDetail"
+            android:name=".activities.FoodDetail"
             android:exported="false"
-            android:parentActivityName=".FoodDisplay" />
+            android:parentActivityName=".activities.FoodDisplay" />
         <activity
-            android:name=".FoodDisplay"
+            android:name=".activities.FoodDisplay"
             android:exported="false" />
         <activity
-            android:name=".StorePage"
+            android:name=".activities.StorePage"
             android:exported="false" />
         <activity
             android:name=".activities.AboutActivity"
@@ -41,7 +41,7 @@
         <activity
             android:name=".activities.ConfirmationActivity"
             android:exported="false"/>
-        <activity android:name=".BottomNavMenu"
+        <activity android:name=".activities.BottomNavMenu"
             android:exported="false"/>
     </application>
 
