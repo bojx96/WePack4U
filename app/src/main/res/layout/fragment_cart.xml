@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/_30sdp"
-        android:paddingRight="@dimen/_30sdp"
+        android:paddingLeft="@dimen/_20sdp"
+        android:paddingRight="@dimen/_20sdp"
         tools:context=".activities.PaymentActivity">
 
         <!-- Checkout section -->
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="@dimen/_185sdp"
+                android:layout_width="@dimen/_195sdp"
                 android:layout_height="wrap_content"
                 android:text="@string/total"
                 android:textSize="@dimen/_12ssp"
@@ -41,10 +41,10 @@
                 android:gravity="end"
                 android:fontFamily="@font/montserrat_bold"/>
             <TextView
-                android:layout_width="@dimen/_70sdp"
+                android:layout_width="@dimen/_80sdp"
                 android:layout_height="wrap_content"
                 android:id="@+id/total"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_12ssp"
                 android:gravity="end"
                 android:fontFamily="@font/montserrat_medium"/>
         </TableRow>

@@ -6,17 +6,20 @@
         android:layout_width="@dimen/_130sdp"
         android:layout_height="wrap_content"
         android:id="@+id/name_a"
+        android:textSize="@dimen/_10ssp"
         android:fontFamily="@font/montserrat_medium"/>
     <TextView
-        android:layout_width="@dimen/_40sdp"
+        android:layout_width="@dimen/_30sdp"
         android:layout_height="wrap_content"
         android:id="@+id/unit_a"
+        android:textSize="@dimen/_10ssp"
         android:fontFamily="@font/montserrat_medium"
         android:gravity="center_horizontal"/>
     <TextView
-        android:layout_width="@dimen/_60sdp"
+        android:layout_width="@dimen/_40sdp"
         android:layout_height="wrap_content"
         android:id="@+id/price_a"
+        android:textSize="@dimen/_10ssp"
         android:fontFamily="@font/montserrat_medium"
         android:gravity="center_horizontal"/>
     <TextView
@@ -24,7 +27,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/remove"
         android:text="@string/remove"
-        android:textSize="@dimen/_7ssp"
+        android:textSize="@dimen/_10ssp"
         android:fontFamily="@font/montserrat_medium"
         android:gravity="end"/>
 </TableRow>
