@@ -88,8 +88,10 @@ public class CartFragment extends Fragment {
                 if (payment_method.getCheckedRadioButtonId() != -1) {
                     int selected = payment_method.getCheckedRadioButtonId();
                     RadioButton method = view.findViewById(selected);
-                    Intent intent = new Intent(getContext(), ConfirmationActivity.class);
-                    startActivity(intent);
+                    /*Intent intent = new Intent(getContext(), ConfirmationActivity.class);
+                    startActivity(intent);*/
+                    Fragment nextFragment = new ConfirmationFragment();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,nextFragment).addToBackStack("CartStack").commit();
                 }
                 else {
                     Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_LONG).show();
