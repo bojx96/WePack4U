@@ -1,5 +1,6 @@
 package com.example.wepack4u.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.wepack4u.R;
+import com.example.wepack4u.activities.MainActivity;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import androidx.annotation.NonNull;
@@ -34,7 +36,7 @@ public class AboutYouFragment extends Fragment {
     private static final String FIRST_NAME = "first_name";
     private static final String LAST_NAME = "last_name";
     EditText editFirstName,editLastName;
-    Button submitButton;
+    Button submitButton,logoutButton;
 
 
 
@@ -66,6 +68,7 @@ public class AboutYouFragment extends Fragment {
         editFirstName= view.findViewById(R.id.editTextFirstName);
         editLastName= view.findViewById(R.id.editTextLastName);
         submitButton = view.findViewById(R.id.submitButton);
+        logoutButton = view.findViewById(R.id.logoutButton);
         //catch UID
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -112,5 +115,15 @@ public class AboutYouFragment extends Fragment {
                         String lastName = editLastName.getText().toString();
                     }
                 });
+        logoutButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
     }
 }

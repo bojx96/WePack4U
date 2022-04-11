@@ -53,6 +53,7 @@
     <string name="huniversity">University</string>
     <string name="location">Where are you located</string>
     <string name="submit">Submit</string>
+    <string name="logout">Logout</string>
     <string name="text_view">Text View</string>
 
     <string name="sutd_canteen_store">SUTD Canteen Store</string>
@@ -101,8 +102,6 @@
     <string-array name="food_options">
         <item>More Chilly</item>
         <item>Less Chilly</item>
-        <item>More Soup</item>
-        <item>Less Soup</item>
 
     </string-array>
 </resources>
