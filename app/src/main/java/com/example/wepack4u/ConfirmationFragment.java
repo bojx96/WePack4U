@@ -73,8 +73,11 @@ public class ConfirmationFragment extends Fragment {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), StorePage.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(getContext(), StorePage.class);
+                startActivity(intent);*/
+                Fragment nextFragment = new StorePageFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,nextFragment).commit();
+
             }
         });
     }
