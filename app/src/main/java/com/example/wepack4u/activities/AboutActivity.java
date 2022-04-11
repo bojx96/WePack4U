@@ -110,6 +110,10 @@ public class AboutActivity extends AppCompatActivity {
             return;
         }
     }
+    @Override
+    public void onBackPressed() {
+        System.exit(0);
+    }
 
 
 }

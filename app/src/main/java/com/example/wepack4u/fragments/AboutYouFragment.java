@@ -1,5 +1,6 @@
 package com.example.wepack4u.fragments;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -122,6 +123,7 @@ public class AboutYouFragment extends Fragment {
                         FirebaseAuth.getInstance().signOut();
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);
+                        getActivity().finish();
                     }
                 }
         );
