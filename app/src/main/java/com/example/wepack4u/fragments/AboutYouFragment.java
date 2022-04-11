@@ -91,8 +91,6 @@ public class AboutYouFragment extends Fragment {
                     String campus = documentSnapshot.getString(CAMPUS);
                     editFirstName.setText(first_name);
                     editLastName.setText(last_name);
-                    editText.setText(campus);
-
                 }
                 else {
                     Toast.makeText(getContext(), "Document doesn't exist",Toast.LENGTH_SHORT).show();
