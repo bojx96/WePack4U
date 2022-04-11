@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,9 +31,9 @@ import java.util.List;
 public class FoodDisplayFragment extends Fragment {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    private String campus;
+    private String campus,storeName;
     private List<FoodMenu> foodMenu;
-    private String storeName;
+    TextView foodstallname;
     RecyclerView recyclerView;
 
 
@@ -129,6 +131,10 @@ public class FoodDisplayFragment extends Fragment {
                                     List<FoodStore> foodStores = querySnapshot.toObjects(FoodStore.class);
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         String store_id = document.getId();
+                                        String STORENAME = document.get("store_name").toString();
+                                        System.out.println("store_name in display is = "+STORENAME);
+                                        foodstallname = getView().findViewById(R.id.foodstallname);
+                                        foodstallname.setText(STORENAME);
                                         db.collection("Campus").document(school_id).collection("food_stores")
                                                 .document(store_id).collection("menu").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
