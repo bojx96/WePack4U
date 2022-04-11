@@ -65,6 +65,7 @@ public class FoodDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -75,9 +76,12 @@ public class FoodDetailFragment extends Fragment {
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         foodDetailRecyclerView = view.findViewById(R.id.foodDetailRecyclerView);
         foodName = getArguments().getString("foodName");
+        System.out.println("foodName = " + foodName);
         storeName = getArguments().getString("storeName");
+        System.out.println("storeName = " + storeName);
         getFoodDetails();
 
         options = getResources().getStringArray(R.array.food_options);
@@ -149,10 +153,12 @@ public class FoodDetailFragment extends Fragment {
                                                     Picasso.get().load(document.get("img").toString()).into(FoodImageHolder);
                                                     String FOODNAME = document.get("name").toString();
                                                     String FOODPRICE = document.get("price").toString();
+                                                    double FOODPRICEFLOAT = Double.parseDouble(FOODPRICE);
+
                                                     FoodDetailName.setText(FOODNAME);
                                                     FoodDetailPrice.setText(FOODPRICE);
                                                     foodDetails.put("name",FOODNAME);
-                                                    foodDetails.put("price",FOODPRICE);
+                                                    foodDetails.put("price",FOODPRICEFLOAT);
                                                     foodDetails.put("stall",STORENAME);
                                                     foodDetails.put("unit",1);
                                                 }

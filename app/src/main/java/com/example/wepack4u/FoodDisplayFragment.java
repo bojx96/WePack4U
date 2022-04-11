@@ -75,8 +75,8 @@ public class FoodDisplayFragment extends Fragment {
                         startActivity(intent);*/
                         Bundle foodnamebundle = new Bundle();
                         Bundle storenamebundle = new Bundle();
-                        foodnamebundle.putString("foodName",foodMenu.get(position).name);
                         storenamebundle.putString("storeName",storeName);
+                        storenamebundle.putString("foodName",foodMenu.get(position).name);
 
                         Fragment nextFragment = new FoodDetailFragment();
                         nextFragment.setArguments(foodnamebundle);
