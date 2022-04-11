@@ -57,5 +57,8 @@ public class BottomNavMenu extends AppCompatActivity {
                     return true;
                 }
             };
-
+    @Override
+    public void onBackPressed(){
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,new StorePageFragment()).commit();
+    }
 }
