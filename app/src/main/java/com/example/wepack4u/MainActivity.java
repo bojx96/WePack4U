@@ -72,7 +72,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+<<<<<<< HEAD
+=======
 //                            Intent intent = new Intent(MainActivity.this, StorePage.class);
+>>>>>>> 6c7555b5cec9b809ada08da4ca6c2e5a0d9edcc8
                             Intent intent = new Intent(MainActivity.this, BottomNavMenu.class);
                             startActivity(intent);
                             finish();

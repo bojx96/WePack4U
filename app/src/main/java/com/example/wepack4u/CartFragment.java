@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
@@ -104,7 +105,13 @@ public class CartFragment extends Fragment {
                         if (task.isSuccessful()) {
                             QuerySnapshot querySnapshot = task.getResult();
                             List<FoodItem> foodItems = querySnapshot.toObjects(FoodItem.class);
-                            String[] stalls = {"Japanese Korean", "Healthy Soup"}; // dummy
+                            ArrayList<String> stalls =  new ArrayList<>();
+                            for (FoodItem each: foodItems){
+                                if (!stalls.contains(each.getStall())){
+                                    stalls.add(each.getStall());
+                                }
+                            }
+//                            String[] stalls = {"Japanese Korean", "Healthy Soup"}; // dummy
 
                             CartRecycler cartRecycler = new CartRecycler(getContext(),
                                     foodItems, stalls, null);

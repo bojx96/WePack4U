@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentActivity extends AppCompatActivity {
@@ -61,10 +62,16 @@ public class PaymentActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                ArrayList<String> stalls = new ArrayList<>();
                 if (task.isSuccessful()) {
                     QuerySnapshot querySnapshot = task.getResult();
                     List<FoodItem> foodItems = querySnapshot.toObjects(FoodItem.class);
-                    String[] stalls = {"Japanese Korean", "Healthy Soup"}; // dummy
+                    for (FoodItem each: foodItems){
+                        if (!stalls.contains(each.getStall())){
+                            stalls.add(each.getStall());
+                        }
+                    }
+//                    String[] stalls = {"Japanese Korean", "Healthy Soup"}; // dummy
 
                     CartRecycler cartRecycler = new CartRecycler(PaymentActivity.this,
                             foodItems, stalls, null);

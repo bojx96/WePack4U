@@ -19,7 +19,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import kotlin.random.AbstractPlatformRandom;
 
 public class ConfirmationActivity extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -59,9 +62,14 @@ public class ConfirmationActivity extends AppCompatActivity {
                     // Receipt
                     QuerySnapshot querySnapshot = task.getResult();
                     List<FoodItem> foodItems = querySnapshot.toObjects(FoodItem.class);
-
+                    ArrayList<String> stalls =  new ArrayList<>();
+                    for (FoodItem each: foodItems){
+                        if (!stalls.contains(each.getStall())){
+                            stalls.add(each.getStall());
+                        }
+                    }
                     // dummies
-                    String[] stalls = {"Japanese Korean", "Healthy Soup"};
+//                    String[] stalls = {"Japanese Korean", "Healthy Soup"};
                     int[] orders = {69, 420};
 
                     CartRecycler cartRecycler = new CartRecycler(ConfirmationActivity.this,
