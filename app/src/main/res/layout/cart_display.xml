@@ -40,21 +40,25 @@
                     android:text="@string/name_column_header"
                     android:textSize="@dimen/_15ssp"
                     android:gravity="center"
-                    android:fontFamily="@font/montserrat_medium"/>
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="#BC000000"/>
+
                 <TextView
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="wrap_content"
                     android:text="@string/unit_column_header"
                     android:textSize="@dimen/_15ssp"
                     android:gravity="center"
-                    android:fontFamily="@font/montserrat_medium"/>
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="#BC000000"/>
                 <TextView
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="wrap_content"
                     android:text="@string/price_column_header"
                     android:textSize="@dimen/_15ssp"
                     android:gravity="end"
-                    android:fontFamily="@font/montserrat_medium"/>
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="#BC000000"/>
             </TableRow>
 
             <!-- draw horizontal line -->

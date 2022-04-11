@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="20dp"
     tools:context=".activities.FoodDisplay">
 
 
@@ -23,10 +24,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/FoodDetailImage"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:text="FoodName"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/foodname"
         android:textAlignment="center"
-        android:textStyle="bold" />
+        android:textColor="#BC000000"
+        android:textSize="15sp"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:id="@+id/FoodDetailPrice"
@@ -34,15 +37,21 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/FoodDetailImage"
         android:layout_alignEnd="@id/FoodDetailName"
+        android:fontFamily="@font/montserrat_bold"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="-250dp"
-        android:text="FoodPrice"
-        android:textAlignment="center" />
+        android:text="@string/foodprice"
+        android:textAlignment="center"
+        android:textColor="#BC000000"
+        android:textSize="15sp"/>
 
     <View
         android:id="@+id/Separator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_below="@id/FoodDetailName"
         android:background="@android:color/darker_gray" />
 
@@ -51,27 +60,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Separator"
+        android:layout_marginTop="10dp"
         android:text="Options"
         android:layout_marginStart="10dp"
-        android:textStyle="bold"/>
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="#BC000000"
+        android:textSize="15sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/foodDetailRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/OptionTitle"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:paddingBottom="50dp" />
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingBottom="50dp"
+        android:textColor="#BC000000"
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/addtoCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/foodDetailRecyclerView"
-        android:layout_marginStart="50dp"
         android:layout_marginTop="-50dp"
-        android:layout_marginEnd="50dp"
-        android:text="Add to cart" />
+        android:text="Add to cart"
+        android:fontFamily="@font/montserrat_bold"
+        android:backgroundTint="#000000"
+        android:textColor="#FFFFFF"
+        />
 
 
 

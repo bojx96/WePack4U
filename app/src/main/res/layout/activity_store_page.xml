@@ -4,25 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.StorePage">
+    tools:context=".activities.StorePage"
+    android:layout_margin="20dp">
     <TextView
         android:id="@+id/sutd_canteen_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/montserrat_bold"
 
         android:padding="@dimen/regular_padding"
         android:text="@string/sutd_canteen_store"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:textSize="@dimen/heading_font_size"
+        android:textSize="@dimen/_24ssp"
         android:textStyle="bold" />
     <!--start recyclerview from here-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/sutd_canteen_heading"/>
+        android:layout_below="@id/sutd_canteen_heading"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="#BC000000"
+        android:textSize="12sp"/>
 
 
 
