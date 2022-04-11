@@ -4,28 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.FoodDisplayFragment"
-    android:layout_margin="20dp">
+    android:layout_margin="@dimen/_15sdp">
 
     <TextView
         android:id="@+id/foodstallname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_bold"
-        android:padding="@dimen/regular_padding"
+        android:gravity="center"
         android:text="@string/food_stall_name"
-        android:textSize="@dimen/heading_font_size"
         android:textColor="#D5000000"
-        android:gravity="center"/>
+        android:textSize="@dimen/_20ssp" />
+
+    <View
+        android:id="@+id/Separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/foodstallname"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewfragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/foodstallname"
-        android:fontFamily="@font/montserrat_bold"
-        android:paddingBottom="50dp"
-        android:textColor="#BC000000"
-        android:textSize="12sp"/>
+        android:layout_below="@+id/Separator"
+        android:paddingBottom="50dp" />
 
 
 </RelativeLayout>

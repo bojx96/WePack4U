@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/checkout_header"
-            android:textSize="@dimen/_30ssp"
+            android:textSize="@dimen/_25ssp"
             android:textColor="@color/black"
             android:fontFamily="@font/montserrat_bold"/>
 
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/payment_header"
-            android:textSize="@dimen/_30ssp"
+            android:textSize="@dimen/_25ssp"
             android:textColor="@color/black"
             android:fontFamily="@font/montserrat_bold"/>
 

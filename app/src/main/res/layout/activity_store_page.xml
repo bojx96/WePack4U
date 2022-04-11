@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.StorePage"
     android:layout_margin="20dp">
+
     <TextView
         android:id="@+id/sutd_canteen_heading"
         android:layout_width="match_parent"

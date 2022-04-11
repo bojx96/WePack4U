@@ -76,6 +76,7 @@
     <string name="foodname">Food Name</string>
     <string name="foodprice">Food Price</string>
     <string name="food_stall_name">Food Stall Name</string>
+    <string name="options">OPTIONS</string>
 
     <!-- Food Display Page -->
     <string-array name="university_array">
@@ -107,4 +108,12 @@
         <item>Less Chilly</item>
 
     </string-array>
+
+    <array name="autosize_text_sizes">
+        <item>10sp</item>
+        <item>12sp</item>
+        <item>20sp</item>
+        <item>40sp</item>
+        <item>100sp</item>
+    </array>
 </resources>
