@@ -74,15 +74,23 @@ public class CartFragment extends Fragment {
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (payment_method.getCheckedRadioButtonId() != -1) {
-                    int selected = payment_method.getCheckedRadioButtonId();
-                    RadioButton method = view.findViewById(selected);
-                    Fragment nextFragment = new ConfirmationFragment();
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,nextFragment).addToBackStack("CartStack").commit();
-                }
-                else {
-                    Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_LONG).show();
-                }
+                db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful() && task.getResult().size()>0){
+                            if (payment_method.getCheckedRadioButtonId() != -1) {
+                                int selected = payment_method.getCheckedRadioButtonId();
+                                RadioButton method = view.findViewById(selected);
+                                Fragment nextFragment = new ConfirmationFragment();
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
+                            } else {
+                                Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), R.string.empty_cart, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
             }
         });
     }

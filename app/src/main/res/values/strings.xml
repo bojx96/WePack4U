@@ -38,6 +38,7 @@
     <string name="paylah">DBS PayLah!</string>
     <string name="paynow">Paynow</string>
     <string name="choose_payment">Select a payment method.</string>
+    <string name="empty_cart">Cart is empty.</string>
 
     <!-- Confirmation page -->
     <string name="successful_header">Payment Successful</string>
