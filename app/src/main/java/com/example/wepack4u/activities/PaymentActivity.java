@@ -16,13 +16,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wepack4u.R;
+import com.example.wepack4u.utilities.RecyclerItemClickListener;
 import com.example.wepack4u.utilities.TotalPrice;
 import com.example.wepack4u.adaptors.CartRecycler;
 import com.example.wepack4u.utilities.FoodItem;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -75,7 +79,6 @@ public class PaymentActivity extends AppCompatActivity {
                             stalls.add(each.getStall());
                         }
                     }
-
                     CartRecycler cartRecycler = new CartRecycler(PaymentActivity.this, foodItems, stalls, false);
                     recyclerView.setAdapter(cartRecycler);
                     recyclerView.setLayoutManager(new LinearLayoutManager(PaymentActivity.this));

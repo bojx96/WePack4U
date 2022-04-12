@@ -3,24 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FoodDisplayFragment">
+    tools:context=".fragments.FoodDisplayFragment"
+    android:layout_margin="@dimen/_15sdp">
 
     <TextView
         android:id="@+id/foodstallname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:padding="@dimen/regular_padding"
-        android:text="Food Stall Name"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:textSize="@dimen/heading_font_size"
-        android:textStyle="bold" />
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center"
+        android:text="@string/food_stall_name"
+        android:textColor="#D5000000"
+        android:textSize="@dimen/_20ssp" />
+
+    <View
+        android:id="@+id/Separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/foodstallname"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewfragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/foodstallname"/>
+        android:layout_below="@+id/Separator"
+        android:paddingBottom="50dp" />
 
 
 </RelativeLayout>
