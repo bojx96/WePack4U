@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -11,6 +10,7 @@
         android:orientation="vertical"
         android:paddingLeft="@dimen/_30sdp"
         android:paddingRight="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         tools:context=".activities.PaymentActivity">
 
         <!-- Checkout section -->
@@ -36,14 +36,16 @@
                 android:text="@string/total"
                 android:textSize="@dimen/_15ssp"
                 android:gravity="end"
-                android:fontFamily="@font/montserrat_bold"/>
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/black"/>
             <TextView
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="wrap_content"
                 android:id="@+id/total"
                 android:textSize="@dimen/_15ssp"
                 android:gravity="center_horizontal"
-                android:fontFamily="@font/montserrat_medium"/>
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/black"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,7 +53,7 @@
                 android:text="@string/empty"
                 android:fontFamily="@font/montserrat_medium"
                 android:gravity="center"
-                android:layout_gravity="end"
+                android:layout_gravity="bottom|end"
                 android:textSize="@dimen/_6ssp"
                 android:textColor="@color/white"
                 android:background="@color/red"/>
@@ -59,7 +61,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"/>
+            android:layout_height="@dimen/_20sdp"/>
 
         <!-- Payment section -->
         <TextView
@@ -113,6 +115,7 @@
                         android:text="@string/mastercard_visa"
                         android:textSize="@dimen/_12ssp"
                         android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/_5sdp"/>
                 </TableRow>
@@ -130,6 +133,7 @@
                         android:text="@string/paylah"
                         android:textSize="@dimen/_12ssp"
                         android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/_5sdp"/>
                 </TableRow>
@@ -145,6 +149,7 @@
                         android:text="@string/paynow"
                         android:textSize="@dimen/_12ssp"
                         android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/_5sdp"/>
                 </TableRow>
@@ -153,18 +158,17 @@
 
         <Button
             android:layout_width="@dimen/_245sdp"
-            android:layout_height="@dimen/_65sdp"
+            android:layout_height="@dimen/_38sdp"
             android:text="@string/checkout_header"
             android:id="@+id/checkout_button"
             android:textSize="@dimen/_15ssp"
             android:textAllCaps="false"
             android:fontFamily="@font/montserrat_bold"
             android:layout_gravity="center"
-            android:backgroundTint="@color/round_button"
-            app:cornerRadius="@dimen/_7sdp"/>
+            android:backgroundTint="@color/black"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"/>
+            android:layout_height="@dimen/_30sdp"/>
     </LinearLayout>
 </ScrollView>
