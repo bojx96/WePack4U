@@ -44,6 +44,7 @@ public class Compost extends RecyclerView.Adapter<Compost.ViewHolder> {
 
         if (isPayment) {
             holder.delete.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     cart.remove(position);
                     notifyItemRemoved(position);

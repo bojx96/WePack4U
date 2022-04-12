@@ -28,22 +28,33 @@
             android:id="@+id/cart_recycler_a"/>
 
         <TableRow
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="@dimen/_185sdp"
+                android:layout_width="@dimen/_165sdp"
                 android:layout_height="wrap_content"
                 android:text="@string/total"
                 android:textSize="@dimen/_15ssp"
                 android:gravity="end"
                 android:fontFamily="@font/montserrat_bold"/>
             <TextView
-                android:layout_width="@dimen/_70sdp"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="wrap_content"
                 android:id="@+id/total"
                 android:textSize="@dimen/_15ssp"
-                android:gravity="end"
+                android:gravity="center_horizontal"
                 android:fontFamily="@font/montserrat_medium"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/empty_cart"
+                android:text="@string/empty"
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="center"
+                android:layout_gravity="end"
+                android:textSize="@dimen/_6ssp"
+                android:textColor="@color/white"
+                android:background="@color/red"/>
         </TableRow>
 
         <View
@@ -96,16 +107,14 @@
                         android:src="@drawable/stripe"
                         android:scaleX="0.75"
                         android:scaleY="0.75"/>
-                    <View
-                        android:layout_width="@dimen/_5sdp"
-                        android:layout_height="@dimen/_40sdp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_40sdp"
                         android:text="@string/mastercard_visa"
                         android:textSize="@dimen/_12ssp"
                         android:fontFamily="@font/montserrat_medium"
-                        android:gravity="center_vertical"/>
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/_5sdp"/>
                 </TableRow>
 
                 <TableRow>
@@ -115,16 +124,14 @@
                         android:src="@drawable/paylah"
                         android:scaleX="0.75"
                         android:scaleY="0.75"/>
-                    <View
-                        android:layout_width="@dimen/_5sdp"
-                        android:layout_height="@dimen/_40sdp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_40sdp"
                         android:text="@string/paylah"
                         android:textSize="@dimen/_12ssp"
                         android:fontFamily="@font/montserrat_medium"
-                        android:gravity="center_vertical"/>
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/_5sdp"/>
                 </TableRow>
 
                 <TableRow>
@@ -132,16 +139,14 @@
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:src="@drawable/paynow"/>
-                    <View
-                        android:layout_width="@dimen/_5sdp"
-                        android:layout_height="@dimen/_40sdp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_40sdp"
                         android:text="@string/paynow"
                         android:textSize="@dimen/_12ssp"
                         android:fontFamily="@font/montserrat_medium"
-                        android:gravity="center_vertical"/>
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/_5sdp"/>
                 </TableRow>
             </TableLayout>
         </TableRow>
@@ -152,6 +157,7 @@
             android:text="@string/checkout_header"
             android:id="@+id/checkout_button"
             android:textSize="@dimen/_15ssp"
+            android:textAllCaps="false"
             android:fontFamily="@font/montserrat_bold"
             android:layout_gravity="center"
             android:backgroundTint="@color/round_button"

@@ -110,6 +110,14 @@ public class CartFragment extends Fragment {
 
                     TextView total = getView().findViewById(R.id.total);
                     total.setText(new TotalPrice(foodItems).getTotal());
+
+                    TextView emptyCart = getView().findViewById(R.id.empty_cart);
+                    emptyCart.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //empty cart
+                        }
+                    });
                 } else {
                     Log.d("cart_list", "Failed to fetch anything");
                 }
