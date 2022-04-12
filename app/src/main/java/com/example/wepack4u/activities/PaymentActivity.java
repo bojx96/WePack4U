@@ -57,8 +57,7 @@ public class PaymentActivity extends AppCompatActivity {
                     RadioButton method = findViewById(selected);
                     Intent intent = new Intent(PaymentActivity.this, ConfirmationActivity.class);
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Toast.makeText(PaymentActivity.this, R.string.choose_payment, Toast.LENGTH_LONG).show();
                 }
             }
