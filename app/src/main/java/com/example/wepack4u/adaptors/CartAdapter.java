@@ -16,13 +16,13 @@ import com.example.wepack4u.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartRecycler extends RecyclerView.Adapter<CartRecycler.ViewHolder> {
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private final Context context;
     private final List<FoodItem> cart;
     private final ArrayList<String> stalls;
     private final boolean isPayment;
 
-    public CartRecycler(Context context, List<FoodItem> cart, ArrayList<String> stalls, boolean isPayment) {
+    public CartAdapter(Context context, List<FoodItem> cart, ArrayList<String> stalls, boolean isPayment) {
         this.context = context;
         this.cart = cart;
         this.stalls = stalls;

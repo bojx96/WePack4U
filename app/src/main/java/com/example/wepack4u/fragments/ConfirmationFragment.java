@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.wepack4u.R;
-import com.example.wepack4u.adaptors.CartRecycler;
+import com.example.wepack4u.adaptors.CartAdapter;
 import com.example.wepack4u.utilities.FoodItem;
 import com.example.wepack4u.utilities.Timestamp;
 import com.example.wepack4u.utilities.TotalPrice;
@@ -102,9 +102,9 @@ public class ConfirmationFragment extends Fragment {
                                 }
                             }
 
-                            CartRecycler cartRecycler = new CartRecycler(getContext(), foodItems,
+                            CartAdapter cartAdapter = new CartAdapter(getContext(), foodItems,
                                     stalls, false);
-                            recyclerView.setAdapter(cartRecycler);
+                            recyclerView.setAdapter(cartAdapter);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
                                 @Override
                                 public boolean canScrollVertically() { return false; }

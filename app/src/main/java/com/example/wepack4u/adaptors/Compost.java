@@ -60,9 +60,9 @@ public class Compost extends RecyclerView.Adapter<Compost.ViewHolder> {
                             if (task.isSuccessful()){
                                 QuerySnapshot querySnapshot = task.getResult();
                                 for (QueryDocumentSnapshot document: querySnapshot){
-                                    System.out.println("document: "+ document.get("name"));
-                                    System.out.println("foodname: "+ food.getName());
-                                    System.out.println("are they equal? " + document.get("name").equals(food.getName()));
+                                    //System.out.println("document: "+ document.get("name"));
+                                    //System.out.println("foodname: "+ food.getName());
+                                    //System.out.println("are they equal? " + document.get("name").equals(food.getName()));
                                     if (document.get("name").equals(food.getName())){
                                         db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
                                         break;

@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.wepack4u.R;
-import com.example.wepack4u.adaptors.CartRecycler;
+import com.example.wepack4u.adaptors.CartAdapter;
 import com.example.wepack4u.utilities.FoodItem;
 import com.example.wepack4u.utilities.Timestamp;
 import com.example.wepack4u.utilities.TotalPrice;
@@ -72,8 +72,8 @@ public class ConfirmationActivity extends AppCompatActivity {
                         }
                     }
 
-                    CartRecycler cartRecycler = new CartRecycler(ConfirmationActivity.this, foodItems, stalls, true);
-                    recyclerView.setAdapter(cartRecycler);
+                    CartAdapter cartAdapter = new CartAdapter(ConfirmationActivity.this, foodItems, stalls, true);
+                    recyclerView.setAdapter(cartAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(ConfirmationActivity.this));
 
                     TextView total = findViewById(R.id.total2);

@@ -15,7 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.wepack4u.adaptors.CartRecycler;
+import com.example.wepack4u.adaptors.CartAdapter;
 import com.example.wepack4u.utilities.FoodItem;
 import com.example.wepack4u.R;
 import com.example.wepack4u.utilities.TotalPrice;
@@ -93,6 +93,14 @@ public class CartFragment extends Fragment {
                 });
             }
         });
+
+        TextView emptyCart = getView().findViewById(R.id.empty_cart);
+        emptyCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //empty cart
+            }
+        });
     }
     public void foodList() {
         db.collection("users").document(auth_uid).collection("cart").get()
@@ -108,9 +116,9 @@ public class CartFragment extends Fragment {
                         if (!stalls.contains(each.getStall())) { stalls.add(each.getStall()); }
                     }
 
-                    CartRecycler cartRecycler = new CartRecycler(getContext(), foodItems, stalls,
+                    CartAdapter cartAdapter = new CartAdapter(getContext(), foodItems, stalls,
                             true);
-                    recyclerView.setAdapter(cartRecycler);
+                    recyclerView.setAdapter(cartAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
                         @Override
                         public boolean canScrollVertically() { return false; }
@@ -118,14 +126,6 @@ public class CartFragment extends Fragment {
 
                     TextView total = getView().findViewById(R.id.total);
                     total.setText(new TotalPrice(foodItems).getTotal());
-
-                    TextView emptyCart = getView().findViewById(R.id.empty_cart);
-                    emptyCart.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            //empty cart
-                        }
-                    });
                 } else {
                     Log.d("cart_list", "Failed to fetch anything");
                 }

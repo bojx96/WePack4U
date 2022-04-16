@@ -10,12 +10,21 @@ import android.view.MenuItem;
 import com.example.wepack4u.R;
 import com.example.wepack4u.fragments.AboutYouFragment;
 import com.example.wepack4u.fragments.CartFragment;
+import com.example.wepack4u.fragments.ConfirmationFragment;
 import com.example.wepack4u.fragments.StorePageFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class BottomNavMenu extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private Fragment newFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +53,16 @@ public class BottomNavMenu extends AppCompatActivity {
                             break;
 
                         case R.id.cart:
-                            fragment = new CartFragment();
+                            db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful() && task.getResult().size()>0) {
+                                        newFragment = new ConfirmationFragment();
+                                    }
+                                    else { newFragment = new CartFragment(); }
+                                }
+                            });
+                            fragment = newFragment;
                             break;
 
                         case R.id.aboutyou:
