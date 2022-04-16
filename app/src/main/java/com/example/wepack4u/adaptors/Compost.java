@@ -10,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wepack4u.R;
+import com.example.wepack4u.utilities.CartListener;
 import com.example.wepack4u.utilities.FoodItem;
+import com.example.wepack4u.utilities.StallHolder;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,7 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
-public class Compost extends RecyclerView.Adapter<Compost.ViewHolder> {
+public class Compost extends RecyclerView.Adapter<StallHolder> implements CartListener {
     private final Context context;
     private final List<FoodItem> cart;
     private final boolean isPayment;
@@ -35,18 +37,27 @@ public class Compost extends RecyclerView.Adapter<Compost.ViewHolder> {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public StallHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view;
+
+        int layoutId;
+        if (isPayment) { layoutId = R.layout.cart_display_row; }
+        else { layoutId = R.layout.receipt_row; }
+
+        return new StallHolder(parent, inflater, this, layoutId, isPayment);
+
+        /*View view;
         if (isPayment) { view = inflater.inflate(R.layout.cart_display_row, parent, false); }
         else { view = inflater.inflate(R.layout.receipt_row, parent, false); }
-        return new Compost.ViewHolder(view);
+        return new Compost.ViewHolder(view);*/
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StallHolder holder, int position) {
         FoodItem food = cart.get(position);
-        holder.name.setText(food.getName());
+        holder.Bind(food, cart);
+
+        /*holder.name.setText(food.getName());
         holder.unit.setText(food.getUnit());
         holder.price.setText(food.getPrice());
 
@@ -71,12 +82,13 @@ public class Compost extends RecyclerView.Adapter<Compost.ViewHolder> {
                             }
                         }
                     });
+                    int position = holder.getAdapterPosition();
                     cart.remove(position);
                     notifyItemRemoved(position);
                     notifyItemRangeChanged(position, getItemCount());
                 }
             });
-        }
+        }*/
     }
 
     @Override
@@ -84,7 +96,7 @@ public class Compost extends RecyclerView.Adapter<Compost.ViewHolder> {
         return cart.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    /*public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView unit;
         TextView price;
@@ -105,5 +117,27 @@ public class Compost extends RecyclerView.Adapter<Compost.ViewHolder> {
                 price = view.findViewById(R.id.price_b);
             }
         }
+    }*/
+
+    @Override
+    public void OnRemove(int position) {
+        db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    QuerySnapshot querySnapshot = task.getResult();
+                    for (QueryDocumentSnapshot document: querySnapshot){
+                        if (document.get("name").equals(cart.get(position).getName())){
+                            db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+
+        cart.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount());
     }
 }

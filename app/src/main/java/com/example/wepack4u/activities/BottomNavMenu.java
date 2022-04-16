@@ -22,8 +22,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class BottomNavMenu extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private Fragment newFragment;
 
     @Override
@@ -53,6 +51,8 @@ public class BottomNavMenu extends AppCompatActivity {
                             break;
 
                         case R.id.cart:
+                            /*final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -62,7 +62,8 @@ public class BottomNavMenu extends AppCompatActivity {
                                     else { newFragment = new CartFragment(); }
                                 }
                             });
-                            fragment = newFragment;
+                            fragment = newFragment;*/
+                            fragment = new CartFragment();
                             break;
 
                         case R.id.aboutyou:

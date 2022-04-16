@@ -59,7 +59,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/total"
                 android:textSize="@dimen/_12ssp"
-                android:textColor="#D5000000"
                 android:gravity="end"
                 android:fontFamily="@font/montserrat_bold"
                 android:textColor="@color/black"/>
