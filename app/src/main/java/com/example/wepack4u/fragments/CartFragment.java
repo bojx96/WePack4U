@@ -21,6 +21,7 @@ import com.example.wepack4u.R;
 import com.example.wepack4u.utilities.TotalPrice;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -82,6 +83,9 @@ public class CartFragment extends Fragment {
                                 int selected = payment_method.getCheckedRadioButtonId();
                                 RadioButton method = view.findViewById(selected);
                                 Fragment nextFragment = new ConfirmationFragment();
+//                                for (QueryDocumentSnapshot document: task.getResult()){
+//                                    db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
+//                                }
                                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
                             } else {
                                 Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_LONG).show();
