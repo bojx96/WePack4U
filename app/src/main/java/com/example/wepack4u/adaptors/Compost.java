@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wepack4u.R;
+import com.example.wepack4u.utilities.CartListener;
 import com.example.wepack4u.utilities.FoodItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,19 +19,21 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Compost extends RecyclerView.Adapter<Compost.ViewHolder> {
     private final Context context;
-    private final List<FoodItem> cart;
+    private final ArrayList<FoodItem> cart;
     private final boolean isPayment;
+    private final CartListener parentListener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-    public Compost(Context context, List<FoodItem> cart, boolean isPayment) {
+    public Compost(Context context, ArrayList<FoodItem> cart, boolean isPayment, CartListener parentListener) {
         this.context = context;
         this.cart = cart;
         this.isPayment = isPayment;
+        this.parentListener = parentListener;
     }
 
     @NonNull
@@ -52,6 +55,7 @@ public class Compost extends RecyclerView.Adapter<Compost.ViewHolder> {
 
         if (isPayment) {
             holder.delete.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -59,20 +63,18 @@ public class Compost extends RecyclerView.Adapter<Compost.ViewHolder> {
                             if (task.isSuccessful()){
                                 QuerySnapshot querySnapshot = task.getResult();
                                 for (QueryDocumentSnapshot document: querySnapshot){
-                                    System.out.println("document: "+ document.get("name"));
-                                    System.out.println("foodname: "+ food.getName());
-                                    System.out.println("are they equal? " + document.get("name").equals(food.getName()));
+                                    //System.out.println("document: "+ document.get("name"));
+                                    //System.out.println("foodname: "+ food.getName());
+                                    //System.out.println("are they equal? " + document.get("name").equals(food.getName()));
                                     if (document.get("name").equals(food.getName())){
                                         db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
+                                        parentListener.OnRemove();
                                         break;
                                     }
                                 }
                             }
                         }
                     });
-                    cart.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, getItemCount());
                 }
             });
         }

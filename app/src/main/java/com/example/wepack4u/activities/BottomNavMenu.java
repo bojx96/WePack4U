@@ -10,12 +10,19 @@ import android.view.MenuItem;
 import com.example.wepack4u.R;
 import com.example.wepack4u.fragments.AboutYouFragment;
 import com.example.wepack4u.fragments.CartFragment;
+import com.example.wepack4u.fragments.ConfirmationFragment;
 import com.example.wepack4u.fragments.StorePageFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class BottomNavMenu extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
+    private Fragment newFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

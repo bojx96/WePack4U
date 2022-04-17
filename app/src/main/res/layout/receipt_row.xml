@@ -6,17 +6,20 @@
         android:layout_width="@dimen/_130sdp"
         android:layout_height="wrap_content"
         android:id="@+id/name_b"
-        android:fontFamily="@font/montserrat_medium" />
+        android:textSize="@dimen/_12ssp"
+        android:fontFamily="@font/montserrat_medium"/>
     <TextView
         android:layout_width="@dimen/_40sdp"
         android:layout_height="wrap_content"
         android:id="@+id/unit_b"
+        android:textSize="@dimen/_12ssp"
         android:fontFamily="@font/montserrat_medium"
         android:gravity="center_horizontal"/>
     <TextView
-        android:layout_width="@dimen/_60sdp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/price_b"
+        android:textSize="@dimen/_12ssp"
         android:fontFamily="@font/montserrat_medium"
-        android:gravity="center_horizontal"/>
+        android:gravity="end"/>
 </TableRow>

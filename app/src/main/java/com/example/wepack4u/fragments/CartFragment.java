@@ -15,7 +15,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.wepack4u.adaptors.CartRecycler;
+import com.example.wepack4u.adaptors.CartAdapter;
+import com.example.wepack4u.utilities.CartListener;
 import com.example.wepack4u.utilities.FoodItem;
 import com.example.wepack4u.R;
 import com.example.wepack4u.utilities.TotalPrice;
@@ -39,10 +40,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements CartListener {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RecyclerView recyclerView;
+    private CartFragment reference = this;
     private Map<String, Object> foodDetails = new HashMap<>();
 
     public CartFragment() {
@@ -68,13 +70,35 @@ public class CartFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Checkout section
         recyclerView = view.findViewById(R.id.cart_recycler_a);
         foodList();
 
+        TextView emptyCart = getView().findViewById(R.id.empty_cart);
+        emptyCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            for (QueryDocumentSnapshot document: querySnapshot) {
+                                db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
+                            }
+                        }
+                    }
+                });
+                foodList();
+            }
+        });
+
+
         cartCheck();
+
         // Payment section
         RadioGroup payment_method = view.findViewById(R.id.payment_method);
         Button checkout = view.findViewById(R.id.checkout_button);
@@ -85,9 +109,12 @@ public class CartFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful() && task.getResult().size()>0){
+                            int selected = payment_method.getCheckedRadioButtonId();
+                            if (selected != -1) {
                             if (payment_method.getCheckedRadioButtonId() != -1) {
                                 int selected = payment_method.getCheckedRadioButtonId();
                                 transferCart();
+
                                 RadioButton method = view.findViewById(selected);
                                 Fragment nextFragment = new ConfirmationFragment();
 //                                for (QueryDocumentSnapshot document: task.getResult()){
@@ -153,9 +180,9 @@ public class CartFragment extends Fragment {
                         if (!stalls.contains(each.getStall())) { stalls.add(each.getStall()); }
                     }
 
-                    CartRecycler cartRecycler = new CartRecycler(getContext(), foodItems, stalls,
-                            true);
-                    recyclerView.setAdapter(cartRecycler);
+                    CartAdapter cartAdapter = new CartAdapter(getContext(), foodItems, stalls,
+                            true, reference);
+                    recyclerView.setAdapter(cartAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
                         @Override
                         public boolean canScrollVertically() { return false; }
@@ -170,8 +197,13 @@ public class CartFragment extends Fragment {
         });
     }
 
-    public void transferCart(){
+    // Update the fragment when item is removed
+    @Override
+    public void OnRemove() {
+        foodList();
+    }
 
+    public void transferCart(){
         db.collection("users").document(auth_uid).collection("cart").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

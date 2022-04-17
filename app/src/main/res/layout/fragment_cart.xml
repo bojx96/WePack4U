@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="20dp">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/_20sdp"
-        android:paddingRight="@dimen/_20sdp"
+        android:paddingLeft="@dimen/_30sdp"
+        android:paddingRight="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         tools:context=".activities.PaymentActivity">
 
         <!-- Checkout section -->
@@ -19,46 +18,57 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/checkout_header"
-            android:textSize="@dimen/_25ssp"
+            android:textSize="@dimen/_30ssp"
             android:textColor="@color/black"
             android:fontFamily="@font/montserrat_bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:id="@+id/cart_recycler_a"/>
 
         <TableRow
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="@dimen/_195sdp"
+                android:layout_width="@dimen/_165sdp"
                 android:layout_height="wrap_content"
                 android:text="@string/total"
-                android:textSize="@dimen/_12ssp"
-                android:textColor="#D5000000"
+                android:textSize="@dimen/_15ssp"
                 android:gravity="end"
-                android:fontFamily="@font/montserrat_bold"/>
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/black"/>
             <TextView
-                android:layout_width="@dimen/_80sdp"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="wrap_content"
                 android:id="@+id/total"
-                android:textSize="@dimen/_12ssp"
-                android:gravity="end"
-                android:fontFamily="@font/montserrat_medium"/>
+                android:textSize="@dimen/_15ssp"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/empty_cart"
+                android:text="@string/empty"
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="center"
+                android:layout_gravity="bottom|end"
+                android:textSize="@dimen/_6ssp"
+                android:textColor="@color/white"
+                android:background="@color/red"/>
         </TableRow>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"/>
+            android:layout_height="@dimen/_20sdp"/>
 
         <!-- Payment section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/payment_header"
-            android:textSize="@dimen/_25ssp"
+            android:textSize="@dimen/_30ssp"
             android:textColor="@color/black"
             android:fontFamily="@font/montserrat_bold"/>
 
@@ -99,17 +109,15 @@
                         android:src="@drawable/stripe"
                         android:scaleX="0.75"
                         android:scaleY="0.75"/>
-                    <View
-                        android:layout_width="@dimen/_5sdp"
-                        android:layout_height="@dimen/_40sdp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_40sdp"
                         android:text="@string/mastercard_visa"
                         android:textSize="@dimen/_12ssp"
                         android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
                         android:gravity="center_vertical"
-                        android:textColor="#D5000000"/>
+                        android:paddingStart="@dimen/_5sdp"/>
                 </TableRow>
 
                 <TableRow>
@@ -119,17 +127,15 @@
                         android:src="@drawable/paylah"
                         android:scaleX="0.75"
                         android:scaleY="0.75"/>
-                    <View
-                        android:layout_width="@dimen/_5sdp"
-                        android:layout_height="@dimen/_40sdp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_40sdp"
                         android:text="@string/paylah"
                         android:textSize="@dimen/_12ssp"
                         android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
                         android:gravity="center_vertical"
-                        android:textColor="#D5000000"/>
+                        android:paddingStart="@dimen/_5sdp"/>
                 </TableRow>
 
                 <TableRow>
@@ -137,34 +143,32 @@
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:src="@drawable/paynow"/>
-                    <View
-                        android:layout_width="@dimen/_5sdp"
-                        android:layout_height="@dimen/_40sdp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_40sdp"
                         android:text="@string/paynow"
                         android:textSize="@dimen/_12ssp"
                         android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
                         android:gravity="center_vertical"
-                        android:textColor="#D5000000"/>
+                        android:paddingStart="@dimen/_5sdp"/>
                 </TableRow>
             </TableLayout>
         </TableRow>
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_245sdp"
             android:layout_height="@dimen/_38sdp"
             android:text="@string/checkout_header"
             android:id="@+id/checkout_button"
+            android:textSize="@dimen/_15ssp"
+            android:textAllCaps="false"
             android:fontFamily="@font/montserrat_bold"
             android:layout_gravity="center"
-            android:backgroundTint="#000000"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="10dp"/>
+            android:backgroundTint="@color/black"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"/>
+            android:layout_height="@dimen/_30sdp"/>
     </LinearLayout>
 </ScrollView>
