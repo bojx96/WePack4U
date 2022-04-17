@@ -45,6 +45,7 @@ public class CartFragment extends Fragment implements CartListener {
     private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RecyclerView recyclerView;
     private final CartFragment reference = this;
+    private boolean isButtonPress = false;
     private Map<String, Object> foodDetails = new HashMap<>();
 
     public CartFragment() {
@@ -79,7 +80,10 @@ public class CartFragment extends Fragment implements CartListener {
         TextView emptyCart = getView().findViewById(R.id.empty_cart);
         emptyCart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { removeCart(); }
+            public void onClick(View view) {
+                isButtonPress = true;
+                removeCart();
+            }
         });
 
         cartCheck();
@@ -101,10 +105,10 @@ public class CartFragment extends Fragment implements CartListener {
                                 Fragment nextFragment = new ConfirmationFragment();
                                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
                             } else {
-                                Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), R.string.empty_cart, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), R.string.empty_cart, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -213,7 +217,10 @@ public class CartFragment extends Fragment implements CartListener {
                             for (QueryDocumentSnapshot document : querySnapshot) {
                                 db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
                             }
-                            foodList();
+                            if (isButtonPress) {
+                                foodList();
+                                isButtonPress = false;
+                            }
                         }
                     }
                 });
