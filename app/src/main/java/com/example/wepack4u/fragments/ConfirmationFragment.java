@@ -103,7 +103,7 @@ public class ConfirmationFragment extends Fragment {
                             }
 
                             CartAdapter cartAdapter = new CartAdapter(getContext(), foodItems,
-                                    stalls, false);
+                                    stalls, false, null);
                             recyclerView.setAdapter(cartAdapter);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
                                 @Override

@@ -13,54 +13,44 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.wepack4u.utilities.CartListener;
 import com.example.wepack4u.utilities.FoodItem;
 import com.example.wepack4u.R;
-import com.example.wepack4u.utilities.PaymentHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartAdapter extends RecyclerView.Adapter<PaymentHolder> implements CartListener {
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private final Context context;
     private final List<FoodItem> cart;
     private final ArrayList<String> stalls;
     private final boolean isPayment;
-    private int pos;
+    private final CartListener listener;
 
-    public CartAdapter(Context context, List<FoodItem> cart, ArrayList<String> stalls, boolean isPayment) {
+    public CartAdapter(Context context, List<FoodItem> cart, ArrayList<String> stalls, boolean isPayment, CartListener listener) {
         this.context = context;
         this.cart = cart;
         this.stalls = stalls;
         this.isPayment = isPayment;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public PaymentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-
-        int layoutId;
-        if (isPayment) { layoutId = R.layout.cart_display; }
-        else { layoutId = R.layout.receipt; }
-
-        return new PaymentHolder(parent, inflater, this, layoutId, isPayment);
-
-        //View view;
-        //if (isPayment) { view = inflater.inflate(R.layout.cart_display, parent, false); }
-        //else { view = inflater.inflate(R.layout.receipt, parent, false); }
-        //return new ViewHolder(view);
+        View view;
+        if (isPayment) { view = inflater.inflate(R.layout.cart_display, parent, false); }
+        else { view = inflater.inflate(R.layout.receipt, parent, false); }
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PaymentHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String stall = stalls.get(position);
-        pos = holder.getAdapterPosition();
-        holder.Bind(stall, cart, context);
-
-        /*holder.stall.setText(stall);
+        holder.stall.setText(stall);
 
         ArrayList<FoodItem> stallCart = new ArrayList<>();
         for (FoodItem f : cart) { if (f.getStall().equals(stall)) { stallCart.add(f); } }
 
-        Compost compost = new Compost(holder.child.getContext(), stallCart, isPayment);
+        Compost compost = new Compost(holder.child.getContext(), stallCart, isPayment, listener);
         holder.child.setAdapter(compost);
         holder.child.setLayoutManager(new LinearLayoutManager(context) {
             @Override
@@ -72,7 +62,7 @@ public class CartAdapter extends RecyclerView.Adapter<PaymentHolder> implements 
             stalls.remove(pos);
             notifyItemRemoved(pos);
             notifyItemRangeChanged(pos, getItemCount());
-        }*/
+        }
     }
 
     @Override
@@ -80,7 +70,7 @@ public class CartAdapter extends RecyclerView.Adapter<PaymentHolder> implements 
         return stalls.size();
     }
 
-    /*public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView stall;
         RecyclerView child;
 
@@ -90,17 +80,5 @@ public class CartAdapter extends RecyclerView.Adapter<PaymentHolder> implements 
             if (isPayment) { child = itemView.findViewById(R.id.row_a); }
             else { child = itemView.findViewById(R.id.row_b); }
         }
-    }*/
-
-    @Override
-    public void OnRemove(int position) {
-        stalls.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, getItemCount());
-    }
-
-    @Override
-    public void IsEmpty() {
-        OnRemove(pos);
     }
 }

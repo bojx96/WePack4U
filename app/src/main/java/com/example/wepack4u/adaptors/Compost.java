@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.wepack4u.R;
 import com.example.wepack4u.utilities.CartListener;
 import com.example.wepack4u.utilities.FoodItem;
-import com.example.wepack4u.utilities.StallHolder;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class Compost extends RecyclerView.Adapter<StallHolder> implements CartListener {
+public class Compost extends RecyclerView.Adapter<Compost.ViewHolder> {
     private final Context context;
     private final ArrayList<FoodItem> cart;
     private final boolean isPayment;
@@ -39,27 +38,18 @@ public class Compost extends RecyclerView.Adapter<StallHolder> implements CartLi
 
     @NonNull
     @Override
-    public StallHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-
-        int layoutId;
-        if (isPayment) { layoutId = R.layout.cart_display_row; }
-        else { layoutId = R.layout.receipt_row; }
-
-        return new StallHolder(parent, inflater, this, layoutId, isPayment);
-
-        /*View view;
+        View view;
         if (isPayment) { view = inflater.inflate(R.layout.cart_display_row, parent, false); }
         else { view = inflater.inflate(R.layout.receipt_row, parent, false); }
-        return new Compost.ViewHolder(view);*/
+        return new Compost.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StallHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FoodItem food = cart.get(position);
-        holder.Bind(food, cart);
-
-        /*holder.name.setText(food.getName());
+        holder.name.setText(food.getName());
         holder.unit.setText(food.getUnit());
         holder.price.setText(food.getPrice());
 
@@ -78,19 +68,16 @@ public class Compost extends RecyclerView.Adapter<StallHolder> implements CartLi
                                     //System.out.println("are they equal? " + document.get("name").equals(food.getName()));
                                     if (document.get("name").equals(food.getName())){
                                         db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
+                                        parentListener.OnRemove();
                                         break;
                                     }
                                 }
                             }
                         }
                     });
-                    int position = holder.getAdapterPosition();
-                    cart.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, getItemCount());
                 }
             });
-        }*/
+        }
     }
 
     @Override
@@ -98,7 +85,7 @@ public class Compost extends RecyclerView.Adapter<StallHolder> implements CartLi
         return cart.size();
     }
 
-    /*public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView unit;
         TextView price;
@@ -119,38 +106,5 @@ public class Compost extends RecyclerView.Adapter<StallHolder> implements CartLi
                 price = view.findViewById(R.id.price_b);
             }
         }
-    }*/
-
-    @Override
-    public void OnRemove(int position) {
-        //TODO: this is making the app crash, says ArrayList is out of bounds'
-        System.out.println(cart.size());
-        System.out.println(position);
-        System.out.println(cart.get(position));
-        db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    QuerySnapshot querySnapshot = task.getResult();
-                    for (QueryDocumentSnapshot document: querySnapshot){
-                        if (document.get("name").equals(cart.get(position).getName())){
-                            db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
-                            break;
-                        }
-                    }
-                }
-            }
-        });
-
-        cart.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, getItemCount());
-
-        if (cart.isEmpty()) {
-            parentListener.IsEmpty();
-        }
     }
-
-    @Override
-    public void IsEmpty() {}
 }

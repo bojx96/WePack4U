@@ -74,8 +74,8 @@ public class PaymentActivity extends AppCompatActivity {
                             stalls.add(each.getStall());
                         }
                     }
-                    CartAdapter cartAdapter = new CartAdapter(PaymentActivity.this, foodItems, stalls, false);
-                    recyclerView.setAdapter(cartAdapter);
+                    //CartAdapter cartAdapter = new CartAdapter(PaymentActivity.this, foodItems, stalls, false);
+                    //recyclerView.setAdapter(cartAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(PaymentActivity.this));
 
                     TextView total = findViewById(R.id.total);

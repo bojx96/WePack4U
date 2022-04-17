@@ -72,8 +72,8 @@ public class ConfirmationActivity extends AppCompatActivity {
                         }
                     }
 
-                    CartAdapter cartAdapter = new CartAdapter(ConfirmationActivity.this, foodItems, stalls, true);
-                    recyclerView.setAdapter(cartAdapter);
+                    //CartAdapter cartAdapter = new CartAdapter(ConfirmationActivity.this, foodItems, stalls, true);
+                    //recyclerView.setAdapter(cartAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(ConfirmationActivity.this));
 
                     TextView total = findViewById(R.id.total2);

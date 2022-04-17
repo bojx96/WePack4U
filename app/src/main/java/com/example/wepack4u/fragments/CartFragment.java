@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.wepack4u.adaptors.CartAdapter;
+import com.example.wepack4u.utilities.CartListener;
 import com.example.wepack4u.utilities.FoodItem;
 import com.example.wepack4u.R;
 import com.example.wepack4u.utilities.TotalPrice;
@@ -35,10 +36,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements CartListener {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RecyclerView recyclerView;
+    private CartFragment reference = this;
 
     public CartFragment() {
         // Required empty public constructor
@@ -78,8 +80,8 @@ public class CartFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful() && task.getResult().size()>0){
-                            if (payment_method.getCheckedRadioButtonId() != -1) {
-                                int selected = payment_method.getCheckedRadioButtonId();
+                            int selected = payment_method.getCheckedRadioButtonId();
+                            if (selected != -1) {
                                 RadioButton method = view.findViewById(selected);
                                 Fragment nextFragment = new ConfirmationFragment();
                                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
@@ -117,7 +119,7 @@ public class CartFragment extends Fragment {
                     }
 
                     CartAdapter cartAdapter = new CartAdapter(getContext(), foodItems, stalls,
-                            true);
+                            true, reference);
                     recyclerView.setAdapter(cartAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
                         @Override
@@ -131,5 +133,11 @@ public class CartFragment extends Fragment {
                 }
             }
         });
+    }
+
+    // Update the fragment when item is removed
+    @Override
+    public void OnRemove() {
+        foodList();
     }
 }
