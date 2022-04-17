@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/_20sdp"
-        android:paddingRight="@dimen/_20sdp"
+        android:paddingLeft="@dimen/_30sdp"
+        android:paddingRight="@dimen/_30sdp"
         tools:context=".activities.ConfirmationActivity">
 
         <TextView
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="@dimen/_195sdp"
+                android:layout_width="@dimen/_185sdp"
                 android:layout_height="wrap_content"
                 android:text="@string/total"
                 android:textSize="@dimen/_12ssp"
@@ -63,7 +63,7 @@
                 android:gravity="end"
                 android:fontFamily="@font/montserrat_bold"/>
             <TextView
-                android:layout_width="@dimen/_80sdp"
+                android:layout_width="@dimen/_70sdp"
                 android:layout_height="wrap_content"
                 android:id="@+id/total2"
                 android:textSize="@dimen/_12ssp"
@@ -81,7 +81,6 @@
             android:id="@+id/payment_text"
             android:textSize="@dimen/_12ssp"
             android:textColor="@color/black"
-            android:gravity="center"
             android:fontFamily="@font/montserrat_medium"/>
         <TextView
             android:layout_width="match_parent"
@@ -89,7 +88,6 @@
             android:id="@+id/waiting_time"
             android:textSize="@dimen/_12ssp"
             android:textColor="@color/black"
-            android:gravity="center"
             android:fontFamily="@font/montserrat_medium"/>
 
         <View
@@ -99,7 +97,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="@dimen/_38sdp"
-            android:text="@string/checkout_header"
+            android:text="@string/done"
             android:id="@+id/done_button"
             android:fontFamily="@font/montserrat_bold"
             android:layout_gravity="center"
