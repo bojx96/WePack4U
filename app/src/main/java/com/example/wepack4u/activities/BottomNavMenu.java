@@ -46,7 +46,13 @@ public class BottomNavMenu extends AppCompatActivity {
                     switch (menuitem.getItemId()) {
                         case R.id.storepage:
                             fragment = new StorePageFragment();
-                            break;
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
+                            return true;
+
+                        case R.id.aboutyou:
+                            fragment = new AboutYouFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
+                            return true;
 
                         case R.id.cart:
                             boolean [] outcome = new boolean[2];
@@ -75,13 +81,7 @@ public class BottomNavMenu extends AppCompatActivity {
                                     });
                                 }
                             });
-
-                        case R.id.aboutyou:
-                            fragment = new AboutYouFragment();
-                            break;
                     }
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
                     return true;
                 }
             };
