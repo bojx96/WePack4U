@@ -46,7 +46,7 @@ public class CartFragment extends Fragment implements CartListener {
     private RecyclerView recyclerView;
     private final CartFragment reference = this;
     private boolean isButtonPress = false;
-    private Map<String, Object> foodDetails = new HashMap<>();
+    private final Map<String, Object> foodDetails = new HashMap<>();
 
     public CartFragment() {
         // Required empty public constructor
@@ -86,8 +86,6 @@ public class CartFragment extends Fragment implements CartListener {
             }
         });
 
-        cartCheck();
-
         // Payment section
         RadioGroup payment_method = view.findViewById(R.id.payment_method);
         Button checkout = view.findViewById(R.id.checkout_button);
@@ -112,37 +110,6 @@ public class CartFragment extends Fragment implements CartListener {
                         }
                     }
                 });
-            }
-        });
-    }
-
-    public void cartCheck(){
-        boolean [] outcome = new boolean[2];
-        db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    QuerySnapshot querySnapshot = task.getResult();
-                    outcome[0] = querySnapshot.isEmpty();
-                    System.out.println(outcome[0]);
-                }
-                db.collection("users").document(auth_uid).collection("tempCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            QuerySnapshot querySnapshot = task.getResult();
-                            outcome[1] = querySnapshot.isEmpty();
-                            System.out.println(outcome[1]);
-                        }
-                        System.out.println("outside: " + outcome[0]);
-                        System.out.println(outcome[1]);
-                        if (outcome[0]==true && outcome[1]==false){
-                            Fragment nextFragment = new ConfirmationFragment();
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
-                        }
-                    }
-                });
-
             }
         });
     }

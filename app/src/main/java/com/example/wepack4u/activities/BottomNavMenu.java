@@ -20,9 +20,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class BottomNavMenu extends AppCompatActivity {
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private Fragment fragment;
 
     private BottomNavigationView bottomNavigationView;
-    private Fragment newFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +43,38 @@ public class BottomNavMenu extends AppCompatActivity {
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuitem) {
-
-                    Fragment fragment=null;
-
-                    switch (menuitem.getItemId())
-                    {
+                    switch (menuitem.getItemId()) {
                         case R.id.storepage:
                             fragment = new StorePageFragment();
                             break;
 
                         case R.id.cart:
-                            fragment = new CartFragment();
-                            break;
+                            boolean [] outcome = new boolean[2];
+                            db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()){
+                                        QuerySnapshot querySnapshot = task.getResult();
+                                        outcome[0] = querySnapshot.isEmpty();
+                                    }
+                                    db.collection("users").document(auth_uid).collection("tempCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()){
+                                                QuerySnapshot querySnapshot = task.getResult();
+                                                outcome[1] = querySnapshot.isEmpty();
+                                            }
+                                            if (outcome[0] && !outcome[1]){
+                                                fragment = new ConfirmationFragment();
+                                            }
+                                            else {
+                                                fragment = new CartFragment();
+                                            }
+                                            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
+                                        }
+                                    });
+                                }
+                            });
 
                         case R.id.aboutyou:
                             fragment = new AboutYouFragment();
@@ -60,7 +82,6 @@ public class BottomNavMenu extends AppCompatActivity {
                     }
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
-
                     return true;
                 }
             };
