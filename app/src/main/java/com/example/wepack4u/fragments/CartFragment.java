@@ -44,7 +44,7 @@ public class CartFragment extends Fragment implements CartListener {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RecyclerView recyclerView;
-    private CartFragment reference = this;
+    private final CartFragment reference = this;
     private Map<String, Object> foodDetails = new HashMap<>();
 
     public CartFragment() {
@@ -85,7 +85,6 @@ public class CartFragment extends Fragment implements CartListener {
                 foodList();
             }
         });
-
 
         cartCheck();
 
@@ -149,9 +148,6 @@ public class CartFragment extends Fragment implements CartListener {
                 }
             }
         });
-
-
-
     }
 
     public void foodList() {
