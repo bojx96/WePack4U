@@ -79,6 +79,8 @@
         <entry key="app/src/main/res/layout/dropdown.xml" value="0.30910645575032064" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_confirmation.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_food_detail.xml" value="0.34375" />
+        <entry key="app/src/main/res/layout/fragment_food_display.xml" value="0.4109375" />
         <entry key="app/src/main/res/layout/receipt.xml" value="0.14673913043478262" />
         <entry key="app/src/main/res/layout/receipt_row.xml" value="0.3423913043478261" />
       </map>

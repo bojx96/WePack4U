@@ -44,7 +44,7 @@
                 <TextView
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/total"
+                    android:id="@+id/total1"
                     android:textSize="@dimen/_15ssp"
                     android:gravity="end"
                     android:fontFamily="@font/montserrat_medium"/>

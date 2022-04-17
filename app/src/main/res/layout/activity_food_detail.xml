@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/FoodDetailImage"
+        android:id="@+id/FoodDetailImage1"
         android:layout_width="match_parent"
         android:layout_height="162dp"
         android:layout_marginTop="10dp"
@@ -22,7 +22,7 @@
         android:id="@+id/FoodDetailName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/FoodDetailImage"
+        android:layout_below="@id/FoodDetailImage1"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/foodname"
@@ -35,7 +35,7 @@
         android:id="@+id/FoodDetailPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/FoodDetailImage"
+        android:layout_below="@id/FoodDetailImage1"
         android:layout_alignEnd="@id/FoodDetailName"
         android:fontFamily="@font/montserrat_bold"
         android:layout_marginTop="20dp"

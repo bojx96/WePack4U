@@ -7,7 +7,7 @@
     android:layout_margin="20dp">
 
     <TextView
-        android:id="@+id/foodstallname"
+        android:id="@+id/foodstallname1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_bold"
