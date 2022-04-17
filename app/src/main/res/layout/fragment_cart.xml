@@ -53,7 +53,7 @@
                 android:text="@string/empty"
                 android:fontFamily="@font/montserrat_medium"
                 android:gravity="center"
-                android:layout_gravity="bottom|end"
+                android:layout_gravity="end|center_vertical"
                 android:textSize="@dimen/_6ssp"
                 android:textColor="@color/white"
                 android:background="@color/red"/>

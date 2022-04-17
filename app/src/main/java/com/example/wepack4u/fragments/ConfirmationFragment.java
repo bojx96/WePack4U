@@ -86,6 +86,7 @@ public class ConfirmationFragment extends Fragment {
             }
         });
     }
+
     public void foodList() {
         db.collection("users").document(auth_uid).collection("tempCart").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

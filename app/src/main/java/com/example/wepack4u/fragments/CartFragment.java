@@ -45,7 +45,8 @@ public class CartFragment extends Fragment implements CartListener {
     private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RecyclerView recyclerView;
     private final CartFragment reference = this;
-    private Map<String, Object> foodDetails = new HashMap<>();
+    private boolean isButtonPress = false;
+    private final Map<String, Object> foodDetails = new HashMap<>();
 
     public CartFragment() {
         // Required empty public constructor
@@ -79,10 +80,11 @@ public class CartFragment extends Fragment implements CartListener {
         TextView emptyCart = getView().findViewById(R.id.empty_cart);
         emptyCart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { removeCart(); }
+            public void onClick(View view) {
+                isButtonPress = true;
+                removeCart();
+            }
         });
-
-        cartCheck();
 
         // Payment section
         RadioGroup payment_method = view.findViewById(R.id.payment_method);
@@ -101,44 +103,13 @@ public class CartFragment extends Fragment implements CartListener {
                                 Fragment nextFragment = new ConfirmationFragment();
                                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
                             } else {
-                                Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), R.string.empty_cart, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), R.string.empty_cart, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-            }
-        });
-    }
-
-    public void cartCheck(){
-        boolean [] outcome = new boolean[2];
-        db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    QuerySnapshot querySnapshot = task.getResult();
-                    outcome[0] = querySnapshot.isEmpty();
-                    System.out.println(outcome[0]);
-                }
-                db.collection("users").document(auth_uid).collection("tempCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            QuerySnapshot querySnapshot = task.getResult();
-                            outcome[1] = querySnapshot.isEmpty();
-                            System.out.println(outcome[1]);
-                        }
-                        System.out.println("outside: " + outcome[0]);
-                        System.out.println(outcome[1]);
-                        if (outcome[0]==true && outcome[1]==false){
-                            Fragment nextFragment = new ConfirmationFragment();
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
-                        }
-                    }
-                });
-
             }
         });
     }
@@ -213,7 +184,10 @@ public class CartFragment extends Fragment implements CartListener {
                             for (QueryDocumentSnapshot document : querySnapshot) {
                                 db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
                             }
-                            foodList();
+                            if (isButtonPress) {
+                                foodList();
+                                isButtonPress = false;
+                            }
                         }
                     }
                 });

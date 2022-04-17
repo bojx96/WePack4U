@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="@dimen/_180sdp"
+                android:layout_width="@dimen/_190sdp"
                 android:layout_height="wrap_content"
                 android:text="@string/total"
                 android:textSize="@dimen/_12ssp"
