@@ -22,6 +22,7 @@ import com.example.wepack4u.R;
 import com.example.wepack4u.utilities.TotalPrice;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -100,7 +101,18 @@ public class CartFragment extends Fragment implements CartListener {
         emptyCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //empty cart
+                db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            for (QueryDocumentSnapshot document: querySnapshot) {
+                                db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
+                            }
+                        }
+                    }
+                });
+                foodList();
             }
         });
     }
