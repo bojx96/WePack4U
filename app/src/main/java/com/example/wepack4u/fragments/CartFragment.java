@@ -44,7 +44,7 @@ public class CartFragment extends Fragment implements CartListener {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RecyclerView recyclerView;
-    private CartFragment reference = this;
+    private final CartFragment reference = this;
     private Map<String, Object> foodDetails = new HashMap<>();
 
     public CartFragment() {
@@ -60,7 +60,6 @@ public class CartFragment extends Fragment implements CartListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
     }
 
@@ -80,12 +79,11 @@ public class CartFragment extends Fragment implements CartListener {
         TextView emptyCart = getView().findViewById(R.id.empty_cart);
         emptyCart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                removeCart();
-                foodList();
-            }
+            public void onClick(View view) { removeCart(); }
         });
+
         cartCheck();
+
         // Payment section
         RadioGroup payment_method = view.findViewById(R.id.payment_method);
         Button checkout = view.findViewById(R.id.checkout_button);
@@ -98,18 +96,15 @@ public class CartFragment extends Fragment implements CartListener {
                         if (task.isSuccessful() && task.getResult().size() > 0) {
                             int selected = payment_method.getCheckedRadioButtonId();
                             if (selected != -1) {
-                                if (payment_method.getCheckedRadioButtonId() != -1) {
-                                    int selected1 = payment_method.getCheckedRadioButtonId();
-                                    transferCart();
-                                    RadioButton method = view.findViewById(selected1);
-                                    Fragment nextFragment = new ConfirmationFragment();
-                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
-                                } else {
-                                    Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_LONG).show();
-                                }
+                                transferCart();
+                                RadioButton method = view.findViewById(selected);
+                                Fragment nextFragment = new ConfirmationFragment();
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
                             } else {
-                                Toast.makeText(getContext(), R.string.empty_cart, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_LONG).show();
                             }
+                        } else {
+                            Toast.makeText(getContext(), R.string.empty_cart, Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -218,6 +213,7 @@ public class CartFragment extends Fragment implements CartListener {
                             for (QueryDocumentSnapshot document : querySnapshot) {
                                 db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
                             }
+                            foodList();
                         }
                     }
                 });
