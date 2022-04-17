@@ -81,17 +81,7 @@ public class CartFragment extends Fragment implements CartListener {
         emptyCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            QuerySnapshot querySnapshot = task.getResult();
-                            for (QueryDocumentSnapshot document: querySnapshot) {
-                                db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
-                            }
-                        }
-                    }
-                });
+                removeCart();
                 foodList();
             }
         });
@@ -108,24 +98,22 @@ public class CartFragment extends Fragment implements CartListener {
                 db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && task.getResult().size()>0){
+                        if (task.isSuccessful() && task.getResult().size() > 0) {
                             int selected = payment_method.getCheckedRadioButtonId();
                             if (selected != -1) {
-                            if (payment_method.getCheckedRadioButtonId() != -1) {
-                                int selected = payment_method.getCheckedRadioButtonId();
-                                transferCart();
+                                if (payment_method.getCheckedRadioButtonId() != -1) {
+                                    int selected1 = payment_method.getCheckedRadioButtonId();
+                                    transferCart();
 
-                                RadioButton method = view.findViewById(selected);
-                                Fragment nextFragment = new ConfirmationFragment();
-//                                for (QueryDocumentSnapshot document: task.getResult()){
-//                                    db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
-//                                }
-                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
+                                    RadioButton method = view.findViewById(selected1);
+                                    Fragment nextFragment = new ConfirmationFragment();
+                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
+                                } else {
+                                    Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_LONG).show();
+                                }
                             } else {
-                                Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), R.string.empty_cart, Toast.LENGTH_LONG).show();
                             }
-                        } else {
-                            Toast.makeText(getContext(), R.string.empty_cart, Toast.LENGTH_LONG).show();
                         }
                     }
                 });
