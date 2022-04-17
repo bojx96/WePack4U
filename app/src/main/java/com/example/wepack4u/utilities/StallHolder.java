@@ -12,7 +12,7 @@ import com.example.wepack4u.R;
 import java.util.List;
 
 public class StallHolder extends RecyclerView.ViewHolder {
-    private CartListener listener;
+    private final CartListener listener;
     private final boolean isPayment;
 
     public StallHolder(ViewGroup parent, LayoutInflater inflater, CartListener listener,

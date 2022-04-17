@@ -20,19 +20,21 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Compost extends RecyclerView.Adapter<StallHolder> implements CartListener {
     private final Context context;
-    private final List<FoodItem> cart;
+    private final ArrayList<FoodItem> cart;
     private final boolean isPayment;
+    private final CartListener parentListener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-    public Compost(Context context, List<FoodItem> cart, boolean isPayment) {
+    public Compost(Context context, ArrayList<FoodItem> cart, boolean isPayment, CartListener parentListener) {
         this.context = context;
         this.cart = cart;
         this.isPayment = isPayment;
+        this.parentListener = parentListener;
     }
 
     @NonNull
@@ -121,6 +123,10 @@ public class Compost extends RecyclerView.Adapter<StallHolder> implements CartLi
 
     @Override
     public void OnRemove(int position) {
+        //TODO: this is making the app crash, says ArrayList is out of bounds'
+        System.out.println(cart.size());
+        System.out.println(position);
+        System.out.println(cart.get(position));
         db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -139,5 +145,12 @@ public class Compost extends RecyclerView.Adapter<StallHolder> implements CartLi
         cart.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, getItemCount());
+
+        if (cart.isEmpty()) {
+            parentListener.IsEmpty();
+        }
     }
+
+    @Override
+    public void IsEmpty() {}
 }

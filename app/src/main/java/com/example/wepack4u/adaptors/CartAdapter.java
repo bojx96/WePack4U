@@ -18,12 +18,12 @@ import com.example.wepack4u.utilities.PaymentHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartAdapter extends RecyclerView.Adapter<PaymentHolder> {
+public class CartAdapter extends RecyclerView.Adapter<PaymentHolder> implements CartListener {
     private final Context context;
     private final List<FoodItem> cart;
     private final ArrayList<String> stalls;
     private final boolean isPayment;
-    private final CartListener listener;
+    private int pos;
 
     public CartAdapter(Context context, List<FoodItem> cart, ArrayList<String> stalls, boolean isPayment) {
         this.context = context;
@@ -41,7 +41,7 @@ public class CartAdapter extends RecyclerView.Adapter<PaymentHolder> {
         if (isPayment) { layoutId = R.layout.cart_display; }
         else { layoutId = R.layout.receipt; }
 
-        return new PaymentHolder(parent, inflater, listener, layoutId, isPayment);
+        return new PaymentHolder(parent, inflater, this, layoutId, isPayment);
 
         //View view;
         //if (isPayment) { view = inflater.inflate(R.layout.cart_display, parent, false); }
@@ -52,6 +52,7 @@ public class CartAdapter extends RecyclerView.Adapter<PaymentHolder> {
     @Override
     public void onBindViewHolder(@NonNull PaymentHolder holder, int position) {
         String stall = stalls.get(position);
+        pos = holder.getAdapterPosition();
         holder.Bind(stall, cart, context);
 
         /*holder.stall.setText(stall);
@@ -90,4 +91,16 @@ public class CartAdapter extends RecyclerView.Adapter<PaymentHolder> {
             else { child = itemView.findViewById(R.id.row_b); }
         }
     }*/
+
+    @Override
+    public void OnRemove(int position) {
+        stalls.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount());
+    }
+
+    @Override
+    public void IsEmpty() {
+        OnRemove(pos);
+    }
 }

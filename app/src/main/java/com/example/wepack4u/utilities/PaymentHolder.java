@@ -36,7 +36,7 @@ public class PaymentHolder extends RecyclerView.ViewHolder {
         ArrayList<FoodItem> stallCart = new ArrayList<>();
         for (FoodItem f : cart) { if (f.getStall().equals(stallName)) { stallCart.add(f); } }
 
-        Compost compost = new Compost(child.getContext(), stallCart, isPayment);
+        Compost compost = new Compost(child.getContext(), stallCart, isPayment, listener);
         child.setAdapter(compost);
         child.setLayoutManager(new LinearLayoutManager(context) {
             @Override
