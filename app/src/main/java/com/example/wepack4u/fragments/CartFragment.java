@@ -87,7 +87,6 @@ public class CartFragment extends Fragment implements CartListener {
         });
 
         cartCheck();
-
         // Payment section
         RadioGroup payment_method = view.findViewById(R.id.payment_method);
         Button checkout = view.findViewById(R.id.checkout_button);
@@ -103,7 +102,6 @@ public class CartFragment extends Fragment implements CartListener {
                                 if (payment_method.getCheckedRadioButtonId() != -1) {
                                     int selected1 = payment_method.getCheckedRadioButtonId();
                                     transferCart();
-
                                     RadioButton method = view.findViewById(selected1);
                                     Fragment nextFragment = new ConfirmationFragment();
                                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
@@ -138,14 +136,15 @@ public class CartFragment extends Fragment implements CartListener {
                             outcome[1] = querySnapshot.isEmpty();
                             System.out.println(outcome[1]);
                         }
+                        System.out.println("outside: " + outcome[0]);
+                        System.out.println(outcome[1]);
+                        if (outcome[0]==true && outcome[1]==false){
+                            Fragment nextFragment = new ConfirmationFragment();
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
+                        }
                     }
                 });
-                System.out.println("outside: " + outcome[0]);
-                System.out.println(outcome[1]);
-                if (outcome[0]==true && outcome[1]==false){
-                    Fragment nextFragment = new ConfirmationFragment();
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
-                }
+
             }
         });
     }
