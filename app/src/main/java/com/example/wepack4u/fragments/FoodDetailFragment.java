@@ -94,6 +94,7 @@ public class FoodDetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 db.collection("users").document(auth_uid).collection("cart").document().set(foodDetails);
+                checkTempCart();
                 //finish();
                 getFragmentManager().popBackStack();
                 Toast.makeText(getContext(), "Item Added to Cart!", Toast.LENGTH_SHORT).show();
@@ -173,4 +174,34 @@ public class FoodDetailFragment extends Fragment {
             }
         });
     }
+
+    public void checkTempCart(){
+        db.collection("users").document(auth_uid).collection("cart").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            if (querySnapshot.size() > 0) {
+                                removeTempCart();
+                            }
+                        }
+                    }
+                });
+    }
+
+        public void removeTempCart(){
+            db.collection("users").document(auth_uid).collection("tempCart").get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                QuerySnapshot querySnapshot = task.getResult();
+                                for (QueryDocumentSnapshot document : querySnapshot) {
+                                    db.collection("users").document(auth_uid).collection("tempCart").document(document.getId()).delete();
+                                }
+                            }
+                        }
+                    });
+        }
 }

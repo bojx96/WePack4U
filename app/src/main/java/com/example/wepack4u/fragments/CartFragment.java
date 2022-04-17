@@ -26,7 +26,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +37,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 
 public class CartFragment extends Fragment implements CartListener {
@@ -42,6 +45,7 @@ public class CartFragment extends Fragment implements CartListener {
     private final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RecyclerView recyclerView;
     private CartFragment reference = this;
+    private Map<String, Object> foodDetails = new HashMap<>();
 
     public CartFragment() {
         // Required empty public constructor
@@ -56,6 +60,7 @@ public class CartFragment extends Fragment implements CartListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
     }
 
@@ -91,6 +96,9 @@ public class CartFragment extends Fragment implements CartListener {
             }
         });
 
+
+        cartCheck();
+
         // Payment section
         RadioGroup payment_method = view.findViewById(R.id.payment_method);
         Button checkout = view.findViewById(R.id.checkout_button);
@@ -103,8 +111,15 @@ public class CartFragment extends Fragment implements CartListener {
                         if (task.isSuccessful() && task.getResult().size()>0){
                             int selected = payment_method.getCheckedRadioButtonId();
                             if (selected != -1) {
+                            if (payment_method.getCheckedRadioButtonId() != -1) {
+                                int selected = payment_method.getCheckedRadioButtonId();
+                                transferCart();
+
                                 RadioButton method = view.findViewById(selected);
                                 Fragment nextFragment = new ConfirmationFragment();
+//                                for (QueryDocumentSnapshot document: task.getResult()){
+//                                    db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
+//                                }
                                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
                             } else {
                                 Toast.makeText(getContext(), R.string.choose_payment, Toast.LENGTH_LONG).show();
@@ -117,6 +132,40 @@ public class CartFragment extends Fragment implements CartListener {
             }
         });
     }
+
+    public void cartCheck(){
+        boolean [] outcome = new boolean[2];
+        db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    QuerySnapshot querySnapshot = task.getResult();
+                    outcome[0] = querySnapshot.isEmpty();
+                    System.out.println(outcome[0]);
+                }
+                db.collection("users").document(auth_uid).collection("tempCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            QuerySnapshot querySnapshot = task.getResult();
+                            outcome[1] = querySnapshot.isEmpty();
+                            System.out.println(outcome[1]);
+                        }
+                    }
+                });
+                System.out.println("outside: " + outcome[0]);
+                System.out.println(outcome[1]);
+                if (outcome[0]==true && outcome[1]==false){
+                    Fragment nextFragment = new ConfirmationFragment();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, nextFragment).addToBackStack("CartStack").commit();
+                }
+            }
+        });
+
+
+
+    }
+
     public void foodList() {
         db.collection("users").document(auth_uid).collection("cart").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -152,5 +201,43 @@ public class CartFragment extends Fragment implements CartListener {
     @Override
     public void OnRemove() {
         foodList();
+    }
+
+    public void transferCart(){
+        db.collection("users").document(auth_uid).collection("cart").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            for (QueryDocumentSnapshot each : querySnapshot) {
+                                String FOODNAME = each.get("name").toString();
+                                String FOODPRICE = each.get("price").toString();
+                                String STORENAME = each.get("stall").toString();
+                                foodDetails.put("name", FOODNAME);
+                                foodDetails.put("price", FOODPRICE);
+                                foodDetails.put("stall", STORENAME);
+                                foodDetails.put("unit", 1);
+                                db.collection("users").document(auth_uid).collection("tempCart").document().set(foodDetails);
+                            }
+                            removeCart();
+                        }
+                    }
+                });
+    }
+
+    public void removeCart(){
+        db.collection("users").document(auth_uid).collection("cart").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            for (QueryDocumentSnapshot document : querySnapshot) {
+                                db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
+                            }
+                        }
+                    }
+                });
     }
 }
