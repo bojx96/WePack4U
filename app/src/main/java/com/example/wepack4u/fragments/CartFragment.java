@@ -65,11 +65,31 @@ public class CartFragment extends Fragment implements CartListener {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Checkout section
         recyclerView = view.findViewById(R.id.cart_recycler_a);
         foodList();
+
+        TextView emptyCart = getView().findViewById(R.id.empty_cart);
+        emptyCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            for (QueryDocumentSnapshot document: querySnapshot) {
+                                db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
+                            }
+                        }
+                    }
+                });
+                foodList();
+            }
+        });
 
         // Payment section
         RadioGroup payment_method = view.findViewById(R.id.payment_method);
@@ -94,25 +114,6 @@ public class CartFragment extends Fragment implements CartListener {
                         }
                     }
                 });
-            }
-        });
-
-        TextView emptyCart = getView().findViewById(R.id.empty_cart);
-        emptyCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            QuerySnapshot querySnapshot = task.getResult();
-                            for (QueryDocumentSnapshot document: querySnapshot) {
-                                db.collection("users").document(auth_uid).collection("cart").document(document.getId()).delete();
-                            }
-                        }
-                    }
-                });
-                foodList();
             }
         });
     }

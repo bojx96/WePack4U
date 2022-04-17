@@ -51,18 +51,6 @@ public class BottomNavMenu extends AppCompatActivity {
                             break;
 
                         case R.id.cart:
-                            /*final FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            final String auth_uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            db.collection("users").document(auth_uid).collection("cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful() && task.getResult().size()>0) {
-                                        newFragment = new ConfirmationFragment();
-                                    }
-                                    else { newFragment = new CartFragment(); }
-                                }
-                            });
-                            fragment = newFragment;*/
                             fragment = new CartFragment();
                             break;
 
