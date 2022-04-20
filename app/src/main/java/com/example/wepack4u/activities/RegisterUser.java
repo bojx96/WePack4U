@@ -140,13 +140,8 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                         }
                     });
                 }
-                backToMain();
             }
         });
     }
 
-    public void backToMain(){
-        Intent intent = new Intent(RegisterUser.this, MainActivity.class);
-        startActivity(intent);
-    }
 }
