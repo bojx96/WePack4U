@@ -70,7 +70,6 @@ public class FoodDisplayFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerViewfragment);
         storeName = getArguments().getString("storeName");
-        System.out.println(storeName);
 
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {

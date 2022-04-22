@@ -94,7 +94,6 @@ public class StorePageFragment extends Fragment{
                                     StoreAdapter storeAdapter = new StoreAdapter(getContext(), foodStores);
                                     recyclerView.setAdapter(storeAdapter);
                                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                                    System.out.println(foodStores.get(0).store_name);
                                 }
                             }
                         });

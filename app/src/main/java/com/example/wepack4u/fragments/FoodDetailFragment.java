@@ -79,9 +79,7 @@ public class FoodDetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         foodDetailRecyclerView = view.findViewById(R.id.foodDetailRecyclerView);
         foodName = getArguments().getString("foodName");
-        System.out.println("foodName = " + foodName);
         storeName = getArguments().getString("storeName");
-        System.out.println("storeName = " + storeName);
         getFoodDetails();
 
         options = getResources().getStringArray(R.array.food_options);
