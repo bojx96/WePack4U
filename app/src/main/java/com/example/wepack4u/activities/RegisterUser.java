@@ -24,52 +24,61 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
+public class RegisterUser extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     private EditText editFirstName, editLastName, editEmail, editPassword;
     private AutoCompleteTextView editCampus;
     private String campus;
+    private Button submit_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
-        mAuth = FirebaseAuth.getInstance();
 
+        initVars();
+        setOnClickListeners();
+        dropMenu();
+
+    }
+
+    void initVars(){
+        mAuth = FirebaseAuth.getInstance();
         this.editFirstName = findViewById(R.id.editfirst_name);
         this.editLastName = findViewById(R.id.editlast_name);
         this.editEmail = findViewById(R.id.editemail);
         this.editPassword = findViewById(R.id.editpassword);
-
-        Button submit_button = findViewById(R.id.submit_button);
-        submit_button.setOnClickListener(this);
-
-        String[] universities = getResources().getStringArray(R.array.university_array);
-
+        this.submit_button = findViewById(R.id.submit_button);
         this.editCampus= findViewById(R.id.editcampus);
+    }
+    void setOnClickListeners(){
+        submit_button.setOnClickListener(submitOnClickListener());
+    }
+
+    void dropMenu(){
+        String[] universities = getResources().getStringArray(R.array.university_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdown, R.id.editTextUniversityName, universities);
         editCampus.setAdapter(adapter);
-
         editCampus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 System.out.println("here");
                 campus =adapterView.getItemAtPosition(position).toString();
                 System.out.println("campus"+campus);
-
             }
         });
     }
 
-    @Override
-    public void onClick (View v){
-        switch (v.getId()){
-            case R.id.submit_button:
+    View.OnClickListener submitOnClickListener(){
+        return new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
                 validateInput();
-                break;
-        }
+            }
+        };
     }
 
     public void validateInput(){
@@ -114,8 +123,6 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             editPassword.requestFocus();
             return;
         }
-
-
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
