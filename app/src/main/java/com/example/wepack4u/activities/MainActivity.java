@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wepack4u.R;
@@ -17,33 +18,52 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText email,password;
+    private TextView register;
+    private Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mAuth = FirebaseAuth.getInstance();
 
-        this.email = findViewById(R.id.editemail);
-        this.password = findViewById(R.id.editpassword);
-
-        Button login = findViewById(R.id.login_button);
-        login.setOnClickListener(this);
+        this.initVars();
+        this.setOnClickListeners();
 
     }
-    @Override
-    public void onClick (View v){
-        switch (v.getId()){
-            case R.id.login_button:
+
+    void initVars(){
+        mAuth = FirebaseAuth.getInstance();
+        this.email = findViewById(R.id.editemail);
+        this.password = findViewById(R.id.editpassword);
+        this.register = findViewById(R.id.register);
+        this.login = findViewById(R.id.login_button);
+    }
+
+    void setOnClickListeners(){
+        login.setOnClickListener(loginOnClickListener());
+        register.setOnClickListener(registerOnClickListener());
+    }
+
+    View.OnClickListener loginOnClickListener(){
+        return new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
                 validateLogin();
-                break;
-            case R.id.register:
-                registerText();
-                break;
-        }
+            }
+        };
+    }
+
+    View.OnClickListener registerOnClickListener(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RegisterUser.class);
+                startActivity(intent);
+            }
+        };
     }
 
     public void validateLogin(){
@@ -80,11 +100,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
-
-    }
-
-    public void registerText(){
-        Intent intent = new Intent(MainActivity.this, RegisterUser.class);
-        startActivity(intent);
     }
 }
