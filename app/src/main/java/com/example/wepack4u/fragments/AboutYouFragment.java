@@ -32,7 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 
-public class AboutYouFragment extends Fragment implements View.OnClickListener {
+public class AboutYouFragment extends Fragment{
     FirebaseFirestore db;
     private FirebaseUser user;
     private String campus;
@@ -41,7 +41,7 @@ public class AboutYouFragment extends Fragment implements View.OnClickListener {
     private static final String LAST_NAME = "last_name";
     EditText editFirstName,editLastName;
     Button submitButton,logoutButton;
-    AutoCompleteTextView editText;
+    AutoCompleteTextView editCampus;
 
 
     public AboutYouFragment() {
@@ -69,25 +69,36 @@ public class AboutYouFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        editFirstName= view.findViewById(R.id.editTextFirstName);
-        editLastName= view.findViewById(R.id.editTextLastName);
-        submitButton = view.findViewById(R.id.submitButton);
-        logoutButton = view.findViewById(R.id.logoutButton);
+        initVars(view);
+        dropMenu(view);
+        fetchData();
+        setOnClickListeners();
 
+    }
+
+    void initVars(View view){
         user = FirebaseAuth.getInstance().getCurrentUser();
+        this.editFirstName= view.findViewById(R.id.editTextFirstName);
+        this.editLastName= view.findViewById(R.id.editTextLastName);
+        this.submitButton = view.findViewById(R.id.submitButton);
+        this.logoutButton = view.findViewById(R.id.logoutButton);
+    }
 
+    void dropMenu(View view) {
         String[] universities = getResources().getStringArray(R.array.university_array);
-        AutoCompleteTextView editText = view.findViewById(R.id.autoCompleteTextViewUniversityName);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.dropdown, R.id.editTextUniversityName, universities);
-        editText.setAdapter(adapter);
+        editCampus = view.findViewById(R.id.autoCompleteTextViewUniversityName);
+        editCampus.setAdapter(adapter);
 
-        editText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        editCampus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 campus =adapterView.getItemAtPosition(position).toString();
             }
         });
+    }
 
+    void fetchData(){
         db = FirebaseFirestore.getInstance();
         DocumentReference userDoc = db.collection("users").document(user.getUid());
         userDoc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -112,11 +123,42 @@ public class AboutYouFragment extends Fragment implements View.OnClickListener {
                 Log.d("TAG", "onFailure: " + e.toString());
             }
         });
-
-
-        submitButton.setOnClickListener(this);
-        logoutButton.setOnClickListener(this);
     }
+
+    void setOnClickListeners(){
+        submitButton.setOnClickListener(submitOnClickListener());
+        logoutButton.setOnClickListener(logoutOnClickListener());
+    }
+
+    View.OnClickListener submitOnClickListener(){
+        return new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                DocumentReference userDoc = db.collection("users").document(user.getUid());
+                String firstName = editFirstName.getText().toString();
+                String lastName = editLastName.getText().toString();
+                if ( validateInput(firstName, lastName) ){
+                    userDoc.update("first_name",firstName);
+                    userDoc.update("last_name",lastName);
+                    userDoc.update("campus", campus);
+                    Toast.makeText(getContext(),"Account Successfully updated!",Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+    }
+
+    View.OnClickListener logoutOnClickListener(){
+        return new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        };
+    }
+
     public boolean validateInput(String firstName, String lastName){
         if (campus == null){
             Toast.makeText(getContext(),"Please choose campus!",Toast.LENGTH_SHORT).show();
@@ -135,26 +177,4 @@ public class AboutYouFragment extends Fragment implements View.OnClickListener {
         return true;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.submitButton:
-                DocumentReference userDoc = db.collection("users").document(user.getUid());
-                String firstName = editFirstName.getText().toString();
-                String lastName = editLastName.getText().toString();
-                if ( validateInput(firstName, lastName) ){
-                    userDoc.update("first_name",firstName);
-                    userDoc.update("last_name",lastName);
-                    userDoc.update("campus", campus);
-                    Toast.makeText(getContext(),"Account Successfully updated!",Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.logoutButton:
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-                break;
-        }
-    }
 }
