@@ -15,9 +15,7 @@
 - Profile Page
 
 ## Screenshots
-![Imgur Image](https://imgur.com/eJUDsuQ)
-![Imgur Image](https://imgur.com/HQuMuis)
-<!-- ![Example screenshot](./img/screenshot.png) -->
+![Imgur Image](https://imgur.com/BYRTwnw.jpg)
 
 ## Acknowledgements
 - This project was based on Singapore University of Technology and Design: Informational Systems and Programming [[50.001](https://istd.sutd.edu.sg/undergraduate/courses/50001-information-systems-programming)]
