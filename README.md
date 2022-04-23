@@ -18,8 +18,8 @@
 <!-- ![Example screenshot](./img/screenshot.png) -->
 
 ## Acknowledgements
-- This project was based on Singapore University of Technology and Design: Informational Systems and Programming [50.001](https://istd.sutd.edu.sg/undergraduate/courses/50001-information-systems-programming)
-- Many thanks to Jacob Tabak & Tom11 on implementation of onClickListener on RecyclerView [Stackoverflow](https://stackoverflow.com/questions/24471109/recyclerview-onclick)
+- This project was based on Singapore University of Technology and Design: Informational Systems and Programming [[50.001](https://istd.sutd.edu.sg/undergraduate/courses/50001-information-systems-programming)]
+- Many thanks to Jacob Tabak & Tom11 on implementation of onClickListener on RecyclerView [[Stackoverflow](https://stackoverflow.com/questions/24471109/recyclerview-onclick)]
 
 ## Developers
 - [@howhj](https://github.com/howhj)
