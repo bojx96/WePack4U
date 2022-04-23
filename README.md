@@ -15,6 +15,8 @@
 - Profile Page
 
 ## Screenshots
+![Imgur Image](https://imgur.com/eJUDsuQ)
+![Imgur Image](https://imgur.com/HQuMuis)
 <!-- ![Example screenshot](./img/screenshot.png) -->
 
 ## Acknowledgements
